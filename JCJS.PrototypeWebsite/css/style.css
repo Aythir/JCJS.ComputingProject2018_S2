@@ -10,7 +10,7 @@ header,
   body,
   header,
   .view {
-    height: 1000px;
+    height: 100vh;
   }
   .navbar-brand {
     font-size: 1em;
@@ -21,7 +21,7 @@ header,
   body,
   header,
   .view {
-    height: 1200px;
+    height: 100vh;
   }
 }
 .navbar {
