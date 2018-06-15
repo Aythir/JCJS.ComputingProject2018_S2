@@ -1,35 +1,16 @@
-html,
-body,
-header,
-.view {
-  height: 100vh;
-  width: 100%;
+body {
+  min-height: 100vh;
 }
-@media (max-width: 768px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 100vh;
-  }
-  .navbar-brand {
-    font-size: 1em;
-  }
-}
-@media (min-width: 800px) and (max-width: 850px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 100vh;
-  }
-}
-.navbar {
+nav {
     border-bottom:  solid 4px;
     border-color: #df525e;
+    height: 15%;
+
 }
+
 .view {
-    background: #EC6F66;  /* fallback for old browsers */
+  height: 100%;
+background: #EC6F66;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
@@ -42,14 +23,15 @@ background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, F
   color: #FFF;
 }
 
-
 h6 {
   line-height: 1.7;
 }
+
 .form-control:focus {
   border-color: #FF0000;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
+
 put[type=text]:focus:not([readonly]) + label {
             color: green;
         }
