@@ -16,115 +16,87 @@
     <link href="css/style.css" rel="stylesheet">
     </head>
     <style>
-.container-liquid
-    {
+.container-liquid{
       background:none;  
     }
 
 form {border: 3px solid  #e6e6e6;
-      max-width:600px;
-      
-      
-      }
+      max-width:550px;
+      padding: 5px;
+      box-shadow: 1px 1px 1px 1px #cc0052;
+     }
 
-input[type=text], input[type=password]
-   {
+input[type=text], input[type=password]   {
        width: 100%;
        padding: 12px 20px;
-       margin: 8px 0;
+       margin: 3px 0;
        display: inline-block;
        border: 1px solid #ccc;
        box-sizing: border-box;
    }
 
-button {
+button{
     background-color: #cc0052;
-    color: white;
-    padding: 14px 20px;
     margin: 8px 0;
-    border: none;
     cursor: pointer;
-    padding: 12px 60px;
-    width: auto;
 }
 
 button:hover {
     opacity: 0.8;
 }
 
-.cancelbtn {
-    width: auto;
-    padding: 10px 55px;
-    width: auto;
-    background-color: white;
-    color: black;
-    border: 2px solid #cc0052; <!-- red */ -->
-}
-
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
 
 .container {
     padding: 16px;
 }
 
-span.psw {
-    <!-- float: right; -->
-    padding-top: 16px;
-}
 </style>
 
-<body>
+ <body>
   <!-- Navbar -->
    <nav class="navbar navbar-expand-sm navbar-light">
       <a class="navbar-brand" href="#"> <!-- Little Red Logo -->
           <img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>
-     
-  </nav>
-      <!-- Content -->
+   </nav>
+   
+  <!-- Content -->
   <div class="container-liquid" >
     <!--Grid row-->
     <div class="row" style="margin-top:80px">
           <!--Grid column-->
-      <div class="col black-text text-center">
-         <!-- <h2 class="h2-responsive font-weight-bold" style="color:#cc0052">Slide Show</h2> -->
-      </div>
+      <div class="col black-text text-center"></div>
     </div>
+    
+   <div class="container">
+      <div class= "login-form offset-md-3">
+        <h3 class="h3-responsive font-weight-bold" style="color:grey" >Administration Login</h3>
+        </br>
 
-   <h2>Administration Login</h2>
-   <!--Login form-->  
-   <form action="/action_page.php">
-        <div class="container">
-          <label for="uname" style="font-weight: bold;"><b>Username:</b></label>
-          <input type="text" placeholder="Enter Username" name="uname" required>
-
-          <label for="psw" style="font-weight: bold"><b>Password:</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
-          <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-          </label>
-          <div class="text-center">   
-          <button type="submit">Login</button>            
+       <!--Login form-->  
+       <form action="/action_page.php">
+         <div class="form-group">
+            <div class="container">
+             <div class="form-group">
+              <label for="uname" style="font-weight:bold">Username:</label>
+              <input type="text" class="form control" placeholder="Enter username" id="uname" required>
+              </div>
+              <div class="form-group">
+                <label for="pwd"style="font-weight:bold">Password:</label>
+                <input type="password" class="form-control" placeholder="Enter password" id="pwd" required>
+              </div>
+              <div class="checkbox">
+               <label><input type="checkbox"> Remember me</label>
+              </div>
+              <button type="submit" class="btn">Submit</button>
+               <div style="padding:15px 0px 0px 0px"> 
+                <span class="pwd">Forgot <a href="#">password?</a></span>       
+               </div>
+            </div>
           </div>
-         <!-- <div class="text-center mt-4">
-            <button class="btn btn-#cc0052" type="submit">Login</button> -->
-         <!-- </div> -->
-          <div class="text-center"> 
-            <button type="button" class="cancelbtn">Cancel</button>
-          </div>
-          <div class="text-center"> 
-            <span class="psw">Forgot <a href="#">password?</a></span>       
-          </div>
+        </form>
       </div>
-   </form>
+   </div>
   </div>
-               
-</body>
+            
+ </body>
 </html>
