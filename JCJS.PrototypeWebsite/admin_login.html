@@ -16,6 +16,7 @@
     <link href="css/style.css" rel="stylesheet">
     </head>
     <style>
+    
 .container-liquid{
       background:none;  
     }
@@ -23,7 +24,9 @@
 form {border: 3px solid  #e6e6e6;
       max-width:550px;
       padding: 5px;
-      box-shadow: 1px 1px 1px 1px #cc0052;
+      box-shadow: 2px 2px 1px 1px #cc0052;
+      border-radius: 10px;
+      
      }
 
 input[type=text], input[type=password]   {
@@ -33,6 +36,7 @@ input[type=text], input[type=password]   {
        display: inline-block;
        border: 1px solid #ccc;
        box-sizing: border-box;
+       
    }
 
 button{
@@ -75,18 +79,25 @@ button:hover {
        <form action="/action_page.php">
          <div class="form-group">
             <div class="container">
+             
              <div class="form-group">
               <label for="uname" style="font-weight:bold">Username:</label>
-              <input type="text" class="form control" placeholder="Enter username" id="uname" required>
+              <input type="text" class="form control" maxlength = "30"
+              placeholder="Enter username" id="uname" required>
               </div>
+              
               <div class="form-group">
                 <label for="pwd"style="font-weight:bold">Password:</label>
-                <input type="password" class="form-control" placeholder="Enter password" id="pwd" required>
+                <input type="password" class="form-control" maxlength = "10"
+                placeholder="Enter password" id="pwd" required>
               </div>
+              
               <div class="checkbox">
                <label><input type="checkbox"> Remember me</label>
               </div>
+              
               <button type="submit" class="btn">Submit</button>
+               
                <div style="padding:15px 0px 0px 0px"> 
                 <span class="pwd">Forgot <a href="#">password?</a></span>       
                </div>
