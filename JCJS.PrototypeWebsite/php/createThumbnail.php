@@ -1,36 +1,36 @@
 <?php
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL | E_STRICT);
 
-    function createThumbnails(string $filepath, int $width, int $height) {
-        echo('filepath1' . realpath($filepath));
+    //This function will detect and create thumbnails of a given dimension for a given eventId
+    //Assuming the event photos are in ../eventPhotos/$eventId relative to this script
+    //A thumbnail subdirectory will be created in the eventId directory if it doesn't already exist
+    //Thumbnails will not be created if they already exist
+    function detectAndCreateThumbnails(int $eventId, int $width, int $height) {
+        $filepath = '..eventPhotos/' . $eventId;
         $thumbnailPath = $filepath . '/thumbnails';
         $filepath = realpath($filepath);
 
         //If thumbnail subdirectory doesn't exist, create it
-        echo('filepath4' . $thumbnailPath);
-        echo('exist?' . file_exists($thumbnailPath));
         if (!file_exists($thumbnailPath)) {
             mkdir($thumbnailPath);
-        } else {
-            echo($thumbnailPath . 'exists');
         }
-
+        $thumbnailPath = realpath($thumbnailPath);
         //Foreach image file in $filepath...
-        $files = glob($filepath . '/*.{jpg,jpeg,gif}', GLOB_BRACE);
+        chdir($filepath);
+        $files = glob('*.{jpg,jpeg,gif}', GLOB_BRACE);
         if(sizeof($files) > 0) {
             foreach($files as $file) {
-                echo $file;
-                //create thumbnail
-                $imagick = new Imagick($file);
-                $imagick->thumbnailImage($width, $height, false, false);
+                //If thumbnail doesn't already exist
+                if (!file_exists($thumbnailPath . '/thumb' . $width . '_' . $file)) {
+                    //create thumbnail
+                    $imagick = new Imagick($file);
+                    $imagick->thumbnailImage($width, $height, false, false);
 
-                //Suffix thumbnail filename with _thumb_$width and place in thumbnail subdirectory
-                $format = $imagick->getFormat();
-                $filename_no_ext = reset(explode('.', $file));
-                if (file_put_contents($thumbnailPath . $filename_no_ext . '_thumb_' . $width . $format, $imagick) === false) {
-                    throw new Exception("Could not put contents.");
+                    //Suffix thumbnail filename with thumb$width_ and place in thumbnail subdirectory
+                    if (file_put_contents($thumbnailPath . '/thumb' . $width . '_' . $file, $imagick) === false) {
+                        throw new Exception("Could not put contents.");
+                    }
                 }
+                
 
             }
         } else {
@@ -38,18 +38,6 @@
         }
         
         
-    }
-    
-    //Test
-    try {
-        createThumbnails('../eventPhotos/1', 400, 300);
-    }
-    catch (ImagickException $e) {
-        echo $e->getMessage();
-    }
-    catch (Exception $e) {
-        echo("Exception");
-        echo $e->getMessage();
     }
     
 ?>
