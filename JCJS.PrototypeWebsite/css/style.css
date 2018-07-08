@@ -91,3 +91,8 @@ put[type=text]:focus:not([readonly]) + label {
 .md-form input[type=text]:focus:not([readonly]) {
     border-bottom: solid 1px #FFF;
     box-shadow: 0 1px 0 0 #FFF;
+}
+img.selected {
+  border: 3px solid green;
+
+}

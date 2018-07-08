@@ -18,18 +18,47 @@
     <link href="css/style.css" rel="stylesheet">
 
     <style type = "text/css">
+     .container-fluid {
+    width: 100%;
+    padding-bottom: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: #EC6F66;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */ 
+    background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     }
+     
      .user-gallery {
-
        border: 3px solid  #e6e6e6;
        padding: 5px;
-       background-color: white;
-       margin-top: 100px;
        box-shadow: 1px 1px 1px 1px black;
        border-radius: 10px;
+       background-color: white;
+       position: relative;
      }
+     .personal-gallery {
+       border: 3px solid  #e6e6e6;
+       padding: 5px;
+       box-shadow: 1px 1px 1px 1px black;
+       border-radius: 10px;
+       background-color: white;
+       position: relative;
+       margin-bottom: 15px;
+     }
+     
+     .row {
+         margin: 0;
+     }
+
+
+     * {
+         margin: 0;
+         padding: 0;
+     } 
+     
     </style>
     </head>
-<body>
+<body onload="img_selection()">
   <!--Navbar-->
   <nav class="navbar navbar-expand-sm navbar-light">
       <a class="navbar-brand" href="#"> <!-- Little Red Logo -->
@@ -56,69 +85,105 @@
           </li>
 		  <li class="nav-item">
             <a class="nav-link" href="host_login.html">Host Login</a>
-          </li
-        </ul>
+          </li>
+          </ul>
       </div>
   </nav>
   <!--/.Navbar-->
   <!--Main content-->
-  <main>
-    <div class="container-liquid">
-      <div class="user-gallery">
-        <h3 class= "h3-responsive font-weight-bold">Your photobooth session photos</h3>
-      </div>
-      <div class="user-gallery">
-        <h3 class="h3-responsive font-weight-bold">Public Event Photos</h3>
-       <div class = "tz-gallery">
-                         <div class="col-md-3">
-                             <div class="card">
-                                 <a class="lightbox" href="img/logo.png">
-                                 <img src="img/logo.png" alt="Park" class="card-img-top">
-                                 </a>
-                             </div>
-                         </div>
-
-                         <div class="col-md-3">
-                             <div class="card">
-                                 <a class="lightbox" href="img/logo.png">
-                                 <img src="img/logo.png" alt="Park" class="card-img-top">
-                                 </a>
-                             </div>
-                         </div>
-
-                         <div class="col-md-3">
-                             <div class="card">
-                                 <a class="lightbox" href="img/logo.png">
-                                 <img src="img/logo.png" alt="Park" class="card-img-top">
-                                 </a>
-                             </div>
-                         </div>
-
-                         <div class="col-md-3">
-                             <div class="card">
-                                 <a class="lightbox" href="img/logo.png">
-                                 <img src="img/logo.png" alt="Park" class="card-img-top">
-                                 </a>
-                             </div>
-                         </div>
-
-                         <div class="col-md-3">
-                             <div class="card">
-                                 <a class="lightbox" href="img/logo.png">
-                                 <img src="img/logo.png" alt="Park" class="card-img-top">
-                                 </a>
-                             </div>
-                         </div>
+    <div class="container-fluid">
+        <div class="personal-gallery tz-gallery">
+            <h3 class= "responsive-text">Your photobooth session</h3>
+            <hr>
+            <div class= "row">
+                <div class= "col-lg-3 col-sm-6">
+                        <div id="gallery" class="card">
+                     
+                            <img src="img/logo.png"  class="card-img-top">
+                            
+                        </div>
                 </div>
-          </div>
+
+                <div  id="gallery" class= "col-lg-3 col-sm-6">
+                        <div class="card">
+                     
+                            <img src="img/logo.png"  class="card-img-top">
+                            
+                        </div>
+
+        </div>
+        </div>
+    </div>
+        <!-- Public event photo gallery-->
+       <div class="user-gallery tz-gallery">
+            <h3>Public Event Photos</h3>
+            <hr>
+        <div class="row">
+               
+                         <div class="col-lg-3 col-sm-6">
+                             <div id="gallery" class="card">
+                          
+                                 <img src="img/logo.png"  class="card-img-top">
+                                 
+                             </div>
+                         </div>
+
+                         <div class="col-lg-3 col-sm-6">
+                             <div id="gallery" class="card">
+                          
+                                 <img src="img/logo.png" class="card-img-top">
+                                 
+                             </div>
+                         </div>
+
+                         <div class="col-lg-3 col-sm-6">
+                             <div id="gallery" class="card">
+                          
+                                 <img src="img/logo.png"  class="card-img-top">
+                                
+                             </div>
+                         </div>
+
+                         <div class="col-lg-3 col-sm-6">
+                             <div id="gallery" class="card">
+                          
+                                 <img src="img/logo.png" class="card-img-top">
+                               
+                             </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6">
+                                <div  id="gallery" class="card">
+                                    <img src="img/logo.png" class="card-img-top">
+                                </div>
+                           </div>
+
+                           <div class="col-lg-3 col-sm-6">
+                                <div id="gallery" class="card">
+                                    <img src="img/logo.png" class="card-img-top"?
+                                </div>
+                           </div>
+        </div>
+        <!-- End row-->
+       </div>
+       <!-- End user gallery-->
+
+       <div class= "create-gif">
+            <div class="card">
+                <h5>Select three photos and click the button to generate your personal GIF!</h5>
+                <button id="reset" type="button" class="btn btn-secondary">Reset</button>
+            </div>
+                <button id="create" type="button" class="btn btn-default">Create GIF</button>
+           </div>
+   
+        </div>
      </div>
-           <!-- Grid row -->
-      <!-- User gallery -->
+     <!-- End main content-->
+     
+     
 
 
 
-  </main>
-  <!--End of Main content-->
 
 
 
@@ -136,5 +201,7 @@
 <script>
     baguetteBox.run('.tz-gallery');
 </script>
+<script type= "text/javascript" src="js/imageSelection.js"></script>
+
 </body>
 </html>
