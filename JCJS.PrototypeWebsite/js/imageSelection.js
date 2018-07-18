@@ -12,8 +12,12 @@ $(function img_selection() {
         if (!conf) return false;
 
 
-        if ($("img.selected").length < 3) {
-            alert("Select at least 3 images");
+        if ($("img.selected").length < 2) {
+            alert("Select at least 2 images");
+            return false;
+        }
+        else if  ($("img.selected").length > 5) {
+            alert("You have selected too many images! Only a maximum of 5 can be turned into a GIF");
             return false;
         }
         else {
