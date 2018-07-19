@@ -7,7 +7,7 @@
 ?>
 <?php include 'guestHeader.php';?>
 <!--Main content-->
-<div onload ="imageSelection()" class="container-fluid">
+<div onload= "imageSelection()" class= "container-fluid">
         <div class="personal-gallery tz-gallery">
             <h3 class= "responsive-text">Your photobooth session</h3>
             <hr>
@@ -86,7 +86,7 @@
 
        <div class= "create-gif">
             <div class="personal-gallery">
-                <h5>Select three photos and click the button to generate your personal GIF!</h5>
+                <h5>Select two to five photos and click the button to generate your personal GIF!</h5>
                 <button id="reset" type="button" class="btn btn-secondary">Reset</button>
             
                 <button id="create" type="button" class="btn btn-default">Create GIF</button>
@@ -94,6 +94,4 @@
            </div>
    
         </div>
-    
-     <!-- End main content-->
 <?php include 'ppFooter.php';?>
