@@ -30,15 +30,17 @@
                   <hr class="hr-light">
                 </div>
                 <!--Body of event code form-->
-                <div class="md-form">
+                <form class="md-form" action="gallery.php">
                   <i class="fa fa-user prefix white-text active"></i>
                   <input type="text" id="form3" class="white-text form-control">
                   <label for="form3" class="active">Code</label>
 
-                </div>
+                
 
                 <div class="text-center mt-4">
-                  <button class="btn btn-white">Enter</button> <!-- Event code button -->
+                <button class="btn btn-white">Enter</button> <!-- Event code button -->
+                </div> 
+                </form> 
                 <!-- Social media links to client's social media pages (if any) -->
                   <hr class="hr-light mb-3 mt-4">
                   <div class="inline-ul text-center d-flex justify-content-center">
