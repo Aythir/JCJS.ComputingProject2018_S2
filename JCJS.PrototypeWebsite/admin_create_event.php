@@ -1,5 +1,10 @@
 <?php include 'databaseConnection.php';?>
+<?php include 'functionList.php';?>
 <?php    
+  $navbarlinks .= createNavLink("Event List","admin_event_details.php");
+  $navbarlinks .= createNavLink("Change Password","admin_change_password.php");
+  $navbarlinks .= createNavLink("Logout","#");
+
   if(isset($_GET['EventID'])) {
     $title = "Modify Event";
     $EventID = mysqli_real_escape_string($conn,$_GET["EventID"]);
@@ -68,6 +73,7 @@
                 <label for="hostAccessCode"style="font-weight:bold">Host Access Code:</label>
                 <input type="text" class="form-control" maxlength = "20" value="<?php echo $HostAccessCode?>" placeholder="Enter the host code" id="hostAccessCode" name="hostAccessCode" required>
               </div>
+
               <?php
               if($EventID > 0) {
                 echo '<button type="submit" class="btn"><i class="fa fa-save"></i> Save Changes</button>';

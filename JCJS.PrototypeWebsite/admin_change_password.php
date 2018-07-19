@@ -1,6 +1,10 @@
 <?php include 'databaseConnection.php';?>
+<?php include 'functionList.php';?>
 <?php    
-    $PageHeading = "Admin Change Password";
+  $title = "Admin Change Password";
+  $navbarlinks = createNavLink("Create Event","admin_create_event.php");
+  $navbarlinks .= createNavLink("Event List","admin_event_details.php");
+  $navbarlinks .= createNavLink("Logout","#");
 ?>
 <?php include 'adminHeader.php';?>
   <!-- Content -->
@@ -11,7 +15,7 @@
     
      <div class=" container col-md-6">
       <div class= "login-form">
-        <h3 class="h3-responsive font-weight-bold" style="color:grey" >Change Password</h3>
+        <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
     
        <!--Reset password form-->  
        <form action="admin_change_password_processor.php" method="post">

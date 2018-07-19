@@ -1,7 +1,6 @@
 <?php include 'functionList.php';?>
 <?php
-  //$navbarlinks = createNavLink("Event Gallery","gallery.html");
-
+  $title = "Enter event code";
 ?>
 <?php include 'guestHeader.php';?>        
       <!-- Content -->

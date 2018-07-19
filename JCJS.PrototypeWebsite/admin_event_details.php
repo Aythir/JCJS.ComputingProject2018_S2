@@ -33,7 +33,10 @@
                 <thead>
                   <tr>
                     <th style="color:#cc0052">Event Name</th>
+                    <th style="color:#cc0052">Event ID</th>
                     <th style="color:#cc0052">Date</th>
+                    <th style="color:#cc0052">Guest Code</th>
+                    <th style="color:#cc0052">Host Code</th>
                     <th style="color:#cc0052">Booth Uploads</th>
                     <th style="color:#cc0052">Guest Uploads</th>
                     <th style="color:#cc0052">Guest Downloads</th>
@@ -48,9 +51,12 @@
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo '<tr onclick="location.href=\'admin_create_event.php?EventID='.$row["EventID"].'\'";>';
+                        echo '<tr onclick="location.href=\'admin_create_event.php?EventID='.$row["EventID"].'\'" style="cursor:pointer;">';
                         echo "<td>".$row["EventName"]."</td>";
+                        echo "<td>".$row["EventID"]."</td>";
                         echo "<td>".$row["EventDate"]."</td>";
+                        echo "<td>".$row["GuestAccessCode"]."</td>";
+                        echo "<td>".$row["HostAccessCode"]."</td>";
                         echo "<td>-</td>";
                         echo "<td>-</td>";
                         echo "<td>-</td>";
@@ -62,11 +68,34 @@
               ?>          
               </tbody>
               </table>
-              
-              <button type="submit" class="btn">View</button>
-              <button type="submit" class="btn">Edit</button>  
-              <button type="submit" class="btn grey">Delete</button>                
-               
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" style="color:green">New event created</h4>
+                      <i class="fa fa-check green-text"style="font-size:20px"></i>
+                    </div>
+                    <div class="modal-body">
+                      <p>Please take note of the event ID as it will be required during event setup</p>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="admin_event_details.html">
+                      <button type="button" class="btn btn-default" >OK</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>    
+
+              <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Create Event</button>          
+              <?php
+              if($_GET['saved'] == "1") {
+                echo "<script>";
+                echo "$('#myModal').modal('show');";
+                echo "</script>";
+              }
+              ?>
         </div>
       </form>
      </div>

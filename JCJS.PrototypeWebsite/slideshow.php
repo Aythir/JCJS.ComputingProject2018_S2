@@ -1,7 +1,6 @@
 <?php include 'functionList.php';?>
 <?php
   $navbarlinks = createNavLink("Event Gallery","gallery.html");
-  $navbarlinks .= createNavLink("Create Gif","#");
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.html");
   $navbarlinks .= createNavLink("Apply Filters","#");
   $navbarlinks .= createNavLink("Host Login","host_login.html");
