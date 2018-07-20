@@ -1,1 +1,0 @@
-# JCJS.ComputingProject2018
