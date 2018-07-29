@@ -2,8 +2,9 @@
 <?php
   $title = "Upload Photo";
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
-  $navbarlinks .= createNavLink("Create Gif","#");
+  //$navbarlinks .= createNavLink("Create Gif","#");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
+  $navbarlinks .= createNavLink("Host Login","host_login.php");
 ?>
 <?php include 'guestHeader.php';?>   
   <!-- Content -->

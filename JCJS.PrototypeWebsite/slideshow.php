@@ -1,9 +1,9 @@
 <?php include 'functionList.php';?>
 <?php
-  $navbarlinks = createNavLink("Event Gallery","gallery.html");
-  $navbarlinks .= createNavLink("Upload Photo","upload_photo.html");
-  $navbarlinks .= createNavLink("Apply Filters","#");
-  $navbarlinks .= createNavLink("Host Login","host_login.html");
+  $title = "Slideshow";
+  $navbarlinks = createNavLink("Event Gallery","gallery.php");
+  $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
+  $navbarlinks .= createNavLink("Host Login","host_login.php");
 ?>
 <?php include 'guestHeader.php';?>          
   <!-- Content -->

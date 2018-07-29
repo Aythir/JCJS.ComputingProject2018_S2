@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?php echo $title?></title>
+    <!-- Import jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Import bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -16,20 +20,8 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- Import font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <!-- Import jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <style>
     
-.container-liquid{
-    background: #cc0052;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F3A183, #cc0050);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #F3A183, #cc0052); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-       
-    }
-.container-liquid-none{
-    background: none;  /* fallback for old browsers */
-    }
-
 form {border: 3px solid  #e6e6e6;
       max-width:550px;
       padding: 5px;

@@ -18,10 +18,6 @@
         <span class="float-left">
          <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
         </span>
-        <span class="float-right">
-         <a class="nav-link" href="admin_create_event.php">
-         <button type="submit" class="btn btn-white">Create New Event</button></a>
-        </span>
        </div>
         
     
@@ -74,15 +70,11 @@
                 <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title" style="color:green">New event created</h4>
+                      <h4 class="modal-title" style="color:green" id='modalText'>New Event Created</h4>
                       <i class="fa fa-check green-text"style="font-size:20px"></i>
                     </div>
-                    <div class="modal-body">
-                      <p>Please take note of the event ID as it will be required during event setup</p>
-                    </div>
                     <div class="modal-footer">
-                      <a href="admin_event_details.html">
-                      <button type="button" class="btn btn-default" >OK</button></a>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
                     </div>
                   </div>
                 </div>
@@ -90,8 +82,14 @@
 
               <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Create Event</button>          
               <?php
-              if($_GET['saved'] == "1") {
+              if(isset($_GET['saved'])) {
                 echo "<script>";
+                if($_GET['saved'] == "0") {
+                  echo "document.getElementById('modalText').innerHTML = 'New Event Created';";
+                } else 
+                {
+                  echo "document.getElementById('modalText').innerHTML = 'Event Updated';";
+                }
                 echo "$('#myModal').modal('show');";
                 echo "</script>";
               }
