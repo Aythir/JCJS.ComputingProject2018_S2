@@ -3,6 +3,7 @@
 <?php
   $title = "Uploaded Image";
   $photoID = (int)$_GET["PhotoID"];
+
   session_start();
   if(isset($_SESSION["EventID"])) {
     $eventID = (int)$_SESSION["EventID"];
@@ -22,7 +23,7 @@
   }  
 
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
-  $navbarlinks .= createNavLink("Create Gif","#");
+  //$navbarlinks .= createNavLink("Create Gif","#");
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Apply Filters","#");
   $navbarlinks .= createNavLink("Host Login","host_login.php");

@@ -10,13 +10,13 @@
 
     if($eventID > 0) {
         $sql = "UPDATE Events SET eventDate = '$eventDate',eventName = '$eventName',eventLocation = '$eventLocation',guestAccessCode = '$guestAccessCode',hostAccessCode = '$hostAccessCode' WHERE eventID = $eventID;";
-        echo $sql;
+        //echo $sql;
         $result = $conn->query($sql);      
     } else {
         $sql = "INSERT INTO Events (eventDate,eventName,eventLocation,guestAccessCode,hostAccessCode) VALUES ('$eventDate','$eventName','$eventLocation','$guestAccessCode','$hostAccessCode');";
-        echo $sql;
+        //echo $sql;
         $result = $conn->query($sql);            
     }
     $conn->close();  
-    header("Location: admin_event_details.php?saved=1");
+    header("Location: admin_event_details.php?saved=".$eventID);
 ?>
