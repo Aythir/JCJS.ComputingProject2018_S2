@@ -1,6 +1,7 @@
-<?php include 'databaseConnection.php';?>
-<?php include 'functionList.php';?>
 <?php
+include 'databaseConnection.php';
+include 'functionList.php';
+
   $title = "Gallery";
   $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
@@ -22,7 +23,7 @@
     }
 
     mysqli_free_result($result);
-    //or if not found above, in photos
+    //...or if not found above, in photos
     if ($codeFound == false) {
         $sql = "SELECT EventID, UniqueCode FROM photos WHERE UniqueCode = '$enteredCode';";
         //echo $sql;
