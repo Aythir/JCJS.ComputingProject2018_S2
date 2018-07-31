@@ -29,16 +29,17 @@
                   <hr class="hr-light">
                 </div>
                 <!--Body of event code form-->
-                <div class="md-form">
+                <form method="post" action="gallery.php" class="md-form"> <!-- The action method will need to change according to the PHP code implemeneted, but this is a short work around now.-->
                   <i class="fa fa-user prefix white-text active"></i>
-                  <input type="text" id="form3" class="white-text form-control">
+                  <input type="text" id="form3" name="code" class="white-text form-control">
                   <label for="form3" class="active">Code</label>
 
-                </div>
+                  <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-white" href="gallery.html">Enter</button> <!-- Event code button -->
+                  <!-- Social media links to client's social media pages (if any) -->
+                  </div>
+                </form>
 
-                <div class="text-center mt-4">
-                  <button class="btn btn-white">Enter</button> <!-- Event code button -->
-                <!-- Social media links to client's social media pages (if any) -->
                   <hr class="hr-light mb-3 mt-4">
                   <div class="inline-ul text-center d-flex justify-content-center">
                     <a class="p-2 m-2 tw-ic">
@@ -56,8 +57,6 @@
           <!--Grid column-->
         </div>
         <!--Grid row-->
-      </div>
-      <!-- Content -->
 
     <!-- SCRIPTS -->
     <!-- JQuery -->

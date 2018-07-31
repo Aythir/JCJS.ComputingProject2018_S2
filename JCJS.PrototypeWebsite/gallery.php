@@ -1,12 +1,42 @@
-<?php include 'databaseConnection.php';?>
-<?php include 'functionList.php';?>
 <?php
+include 'databaseConnection.php';
+include 'functionList.php';
+
   $title = "Gallery";
   $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
   $navbarlinks .= createNavLink("Host Login","host_login.php");
 
   session_start();
+  if(isset($_POST["code"])) {
+    //check database for code, either in events...
+    $enteredCode = $_POST["code"];
+    $codeFound = false;
+    $sql = "SELECT EventID FROM events WHERE GuestAccessCode = '$enteredCode';";
+    //echo $sql;
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $codeFound = true;
+        $row = mysqli_fetch_row($result);
+        $_SESSION["EventID"] = (int)$row[0];
+    }
+
+    mysqli_free_result($result);
+    //...or if not found above, in photos
+    if ($codeFound == false) {
+        $sql = "SELECT EventID, UniqueCode FROM photos WHERE UniqueCode = '$enteredCode';";
+        //echo $sql;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $codeFound = true;
+            $row = mysqli_fetch_row($result);
+            $_SESSION["EventID"] = (int)$row[0];
+            $_SESSION["UniqueCodes"] = array($enteredCode);
+        }
+    }
+  }
   if(isset($_SESSION["EventID"])) {
     $eventID = (int)$_SESSION["EventID"];
   } else {
@@ -22,7 +52,7 @@
         <hr>
         <div class= "row">
             <?php
-                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND ImageType = 3;";
+                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 0;";
                 //echo $sql;
                 $result = $conn->query($sql);
 
@@ -47,7 +77,7 @@
         <hr>
         <div class="row">
         <?php
-            $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND ImageType = 1;";
+            $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 1;";
             //echo $sql;
             $result = $conn->query($sql);
 
