@@ -11,7 +11,5 @@
     // Check connection was successful
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    } else {
-        die("Connected");
     }
 ?>

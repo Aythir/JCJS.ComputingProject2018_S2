@@ -55,6 +55,44 @@ button:hover {
     padding: 16px;
 }
 
+.container-fluid {
+    width: 100%;
+    padding-bottom: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: #EC6F66;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */ 
+    background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     }
+     
+.user-gallery {
+       border: 3px solid  #e6e6e6;
+       padding: 5px;
+       box-shadow: 1px 1px 1px 1px black;
+       border-radius: 10px;
+       background-color: white;
+       position: relative;
+     }
+.personal-gallery {
+       border: 3px solid  #e6e6e6;
+       padding: 5px;
+       box-shadow: 1px 1px 1px 1px black;
+       border-radius: 10px;
+       background-color: white;
+       position: relative;
+       margin-bottom: 15px;
+     }
+     
+.row {
+         margin: 0;
+     }
+
+
+* {
+         margin: 0;
+         padding: 0;
+     } 
+
 </style>
 </head>
 <body>
