@@ -2,11 +2,11 @@
 <?php
   $title = "Enter event code";
 ?>
-<?php include 'guestHeader.php';?>        
+<?php include 'guestHeader.php';?>
       <!-- Content -->
       <div class="container-liquid">
         <!--Grid row-->
-        <div class="row">
+        <div class="row" style="margin-top:80px">
           <!--Grid column-->
           <div class="col-sm-12 col-md-6 white-text text-center text-md-left">
             <div class="leftcol ml-auto">

@@ -17,16 +17,15 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom style -->
     <link href="css/style.css" rel="stylesheet">
-    
+
     </head>
     <style>
     .container-liquid {
-    background: #cc0052;  /* fallback for old browsers */
-    /* background-image:url(img/red_bg.jpg); /*red abstract background */*/
-     background: -webkit-linear-gradient(to right, #F3A183, #cc0050);  /* Chrome 10-25, Safari 5.1-6 */
-     background: linear-gradient(to right, #F3A183, #cc0052); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: #EC6F66;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
-    
+
    form {border: 3px solid  #e6e6e6;
       background-color: white;
       padding: 5px;
@@ -56,11 +55,11 @@
    .container {
     padding: 16px;
     }
-    
+
     .form-control{
      background-color: #f2f2f2;
      }
-        
+
     </style>
 <body>
   <!-- Navbar -->
@@ -80,6 +79,6 @@
             echo $navbarlinks;
             echo '</ul>';
         }
-      ?>        
+      ?>
       </div>
   </nav>
