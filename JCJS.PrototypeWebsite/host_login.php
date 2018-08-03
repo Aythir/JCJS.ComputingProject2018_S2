@@ -6,11 +6,11 @@
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
 ?>
-<?php include 'guestHeader.php';?>        
+<?php include 'guestHeader.php';?>
       <!-- Content -->
       <div class="container-liquid">
         <!--Grid row-->
-        <div class="row">
+        <div class="row" style="margin-top:80px">
           <!--Grid column-->
           <div class="col-sm-12 col-md-6 white-text text-center text-md-left">
             <div class="leftcol ml-auto">
@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-      </div>          
+      </div>
 
     <!-- SCRIPTS -->
     <script>
@@ -87,7 +87,7 @@
           function(data, status){
               alert("Data: " + data + "\nStatus: " + status);
           });
-      }); 
+      });
 
       $(document).ready(function() {
           $("#enterButton").click(function(){
@@ -103,8 +103,8 @@
                 }
                 $('#myModal').modal('show');
             });
-          }); 
-      });         
+          });
+      });
     </script>
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
