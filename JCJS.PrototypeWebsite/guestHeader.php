@@ -93,6 +93,19 @@ button:hover {
          padding: 0;
      } 
 
+/* Styles for showPhoto.php */
+
+   .mySlides
+   {
+      display: none;
+   }
+   
+   
+   figure
+      {
+        cursor: pointer;
+      }
+
 </style>
 </head>
 <body>
