@@ -1,6 +1,6 @@
 <?php include 'databaseConnection.php';?>
 <?php include 'functionList.php';?>
-<?php    
+<?php
   $navbarlinks .= createNavLink("Event List","admin_event_details.php");
   $navbarlinks .= createNavLink("Change Password","admin_change_password.php");
   $navbarlinks .= createNavLink("Logout","#");
@@ -21,7 +21,7 @@
             $GuestAccessCode = trim($row["GuestAccessCode"]);
             $HostAccessCode = trim($row["HostAccessCode"]);
         }
-    } 
+    }
   } else {
     $title = "Create New Event";
     $EventID = 0;
@@ -30,7 +30,7 @@
     $EventLocation = "21 Party Lane, Cairns";
     $GuestAccessCode = "AAABBBCCC";
     $HostAccessCode = "XXXYYYZZZ";
-  }     
+  }
 ?>
 <?php include 'adminHeader.php';?>
  <!-- Content -->
@@ -38,12 +38,12 @@
      <!--Grid row-->
   <div class="row" style="margin-top:80px">
           <!--Grid column-->
-          
+
     <div class="container mt-3">
       <div class= "login-form">
         <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
-    
-       <!--Reset password form-->  
+
+       <!--Reset password form-->
        <form method="post" action="/eventProcessor.php?EventID=<?php echo $EventID?>">
          <div class="form-group">
             <div class="container">
@@ -51,24 +51,24 @@
 
               <div class="form-group">
                 <label for="eventDate"style="font-weight:bold">Event Date:</label>
-                <input type="text" class="form-control" maxlength = "20" value="<?php echo $EventDate?>" name="eventDate" placeholder="Enter the event date" id="eventDate" required>
+                <input type="date" class="form-control" maxlength = "20" value="<?php echo $EventDate?>" name="eventDate" placeholder="Enter the event date" id="eventDate" required>
               </div>
-              
+
               <div class="form-group">
                 <label for="eventName"style="font-weight:bold">Event Name:</label>
                 <input type="text" class="form-control" maxlength = "50" value="<?php echo $EventName?>" placeholder="Enter a name for the event" id="eventName" name="eventName" required>
               </div>
-              
+
               <div class="form-group">
                 <label for="eventLocation"style="font-weight:bold">Event Location:</label>
                 <input type="text" class="form-control" maxlength = "100" value="<?php echo $EventLocation?>" placeholder="Enter the venue name and address" id="eventLocation" name="eventLocation" required>
               </div>
-              
+
               <div class="form-group">
                 <label for="guestAccessCode"style="font-weight:bold">Event Access Code:</label>
                 <input type="text" class="form-control" maxlength = "20" value="<?php echo $GuestAccessCode?>" placeholder="Enter the event code" id="guestAccessCode" name="guestAccessCode" required>
               </div>
-              
+
               <div class="form-group">
                 <label for="hostAccessCode"style="font-weight:bold">Host Access Code:</label>
                 <input type="text" class="form-control" maxlength = "20" value="<?php echo $HostAccessCode?>" placeholder="Enter the host code" id="hostAccessCode" name="hostAccessCode" required>
@@ -86,8 +86,8 @@
         </form>
       </div>
    </div>
-       
+
   </div>
-          
+
  </div>
 <?php include 'ppFooter.php';?>
