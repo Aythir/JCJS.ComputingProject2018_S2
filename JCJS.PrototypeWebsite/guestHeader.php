@@ -21,13 +21,13 @@
     <!-- Import font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
-    
+
 form {border: 3px solid  #e6e6e6;
       max-width:550px;
       padding: 5px;
       box-shadow: 2px 2px 1px 1px #cc0052;
       border-radius: 10px;
-      
+
      }
 
 input[type=text], input[type=password]   {
@@ -37,7 +37,7 @@ input[type=text], input[type=password]   {
        display: inline-block;
        border: 1px solid #ccc;
        box-sizing: border-box;
-       
+
    }
 
 button{
@@ -61,10 +61,10 @@ button:hover {
     background-repeat: no-repeat;
     background-size: cover;
     background: #EC6F66;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */ 
+    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
      }
-     
+
 .user-gallery {
        border: 3px solid  #e6e6e6;
        padding: 5px;
@@ -82,7 +82,7 @@ button:hover {
        position: relative;
        margin-bottom: 15px;
      }
-     
+
 .row {
          margin: 0;
      }
@@ -91,7 +91,7 @@ button:hover {
 * {
          margin: 0;
          padding: 0;
-     } 
+     }
 
 /* Styles for showPhoto.php */
 
@@ -99,7 +99,7 @@ button:hover {
    {
       display: none;
    }
-   
+
    
    figure
       {
@@ -111,7 +111,7 @@ button:hover {
 <body>
   <!-- Navbar -->
    <nav class="navbar navbar-expand-sm navbar-light">
-      <a class="navbar-brand" href="#"> <!-- Little Red Logo -->
+      <a class="navbar-brand" href="gallery.php"> <!-- Little Red Logo -->
           <img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>
       <!-- Toggler/collapsibe Button -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -129,18 +129,18 @@ button:hover {
       ?>
       </div>
    </nav>
-   
+
   <!-- Content -->
   <?php if(isset($clearBackground)) {
     echo '<div class="container-liquid-none">';
   } else {
     echo '<div class="container-liquid">';
-  }  
+  }
   ?>
     <!--Grid row-->
     <div class="row" style="margin-top:80px">
           <!--Grid column-->
       <div class="col black-text text-center"></div>
     </div>
-    
+
    <div class="container">
