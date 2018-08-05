@@ -42,6 +42,9 @@
 
                 <div class="text-center mt-4">
                   <button id="enterButton" class="btn btn-white">Enter</button> <!-- Event code button -->
+                  <br><br>
+                  <h6 style="color: white"><i>By continuing, you agree to the <a href="#"style="color: white">Terms of Use</a> and <a href="#"style="color: white">Privacy Policy</i></a></h6>
+
                   <!-- Social media links to client's social media pages (if any) -->
                   <hr class="hr-light mb-3 mt-4">
                   <div class="inline-ul text-center d-flex justify-content-center">
