@@ -36,6 +36,9 @@
 
                   <div class="text-center mt-4">
                     <button type="submit" class="btn btn-white" href="gallery.html">Enter</button> <!-- Event code button -->
+                  <br><br>
+                    <!--Terms of Use and Privacy Policy text and links-->
+                    <h6 style="color: white"><i>By continuing, you agree to the <a href="#"style="color: white">Terms of Use</a> and <a href="#"style="color: white">Privacy Policy</i></a></h6>
                   <!-- Social media links to client's social media pages (if any) -->
                   </div>
                 </form>
