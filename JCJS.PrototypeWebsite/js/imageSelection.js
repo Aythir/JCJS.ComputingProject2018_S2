@@ -26,7 +26,24 @@ $(function img_selection() {
             return false;
         }
         else {
-          
+            $("").submit(function(e) {
+                var formData = new FormData($("img.selected")[0]);
+        
+                $.ajax({
+                    url: "", // URL for the data to be sent too.
+                    type: "POST", // Type of request.
+                    data: formData, // Data for the 
+                    async: false,
+                    success: function (msg) {
+                        alert(msg)
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+        
+                e.preventDefault();
+            });
         }
     
 
