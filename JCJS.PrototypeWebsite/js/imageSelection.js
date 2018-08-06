@@ -1,4 +1,7 @@
 $(function img_selection() {
+    $("#SelectPhotos").on('hide.bs.modal', function img_selection(){
+
+    });
     $("#gallery > img").click(function img_selection() {
         $(this).toggleClass("selected");
     });
@@ -23,7 +26,7 @@ $(function img_selection() {
             return false;
         }
         else {
-           //Add the server side processing code here. ;
+          
         }
     
 
