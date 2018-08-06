@@ -7,18 +7,24 @@ $(function img_selection() {
         $("img.selected").removeClass("selected");
     });
     $("#create").click(function img_selection() {
-        var txt = "Have all desired images been selected?";
+        var txt = $("#YesButton").click();
+        });
+        $("#SelectedPhotos").on('hide.bs.modal', function img_selection(){
+            
+        });
         var conf = confirm(txt);
         if (!conf) return false;
 
-
+    
         if ($("img.selected").length < 3) {
-            alert("Select at least 3 images");
+            $("#SelectPhotosError").on('hide.bs.modal', function img_selection(){
+
+            });
             return false;
         }
         else {
-            alert("An error has occured.");
+           //Add the server side processing code here. ;
         }
     
-    });
+
 });

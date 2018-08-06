@@ -45,7 +45,7 @@ include 'functionList.php';
 ?>
 <?php include "guestHeader.php";?>
  <!--Main content-->
- <div onload= "img_selection()" class="container-fluid">
+ <div class="container-fluid">
 
     <div class="personal-gallery tz-gallery">
         <h3 class= "responsive-text">Your Photobooth Session</h3>
@@ -103,8 +103,121 @@ include 'functionList.php';
         <div class="personal-gallery">
             <h5>Select two to five photos and click the button to generate your personal GIF!</h5>
             <button id="reset" type="button" class="btn btn-secondary">Reset</button>
-            <button id="create" type="button" class="btn btn-default">Create GIF</button>
+            <button onclick= "img_selection()" id="create" type="button" class="btn btn-default">Create GIF</button>
         </div>
+    </div>
+</div>
+<!-- Intialization Modal-->
+<div class="modal fade right" id="ModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="t`rue">
+    <div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Select your photos</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+
+                    <div class="col-9">
+                        <p>Select three desired photos to be placed in your own custom GIF..</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary">Get it now <i class="fa fa-diamond ml-1"></i></a>
+                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No, thanks</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<!--'Have you selected all desired photos?' modal--> 
+
+<div class="modal fade right" id="SelectedPhotos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="t`rue">
+    <div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Have you selected all desired photos?</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+
+                    <div class="col-9">
+                        <p>Have you selected all desired photos?</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a  id= "YesButton" type="button" class="btn btn-primary">Yes <i class="fa fa-diamond ml-1"></i></a>
+                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<!--'Please select three photos' modal--> 
+
+<div class="modal fade right" id="SelectPhotosError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="t`rue">
+    <div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Please select three photos</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-3">
+                    </div>
+
+                    <div class="col-9">
+                        <p>Please select three photos.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary">OK<i class="fa fa-diamond ml-1"></i></a>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
 </div>
 <!-- End main content-->
