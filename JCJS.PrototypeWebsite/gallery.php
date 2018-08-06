@@ -108,7 +108,7 @@ include 'functionList.php';
     </div>
 </div>
 <!-- Intialization Modal-->
-<div class="modal fade right" id="ModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="t`rue">
+<div class="modal fade right" id="SelectPhotos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="t`rue">
     <div class="modal-dialog modal-notify modal-danger modal-side modal-top-right" role="document">
         <!--Content-->
         <div class="modal-content">
