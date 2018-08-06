@@ -28,7 +28,47 @@
   $navbarlinks .= createNavLink("Apply Filters","#");
   $navbarlinks .= createNavLink("Host Login","host_login.php");
 ?>
-<?php include 'guestHeader.php';?>          
+<?php include 'guestHeader.php';?>  
+<!--Facebook supplied code-->
+<div id="fb-root"></div>
+<!-- end Facebook supplied code-->
+<script>
+
+  //Facebook supplied code
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=1023726461149386&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  //End Facebook supplied code
+  
+
+function shareToFacebook() {
+  FB.getLoginStatus(function(response) {
+    if (response.status === 'connected') {
+      var accessToken = response.authResponse.accessToken;
+      alert(accessToken);
+    } 
+  } );
+  
+  var imgURL="http://54.153.242.36/eventPhotos/1/2018-8-6-47253A.jpg";//change with your external photo url
+  FB.api('/album_id/photos', 'post', {
+    message:'photo description',
+    url:imgURL        
+  }, function(response){
+
+    if (!response || response.error) {
+        alert('Error occured');
+    } else {
+        alert('Post ID: ' + response.id);
+    }
+
+  });
+}
+  
+</script>
 <!-- Content -->
 <div class="container-liquid">
 
@@ -39,27 +79,67 @@
     <!-- selected large images -->
     <!-- original image -->
     <div class="row m-0" style="margin-top:10px">
-      <figure class="col-md-12 p-1 ">
-        <img alt="picture" src='eventPhotos/<?php echo $eventID."/".$fileName?>' class="img-fluid" >
-      </figure>
+      <!-- <figure class=""> -->
+        <img alt="picture" src='eventPhotos/<?php echo $eventID."/".$fileName?>' class="img-fluid col-md-12 p-1">
+      <!-- </figure> -->
     </div>
-
+    <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
     <div class="text-center d-flex justify-content-center" style="font-size:25px">
       <!-- save button-->
-          <a href="#"><button class="btn">Save To Device</button></a>
-      <!-- save button-->
-          <a href="#"><button class="btn">Apply Filter</button></a>
+          <a href="/eventPhotos/<?php echo $eventID. '/'. $fileName?>" download><button id="saveButton" class="btn">View Full Size</button></a>
+      <!-- apply filter-->
+          <button class="btn" onclick="filterMode()">Apply Filter</button>
 
           <span class="align-middle">Share:</span>
       <!-- facebook-->
           <a class="p-2 m-2 fb-ic" >
-             <i class="fa fa-facebook red-text"></i></a>
+             <i class="fa fa-facebook red-text" onclick="shareToFacebook()"></i></a>
+             <!--Facebook supplied button-->
+              <div class="fb-share-button" data-href="/eventPhotos/<?php echo $eventID. '/'. $fileName?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+            <!-- end Facebook supplied button-->
      <!-- instragram-->
           <a class="p-2 m-2 ins-ic">
             <i class="fa fa-instagram red-text"> </i></a>
+    </div>
+    </div>
+    <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+    <div class="text-center d-flex justify-content-center" style="font-size:25px">
+      <!-- filter dropdown-->
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Black and White</a>
+          <a class="dropdown-item" href="#">Sepia</a>
+          <a class="dropdown-item" href="#">Cartoon</a>
+        </div>
+      </div>
+      <!-- apply filter button-->
+          <button class="btn">Apply</button>
+      <!-- cancel filter button-->
+          <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
+    </div>
     </div>
 
   </div>
 
 </div>
+<script>
+  alert("Script running");
+
+  function cancelFilter() {
+    alert(document.getElementById("default-buttons").style.display);
+    document.getElementById("default-buttons").style.display = "block";
+    document.getElementById("apply-filter-buttons").style.display = "none";
+  }
+
+  function filterMode() {
+    alert(document.getElementById("default-buttons").style.display);
+    document.getElementById("default-buttons").style.display = "none";
+    document.getElementById("apply-filter-buttons").style.display = "block";
+  }
+
+  cancelFilter();
+</script>
 <?php include 'ppFooter.php';?>
