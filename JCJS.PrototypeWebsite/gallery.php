@@ -6,6 +6,7 @@ include 'functionList.php';
   $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
   $navbarlinks .= createNavLink("Host Login","host_login.php");
+  $navbarlinks .= createNavLink("Logout","#");
 
   session_start();
   if(isset($_POST["code"])) {
@@ -41,7 +42,7 @@ include 'functionList.php';
     $eventID = (int)$_SESSION["EventID"];
   } else {
     header("Location: enterEventCode.php?error=1");
-  }  
+  }
 ?>
 <?php include "guestHeader.php";?>
  <!--Main content-->
@@ -67,7 +68,7 @@ include 'functionList.php';
                     }
                 } else {
                     header("Location: adminLogin.php?error=1");
-                } 
+                }
             ?>
         </div>
     </div>
@@ -92,8 +93,8 @@ include 'functionList.php';
                 }
             } else {
                 header("Location: adminLogin.php?error=1");
-            } 
-        ?>        
+            }
+        ?>
         </div>
         <!-- End row-->
     </div>
