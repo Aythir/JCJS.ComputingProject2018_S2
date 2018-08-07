@@ -39,19 +39,11 @@
                   <br><br>
                     <!--Terms of Use and Privacy Policy text and links-->
                     <h6 style="color: white"><i>By continuing, you agree to the <a href="#"style="color: white">Terms of Use</a> and <a href="#"style="color: white">Privacy Policy</i></a></h6>
-                  <!-- Social media links to client's social media pages (if any) -->
                   </div>
                 </form>
 
                   <hr class="hr-light mb-3 mt-4">
-                  <div class="inline-ul text-center d-flex justify-content-center">
-                    <a class="p-2 m-2 tw-ic">
-                      <i class="fa fa-twitter white-text"></i>
-                    </a>
-                    <a class="p-2 m-2 ins-ic">
-                      <i class="fa fa-instagram white-text"> </i>
-                    </a>
-                  </div>
+
                 </div>
               </div>
             </div>

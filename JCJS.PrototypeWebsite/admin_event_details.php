@@ -11,20 +11,20 @@
      <!--Grid row-->
   <div class="row" style="margin-top:80px">
           <!--Grid column-->
-          
+
     <div class="container mt-3">
-      
+
        <div class="clearfix">
         <span class="float-left">
          <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
         </span>
        </div>
-        
-    
-       <!--Table-->  
-     <form>        
+
+
+       <!--Table-->
+     <form>
       <div class="container">
-         <h4 class="h4-responsive font-weight-bold" style="color:grey">Existing Events</h4> 
+         <h4 class="h4-responsive font-weight-bold" style="color:grey">Existing Events</h4>
          <table class="table table-hover">
                 <thead>
                   <tr>
@@ -39,7 +39,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php                
+                <?php
                 $sql = "SELECT * FROM events ORDER BY EventDate;";
                 //echo $sql;
                 $result = $conn->query($sql);
@@ -60,8 +60,8 @@
                     }
                 } else {
                     header("Location: adminLogin.php?error=1");
-                }      
-              ?>          
+                }
+              ?>
               </tbody>
               </table>
               <!-- Modal -->
@@ -78,15 +78,17 @@
                     </div>
                   </div>
                 </div>
-              </div>    
+              </div>
 
-              <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Create Event</button>          
+              <a href= "admin_create_event.php"><button type="button" class="btn">Create Event</button></a>
+               <!-- Move this to 'Modify Event Page' links to particular events gallery -->
+              <a href= "gallery.php"><button type="button" class="btn">EVENT GALLERY</button></a>
               <?php
               if(isset($_GET['saved'])) {
                 echo "<script>";
                 if($_GET['saved'] == "0") {
                   echo "document.getElementById('modalText').innerHTML = 'New Event Created';";
-                } else 
+                } else
                 {
                   echo "document.getElementById('modalText').innerHTML = 'Event Updated';";
                 }

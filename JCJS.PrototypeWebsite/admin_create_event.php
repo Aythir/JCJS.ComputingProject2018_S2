@@ -22,15 +22,7 @@
             $HostAccessCode = trim($row["HostAccessCode"]);
         }
     }
-  } else {
-    $title = "Create New Event";
-    $EventID = 0;
-    $EventDate = "2018-06-08";
-    $EventName = "My New Event";
-    $EventLocation = "21 Party Lane, Cairns";
-    $GuestAccessCode = "AAABBBCCC";
-    $HostAccessCode = "XXXYYYZZZ";
-  }
+  } 
 ?>
 <?php include 'adminHeader.php';?>
  <!-- Content -->
