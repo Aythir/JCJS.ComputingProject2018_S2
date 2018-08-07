@@ -5,6 +5,7 @@
   //$navbarlinks .= createNavLink("Create Gif","#");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
   $navbarlinks .= createNavLink("Host Login","host_login.php");
+  $navbarlinks .= createNavLink("Logout","#");
 ?>
 <?php include 'guestHeader.php';?>
   <!-- Content -->
