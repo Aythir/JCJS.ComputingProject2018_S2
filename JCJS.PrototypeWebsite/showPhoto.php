@@ -1,5 +1,6 @@
 <?php include 'databaseConnection.php';?>
 <?php include 'functionList.php';?>
+
 <?php
   $title = "Uploaded Image";
   $photoID = (int)$_GET["PhotoID"];
@@ -18,6 +19,7 @@
   if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
     $fileName = $row["Filename"];
+    $filePath = "eventPhotos/".$eventID."/".$fileName;
   } else {
       header("Location: 500.php?error=1");
   }  
@@ -49,7 +51,6 @@ function shareToFacebook() {
   FB.getLoginStatus(function(response) {
     if (response.status === 'connected') {
       var accessToken = response.authResponse.accessToken;
-      alert(accessToken);
     } 
   } );
   
@@ -67,6 +68,20 @@ function shareToFacebook() {
 
   });
 }
+
+function uploadToCloudinary() {
+  alert("Entered upload");
+  var filePath = "<?php echo $filePath?>";
+  var photoID = <?php echo $photoID?>;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    //if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("testDiv").innerHTML = this.responseText;
+    //}
+  };
+  xhttp.open("GET", "./scripts/uploadToCloudinary.php?filePath=" + filePath +"&photoID="+ photoID, true);
+  xhttp.send();
+}
   
 </script>
 <!-- Content -->
@@ -80,13 +95,13 @@ function shareToFacebook() {
     <!-- original image -->
     <div class="row m-0" style="margin-top:10px">
       <!-- <figure class=""> -->
-        <img alt="picture" src='eventPhotos/<?php echo $eventID."/".$fileName?>' class="img-fluid col-md-12 p-1">
+        <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
       <!-- </figure> -->
     </div>
     <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
     <div class="text-center d-flex justify-content-center" style="font-size:25px">
       <!-- save button-->
-          <a href="/eventPhotos/<?php echo $eventID. '/'. $fileName?>" download><button id="saveButton" class="btn">View Full Size</button></a>
+          <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
       <!-- apply filter-->
           <button class="btn" onclick="filterMode()">Apply Filter</button>
 
@@ -95,7 +110,7 @@ function shareToFacebook() {
           <a class="p-2 m-2 fb-ic" >
              <i class="fa fa-facebook red-text" onclick="shareToFacebook()"></i></a>
              <!--Facebook supplied button-->
-              <div class="fb-share-button" data-href="/eventPhotos/<?php echo $eventID. '/'. $fileName?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+              <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
             <!-- end Facebook supplied button-->
      <!-- instragram-->
           <a class="p-2 m-2 ins-ic">
@@ -121,21 +136,25 @@ function shareToFacebook() {
           <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
     </div>
     </div>
+    <div id="testDiv"></div>
 
   </div>
 
 </div>
 <script>
-  alert("Script running");
+  var fileName = "<?php echo $filePath?>";
+  alert(fileName);
 
   function cancelFilter() {
-    alert(document.getElementById("default-buttons").style.display);
     document.getElementById("default-buttons").style.display = "block";
     document.getElementById("apply-filter-buttons").style.display = "none";
   }
 
   function filterMode() {
-    alert(document.getElementById("default-buttons").style.display);
+    alert("Entered filtermode");
+    //Upload image in preparation for applying filters
+    uploadToCloudinary();
+    alert("Finished upload");
     document.getElementById("default-buttons").style.display = "none";
     document.getElementById("apply-filter-buttons").style.display = "block";
   }
