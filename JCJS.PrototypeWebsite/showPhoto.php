@@ -70,7 +70,6 @@ function shareToFacebook() {
 }
 
 function uploadToCloudinary() {
-  alert("Entered upload");
   var filePath = "<?php echo $filePath?>";
   var photoID = <?php echo $photoID?>;
   var xhttp = new XMLHttpRequest();
@@ -81,6 +80,26 @@ function uploadToCloudinary() {
   };
   xhttp.open("GET", "./scripts/uploadToCloudinary.php?filePath=" + filePath +"&photoID="+ photoID, true);
   xhttp.send();
+}
+
+function applyFilter() {
+  alert("Entered applyFilter");
+  var photoID = <?php echo $photoID?>;
+  alert(document.getElementById("filterDropdown").value);
+  var filter = document.getElementById("filterDropdown").value;
+  if (filter != "") {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("saveFilter").href = this.responseText;
+      document.getElementById("showImage").src = this.responseText;
+      saveFilterResult();
+      }
+    };
+    xhttp.open("GET", "./scripts/applyFilter.php?photoID="+ photoID + "&filter=" + filter, true);
+    xhttp.send();
+  }
+  
 }
   
 </script>
@@ -124,16 +143,25 @@ function uploadToCloudinary() {
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Select filter
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Black and White</a>
-          <a class="dropdown-item" href="#">Sepia</a>
-          <a class="dropdown-item" href="#">Cartoon</a>
+        <div class="dropdown-menu" id="filterDropdown" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" value="grayscale">Black and White</a>
+          <a class="dropdown-item" value="sepia">Sepia</a>
+          <a class="dropdown-item" value="cartoonify">Cartoon</a>
         </div>
       </div>
       <!-- apply filter button-->
-          <button class="btn">Apply</button>
+          <button class="btn" onclick="applyFilter()">Apply</button>
       <!-- cancel filter button-->
           <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
+    </div>
+    </div>
+
+    <div id="save-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+    <div class="text-center d-flex justify-content-center" style="font-size:25px">
+      <!-- save filter button-->
+          <a id="saveFilter" href="#" download><button class="btn" >Save Full Size</button></a>
+      <!-- discard filter result button-->
+          <a href="#"><button class="btn" onclick="cancelFilter()">Discard</button></a>
     </div>
     </div>
     <div id="testDiv"></div>
@@ -143,11 +171,12 @@ function uploadToCloudinary() {
 </div>
 <script>
   var fileName = "<?php echo $filePath?>";
-  alert(fileName);
 
   function cancelFilter() {
     document.getElementById("default-buttons").style.display = "block";
     document.getElementById("apply-filter-buttons").style.display = "none";
+    document.getElementById("save-filter-buttons").style.display = "none";
+    document.getElementById("showImage").src = fileName;
   }
 
   function filterMode() {
@@ -157,6 +186,13 @@ function uploadToCloudinary() {
     alert("Finished upload");
     document.getElementById("default-buttons").style.display = "none";
     document.getElementById("apply-filter-buttons").style.display = "block";
+    document.getElementById("save-filter-buttons").style.display = "none";
+  }
+
+  function saveFilterResult () {
+    document.getElementById("default-buttons").style.display = "none";
+    document.getElementById("apply-filter-buttons").style.display = "none";
+    document.getElementById("save-filter-buttons").style.display = "block";
   }
 
   cancelFilter();
