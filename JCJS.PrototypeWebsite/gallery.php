@@ -129,7 +129,7 @@ include 'functionList.php';
                     </div>
 
                     <div class="col-9">
-                        <p>Select three desired photos to be placed in your own custom GIF..</p>
+                        <p>Select two to five photos desired photos to be placed in your own custom GIF..</p>
                     </div>
                 </div>
             </div>

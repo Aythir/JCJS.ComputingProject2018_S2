@@ -19,32 +19,36 @@ $(function img_selection() {
         if (!conf) return false;
 
     
-        if ($("img.selected").length < 3) {
+        if ($("img.selected").length > 5)  {
             $("#SelectPhotosError").on('hide.bs.modal', function img_selection(){
 
             });
             return false;
         }
         else {
-            $("").submit(function(e) {
-                var formData = new FormData($("img.selected")[0]);
-        
-                $.ajax({
-                    url: "", // URL for the data to be sent too.
-                    type: "POST", // Type of request.
-                    data: formData, // Data for the 
-                    async: false,
-                    success: function (msg) {
-                        alert(msg)
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-        
-                e.preventDefault();
-            });
+            imageSubmission();
         }
     
-
-});
+    });
+    
+function imageSubmission() {
+    
+    $("").submit(function(e) { // form element 
+        var formData = new FormData($("img.selected")[0]); // img.selected 
+    
+        $.ajax({
+            url: "gallery.php", // URL for the data to be sent too.
+            type: "POST", // Type of request.
+            data: formData, // Data for the server to process 
+            async: false,
+            success: function (msg) {
+                alert(msg['Success!'])
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    
+        e.preventDefault();
+    });
+}
