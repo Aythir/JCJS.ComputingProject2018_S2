@@ -3,6 +3,7 @@
   $title = "Enter event code";
 ?>
 <?php include 'guestHeader.php';?>
+
       <!-- Content -->
       <div class="container-liquid">
         <!--Grid row-->
@@ -29,18 +30,19 @@
                   <hr class="hr-light">
                 </div>
                 <!--Body of event code form-->
-                <form method="post" action="gallery.php" class="md-form"> <!-- The action method will need to change according to the PHP code implemeneted, but this is a short work around now.-->
+                <!--<form method="post" action="gallery.php" class="md-form"> <!-- The action method will need to change according to the PHP code implemeneted, but this is a short work around now.-->
+                  <div class="md-form">
                   <i class="fa fa-user prefix white-text active"></i>
                   <input type="text" id="form3" name="code" class="white-text form-control">
                   <label for="form3" class="active">Code</label>
 
                   <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-white" href="gallery.html">Enter</button> <!-- Event code button -->
+                    <button type="enterButton" class="btn btn-white">Enter</button> <!-- Event code button -->
                   <br><br>
                     <!--Terms of Use and Privacy Policy text and links-->
                     <h6 style="color: white"><i>By continuing, you agree to the <a href="#"style="color: white">Terms of Use</a> and <a href="#"style="color: white">Privacy Policy</i></a></h6>
                   </div>
-                </form>
+                <!--</form>-->
 
                   <hr class="hr-light mb-3 mt-4">
 
@@ -52,7 +54,50 @@
           <!--Grid column-->
         </div>
         <!--Grid row-->
+<!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" style="color:red" id='modalText'>New Event Created</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-error" data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+    <!-- SCRIPTS -->
+    <script>
+      $("enterButton").click(function(){
+        console.log(3);
+          $.post("demo_test_post.asp",
+          {
+              hostCode: document.getElementById('hostCode').value
+          },
+          function(data, status){
+              alert("Data: " + data + "\nStatus: " + status);
+          });
+      });
+
+      $(document).ready(function() {
+          $("#enterButton").click(function(){
+            $.post("ajaxSubmitHostCode.php",
+            {
+                hostCode: document.getElementById('hostCode').value
+            },
+            function(data, status){
+                if(data === "true") {
+                  document.getElementById('modalText').innerHTML = "Event code accepted";
+                } else {
+                  document.getElementById('modalText').innerHTML = "Invalid event code";
+                }
+                $('#myModal').modal('show');
+            });
+          });
+      });
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
