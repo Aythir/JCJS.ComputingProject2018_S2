@@ -102,8 +102,10 @@ include 'functionList.php';
     <div class= "create-gif">
         <div class="personal-gallery">
             <h5>Select two to five photos and click the button to generate your personal GIF!</h5>
+            <form id="imageSubmission" method= "post" action="">
             <button id="reset" type="button" class="btn btn-secondary">Reset</button>
             <button onclick= "img_selection()" id="create" type="button" class="btn btn-default">Create GIF</button>
+            </form>
         </div>
     </div>
 </div>
@@ -136,8 +138,7 @@ include 'functionList.php';
 
             <!--Footer-->
             <div class="modal-footer justify-content-center">
-                <a type="button" class="btn btn-primary">Get it now <i class="fa fa-diamond ml-1"></i></a>
-                <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No, thanks</a>
+                <a type="button" class="btn btn-primary">OK <i class="fa fa-diamond ml-1" data-dismiss="modal"></i></a>
             </div>
         </div>
         <!--/.Content-->
@@ -191,7 +192,7 @@ include 'functionList.php';
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <p class="heading">Please select three photos</p>
+                <p class="heading">Please select two to five  photos</p>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="white-text">&times;</span>
@@ -206,7 +207,7 @@ include 'functionList.php';
                     </div>
 
                     <div class="col-9">
-                        <p>Please select three photos.</p>
+                        <p>Please select two to five photos.</p>
                         
                     </div>
                 </div>

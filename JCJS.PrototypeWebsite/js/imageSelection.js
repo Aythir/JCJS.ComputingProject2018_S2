@@ -32,9 +32,9 @@ $(function img_selection() {
     });
     
 function imageSubmission() {
-    
-    $("").submit(function(e) { // form element 
-        var formData = new FormData($("img.selected")[0]); // img.selected 
+
+    $("#imageSubmission").submit(function(e) { // form element 
+        var formData = new FormData($("img.selected > $eventID").serialize()[0]); // img.selected 
     
         $.ajax({
             url: "gallery.php", // URL for the data to be sent too.
