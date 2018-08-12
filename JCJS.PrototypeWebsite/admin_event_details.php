@@ -81,8 +81,6 @@
               </div>
 
               <a href= "admin_create_event.php"><button type="button" class="btn">Create Event</button></a>
-               <!-- Move this to 'Modify Event Page' links to particular events gallery -->
-              <a href= "gallery.php"><button type="button" class="btn">EVENT GALLERY</button></a>
               <?php
               if(isset($_GET['saved'])) {
                 echo "<script>";
