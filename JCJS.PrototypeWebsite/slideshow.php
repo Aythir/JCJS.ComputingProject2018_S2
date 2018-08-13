@@ -4,7 +4,7 @@
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Host Login","host_login.php");
-  $navbarlinks .= createNavLink("Logout","#");
+  $navbarlinks .= createLogout();
 ?>
 <?php include 'guestHeader.php';?>
   <!-- Content -->

@@ -5,55 +5,79 @@ include 'functionList.php';
   $title = "Gallery";
   $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
-  $navbarlinks .= createNavLink("Host Login","host_login.php");
-  $navbarlinks .= createNavLink("Logout","#");
-
+  
   session_start();
-  if(isset($_POST["code"])) {
-    //check database for code, either in events...
-    $enteredCode = $_POST["code"];
-    $codeFound = false;
-    $sql = "SELECT EventID FROM events WHERE GuestAccessCode = '$enteredCode';";
-    //echo $sql;
-    $result = $conn->query($sql);
+  if(isset($_SESSION["HostAccess"])) {
+    $navbarlinks .= createModalLink();
+  } else {
+    $navbarlinks .= createNavLink("Host Login","host_login.php");
+  }
 
-    if ($result->num_rows > 0) {
-        $codeFound = true;
-        $row = mysqli_fetch_row($result);
-        $_SESSION["EventID"] = (int)$row[0];
-    }
+  $navbarlinks .= createLogout();
 
-    mysqli_free_result($result);
-    //...or if not found above, in photos
-    if ($codeFound == false) {
-        $sql = "SELECT EventID, UniqueCode FROM photos WHERE UniqueCode = '$enteredCode';";
+  if(isset($_SESSION["EventID"])) {
+    $eventID = (int)$_SESSION["EventID"];
+  }
+  else {
+    //header("Location: index.php?error=2");
+
+    if(isset($_POST["code"])) {
+        //check database for code, either in events...
+        $enteredCode = $_POST["code"];
+        $codeFound = false;
+        $sql = "SELECT EventID FROM events WHERE GuestAccessCode = '$enteredCode';";
         //echo $sql;
         $result = $conn->query($sql);
-
+    
         if ($result->num_rows > 0) {
             $codeFound = true;
             $row = mysqli_fetch_row($result);
             $_SESSION["EventID"] = (int)$row[0];
-            $_SESSION["UniqueCodes"] = array($enteredCode);
         }
-    }
-  }
-  if(isset($_SESSION["EventID"])) {
-    $eventID = (int)$_SESSION["EventID"];
-  } else {
-    header("Location: enterEventCode.php?error=1");
+    
+        mysqli_free_result($result);
+        //...or if not found above, in photos
+        if ($codeFound == false) {
+            $sql = "SELECT EventID, UniqueCode FROM photos WHERE UniqueCode = '$enteredCode';";
+            //echo $sql;
+            $result = $conn->query($sql);
+    
+            if ($result->num_rows > 0) {
+                $codeFound = true;
+                $row = mysqli_fetch_row($result);
+                $_SESSION["EventID"] = (int)$row[0];
+                $_SESSION["UniqueCodes"] = array($enteredCode);
+            }
+        }
+      }
   }
 ?>
 <?php include "guestHeader.php";?>
+
+<!-- Modal -->
+<div class="modal fade" id="hostModal" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id='modalText'>Are you sure you want to download all photos for this event as a single ZIP file?</h4>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+    <button type="button" id='modalButton' class="btn btn-error" data-dismiss="modal">OK</button>
+    </div>
+    </div>
+</div>
+</div>
+
  <!--Main content-->
  <div onload= "img_selection()" class="container-fluid">
-
     <div class="personal-gallery tz-gallery">
         <h3 class= "responsive-text">Your Photobooth Session</h3>
         <hr>
         <div class= "row">
             <?php
-                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 0;";
+                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND ImageType = 0;";
                 //echo $sql;
                 $result = $conn->query($sql);
 
@@ -66,8 +90,6 @@ include 'functionList.php';
                         echo "</div>";
                         echo "</div>";
                     }
-                } else {
-                    header("Location: adminLogin.php?error=1");
                 }
             ?>
         </div>
@@ -78,7 +100,7 @@ include 'functionList.php';
         <hr>
         <div class="row">
         <?php
-            $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 1;";
+            $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND ImageType = 1;";
             //echo $sql;
             $result = $conn->query($sql);
 
@@ -110,4 +132,11 @@ include 'functionList.php';
 </div>
 <!-- End main content-->
 <!--End of Main content-->
+<script>
+    $(document).ready(function() {
+        $("#modalButton").click(function(){
+            location.href='ajaxDownloadAllPhotos.php';
+        });
+    });    
+</script>
 <?php include 'ppFooter.php';?>

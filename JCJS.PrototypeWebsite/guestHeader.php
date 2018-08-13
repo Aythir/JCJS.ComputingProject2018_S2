@@ -109,7 +109,23 @@ button:hover {
 </style>
 </head>
 <body>
-  <!-- Navbar -->
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Are you sure you want to log out now?</h4>            
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-error" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href='logout.php';">Yes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+        
+    <!-- Navbar -->
    <nav class="navbar navbar-expand-sm navbar-light">
       <a class="navbar-brand" href="gallery.php"> <!-- Little Red Logo -->
           <img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>

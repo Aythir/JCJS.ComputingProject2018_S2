@@ -25,10 +25,9 @@
   }  
 
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
-  //$navbarlinks .= createNavLink("Create Gif","#");
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
-  $navbarlinks .= createNavLink("Apply Filters","#");
   $navbarlinks .= createNavLink("Host Login","host_login.php");
+  $navbarlinks .= createLogout();
 ?>
 <?php include 'guestHeader.php';?>  
 <!--Facebook supplied code-->

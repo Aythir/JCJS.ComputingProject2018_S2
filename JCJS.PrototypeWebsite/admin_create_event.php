@@ -1,9 +1,18 @@
 <?php include 'databaseConnection.php';?>
 <?php include 'functionList.php';?>
 <?php
+  $title = "Create New Event";
+
+  $navbarlinks = "";
   $navbarlinks .= createNavLink("Event List","admin_event_details.php");
   $navbarlinks .= createNavLink("Change Password","admin_change_password.php");
-  $navbarlinks .= createNavLink("Logout","#");
+  $navbarlinks .= createLogout();
+
+  $EventID = 0;
+  $EventName = "";
+  $EventLocation = "";
+  $GuestAccessCode = "";
+  $HostAccessCode = "";
 
   if(isset($_GET['EventID'])) {
     $title = "Modify Event";

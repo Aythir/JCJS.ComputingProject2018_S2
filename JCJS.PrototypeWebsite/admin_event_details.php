@@ -3,7 +3,7 @@
   $title = "List of Events";
   $navbarlinks = createNavLink("Create Event","admin_create_event.php");
   $navbarlinks .= createNavLink("Change Password","admin_change_password.php");
-  $navbarlinks .= createNavLink("Logout","#");
+  $navbarlinks .= createLogout();
 ?>
 <?php include 'adminHeader.php';?>
  <!-- Content -->

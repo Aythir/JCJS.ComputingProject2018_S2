@@ -16,7 +16,7 @@
 
         header("Location: admin_event_details.php");
   } else {
-      header("Location: adminLogin.php?error=1");
+      header("Location: admin_Login.php?error=1&username=".$username);
   }
   $conn->close();  
 ?>
