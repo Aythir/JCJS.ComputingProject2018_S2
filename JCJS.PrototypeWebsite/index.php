@@ -1,6 +1,6 @@
 <?php include 'functionList.php';?>
 <?php
-  $title = "Enter event code";
+  $title = "Enter Event Code";
 ?>
 <?php include 'guestHeader.php';?>
 
@@ -33,11 +33,11 @@
                 <!--<form method="post" action="gallery.php" class="md-form"> <!-- The action method will need to change according to the PHP code implemeneted, but this is a short work around now.-->
                   <div class="md-form">
                   <i class="fa fa-user prefix white-text active"></i>
-                  <input type="text" id="form3" name="code" class="white-text form-control">
-                  <label for="form3" class="active">Code</label>
+                  <input type="text" id="eventCode" name="eventCode" class="white-text form-control">
+                  <label for="eventCode" class="active">Code</label>
 
                   <div class="text-center mt-4">
-                    <button type="enterButton" class="btn btn-white">Enter</button> <!-- Event code button -->
+                    <button id="enterButton" class="btn btn-white">Enter</button> <!-- Event code button -->
                   <br><br>
                     <!--Terms of Use and Privacy Policy text and links-->
                     <h6 style="color: white"><i>By continuing, you agree to the <a href="#"style="color: white">Terms of Use</a> and <a href="#"style="color: white">Privacy Policy</i></a></h6>
@@ -54,16 +54,16 @@
           <!--Grid column-->
         </div>
         <!--Grid row-->
-<!-- Modal -->
+      <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
         <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" style="color:red" id='modalText'>New Event Created</h4>
+              <h4 class="modal-title" id='modalText'></h4>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-error" data-dismiss="modal">OK</button>
+              <button type="button" id='modalButton' class="btn btn-error" data-dismiss="modal">OK</button>
             </div>
           </div>
         </div>
@@ -71,33 +71,29 @@
 
     <!-- SCRIPTS -->
     <script>
-      $("enterButton").click(function(){
-        console.log(3);
-          $.post("demo_test_post.asp",
-          {
-              hostCode: document.getElementById('hostCode').value
-          },
-          function(data, status){
-              alert("Data: " + data + "\nStatus: " + status);
-          });
-      });
-
       $(document).ready(function() {
           $("#enterButton").click(function(){
-            $.post("ajaxSubmitHostCode.php",
+            $.post("ajaxSubmitEventCode.php",
             {
-                hostCode: document.getElementById('hostCode').value
+                eventCode: document.getElementById('eventCode').value
             },
             function(data, status){
                 if(data === "true") {
+                  //document.getElementById('modalButton').className = "btn btn-success";
+                  document.getElementById('modalButton').className = "btn btn-success";
                   document.getElementById('modalText').innerHTML = "Event code accepted";
+                  document.getElementById("modalButton").onclick = function() {
+                    location.href='gallery.php';
+                  }
                 } else {
+                  document.getElementById('modalButton').className = "btn btn-danger";
                   document.getElementById('modalText').innerHTML = "Invalid event code";
                 }
                 $('#myModal').modal('show');
             });
           });
       });
+      </script>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

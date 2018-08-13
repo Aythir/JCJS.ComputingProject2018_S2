@@ -63,10 +63,10 @@
         <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" style="color:red" id='modalText'>New Event Created</h4>
+              <h4 class="modal-title" id='modalText'>New Event Created</h4>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-error" data-dismiss="modal">OK</button>
+              <button type="button" id="modalButton" class="btn btn-error" data-dismiss="modal">OK</button>
             </div>
           </div>
         </div>
@@ -74,17 +74,6 @@
 
     <!-- SCRIPTS -->
     <script>
-      $("enterButton").click(function(){
-        console.log(3);
-          $.post("demo_test_post.asp",
-          {
-              hostCode: document.getElementById('hostCode').value
-          },
-          function(data, status){
-              alert("Data: " + data + "\nStatus: " + status);
-          });
-      });
-
       $(document).ready(function() {
           $("#enterButton").click(function(){
             $.post("ajaxSubmitHostCode.php",
@@ -93,8 +82,13 @@
             },
             function(data, status){
                 if(data === "true") {
+                  document.getElementById('modalButton').className = "btn btn-success";
                   document.getElementById('modalText').innerHTML = "Host code accepted";
+                  document.getElementById("modalButton").onclick = function() {
+                    location.href='gallery.php';
+                  }                  
                 } else {
+                  document.getElementById('modalButton').className = "btn btn-danger";
                   document.getElementById('modalText').innerHTML = "Invalid host code";
                 }
                 $('#myModal').modal('show');

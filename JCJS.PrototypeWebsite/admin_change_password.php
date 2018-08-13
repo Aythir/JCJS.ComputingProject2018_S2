@@ -4,7 +4,7 @@
   $title = "Admin Change Password";
   $navbarlinks = createNavLink("Create Event","admin_create_event.php");
   $navbarlinks .= createNavLink("Event List","admin_event_details.php");
-  $navbarlinks .= createNavLink("Logout","#");
+  $navbarlinks .= createLogout();
 ?>
 <?php include 'adminHeader.php';?>
 <style>
