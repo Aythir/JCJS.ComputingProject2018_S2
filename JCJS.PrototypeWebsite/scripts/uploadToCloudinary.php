@@ -11,15 +11,14 @@
 
 
 
-  $default_upload_options = array("tags" => "basic_sample");
+  $default_upload_options = array("tags" => "basic_sample", "effect" => "cartoonify");
 
   if (isset($_GET["filePath"]) && isset($_GET["photoID"])) {
     $filePath = "../".$_GET["filePath"];
     $photoID = $_GET["photoID"];
     # Same image, uploaded with a public_id
-    $upload = \Cloudinary\Uploader::upload($filePath,
-    array_merge($default_upload_options, array("public_id" => $photoID)));
-    print_r($upload);
+    $upload = \Cloudinary\Uploader::upload($filePath, array("public_id" => $photoID));
+    echo $upload["url"];
   }
       
 ?>
