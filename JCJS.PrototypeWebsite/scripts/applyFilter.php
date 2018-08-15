@@ -1,4 +1,8 @@
 <?php 
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
+
   require 'Cloudinary.php';
   require 'Uploader.php';
   require 'Api.php';
@@ -9,17 +13,9 @@
     "api_secret" => "lNdOEX5stZEosAsWZjv2bkqQlkM" 
   ));
 
-
-
-  
-
-  if (isset($_GET["photoID"]) && isset($_GET["filter"])) {
     $photoID = $_GET["photoID"];
-    $filter = $_GET["filter"])
-    $options = array("effect" => $filter);
-    # Same image, uploaded with a public_id
-    $transformation_url = cloudinary_url($photoID, $options);
-    echo $transformation_url;
-  }
+    $filter = $_GET["filter"];
+    $result = cloudinary_url($photoID, array("effect" => $filter));
+    echo $result;
       
 ?>
