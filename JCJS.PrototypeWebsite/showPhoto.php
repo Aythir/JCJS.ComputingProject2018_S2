@@ -20,6 +20,10 @@
     $row = mysqli_fetch_assoc($result);
     $fileName = $row["Filename"];
     $filePath = "eventPhotos/".$eventID."/".$fileName;
+    $thumbnailPath = "eventPhotos/".$eventID."/thumbnails/thumb500_".$fileName;
+    if (file_exists($thumbnailPath)) {
+      $filePath = $thumbnailPath;
+    }
   } else {
       header("Location: 500.php?error=1");
   }  

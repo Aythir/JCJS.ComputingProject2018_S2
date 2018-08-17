@@ -86,7 +86,13 @@ include 'functionList.php';
                     while($row = $result->fetch_assoc()) {
                         echo '<div class= "col-lg-3 col-sm-6" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                         echo '<div id="gallery" class="card">';
-                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top">';
+                        echo '<img src="eventPhotos/'.$eventID.'/';
+                        //Check for existence of thumbnail and append filename if so
+                        if (file_exists('eventPhotos/'.$eventID.'/thumbnails/thumb200_'.$row["Filename"])) {
+                            echo 'thumbnails/thumb200_'
+                        }
+                        echo $row["Filename"];
+                        echo '" class="card-img-top">';
                         echo "</div>";
                         echo "</div>";
                     }
@@ -109,7 +115,13 @@ include 'functionList.php';
                 while($row = $result->fetch_assoc()) {
                     echo '<div class= "col-lg-3 col-sm-6" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                     echo '<div id="gallery" class="card">';
-                    echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top">';
+                    echo '<img src="eventPhotos/'.$eventID.'/';
+                        //Check for existence of thumbnail and append filename if so
+                        if (file_exists('eventPhotos/'.$eventID.'/thumbnails/thumb200_'.$row["Filename"])) {
+                            echo 'thumbnails/thumb200_'
+                        }
+                        echo $row["Filename"];
+                    echo '" class="card-img-top">';
                     echo "</div>";
                     echo "</div>";
                 }
