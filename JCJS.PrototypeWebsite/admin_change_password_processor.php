@@ -20,9 +20,9 @@
         // check password passes complexity requirements with regex
         $pattern = "/(?=(.*[0-9]){1,})(?=.*[\*^!])(?=.*[a-z]{1,})(?=(.*[A-Z]){1,}).{8,10}/";
         if(preg_match($pattern, $newPassword1)){
-            echo "Match found!";
+            //echo "Match found!";
             // check that current password is correct
-            $sql = "SELECT Password FROM `admin` WHERE AdminID = $adminID;";
+            $sql = "SELECT Password FROM `admin` WHERE AdminID = $adminID AND Password = '$currentPassword';";
             //echo $sql;
             $result = $conn->query($sql);
 
@@ -31,22 +31,25 @@
                 $sql = "UPDATE admin SET Password = '$newPassword1' WHERE AdminID = $adminID;";
                 //echo $sql;
                 $result = $conn->query($sql);      
+
+                echo "Password changed succesfully";
             } else {
                 // admin id not found in database or password incorrect so redirect back
-                header("Location: admin_change_password.php?error=1");    
+                //header("Location: admin_change_password.php?error=1");    
+                echo "Incorrect current password";
             }
         } else{
             // password does not meet complexity requirements
-            header("Location: admin_change_password.php?error=2");
+            echo "Password does not meet complexity requirements";
         }
     } else {
         //if new passwords don't match then redirect back to change page
-        header("Location: admin_change_password.php?error=3");
+        echo "Passwords don't match";
     }
 
     // close database connection
     $conn->close();  
 
     // redirect to success page
-    header("Location: password_updated.php");
+    //header("Location: password_updated.php");
 ?>

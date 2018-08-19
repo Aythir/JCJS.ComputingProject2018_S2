@@ -122,9 +122,10 @@ include 'functionList.php';
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo '<div class= "col-lg-3 col-sm-6" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
+                    //echo '<div class= "col-lg-3 col-sm-6" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
+                    echo '<div class= "col-lg-3 col-sm-6" style="cursor:pointer;">';
                     echo '<div id="gallery" class="card">';
-                    echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top">';
+                    echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white">';
                     echo "</div>";
                     echo "</div>";
                 }
@@ -203,7 +204,7 @@ include 'functionList.php';
     }
 
     function mergeSelections() {
-        if(selectionArray.length < 1) {
+        if(selectionArray.length < 3) {
             document.getElementById("selectorModalText").innerHTML = "No images are selected. Please select 3-5 images and then click 'Create animation from selected images' to create an animated Gif file.";
             $('#selectorModal').modal('show');
         } else if (selectionArray.length > 5) {

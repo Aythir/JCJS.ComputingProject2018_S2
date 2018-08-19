@@ -45,6 +45,22 @@
     content: "✖";
 }
 </style>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id='modalText'></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id='modalButton' class="btn btn-error" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Content -->
  <div class="container-liquid" >
     <!--Grid row-->
@@ -56,7 +72,7 @@
         <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
 
        <!--Reset password form-->
-        <form action="admin_change_password_processor.php" method="post">
+        <form action="javascript:ajaxSubmit();" method="post" id="myForm">
           <div class="form-group">
             <div class="container">
 
@@ -77,7 +93,7 @@
                 <input type="password" class="form-control" maxlength = "10" placeholder="Re-enter new password" name="pwd2" id="pwd2"
                 title="Must match the new password entered"required>
               </div>
-              <button type="submit" class="btn">Reset Password</button>
+              <button type="submit" class="btn" id="enterButton">Reset Password</button>
 
               <div id="message">
                 <h6 style="font-weight:bold; color:grey">Password must contain the following:</h6>
@@ -88,6 +104,35 @@
               </div>
 
                 <script>
+                    function ajaxSubmit() {
+                      console.log(999);
+                      if($('#myForm')[0].checkValidity()) {
+                        $.post("admin_change_password_processor.php",
+                        {
+                            pwd1: document.getElementById('pwd1').value,
+                            pwd2: document.getElementById('pwd2').value,
+                            pwd: document.getElementById('pwd').value
+                        },
+                        function(data, status){
+                            if(data === "Password changed successfully") {
+                              //document.getElementById('modalButton').className = "btn btn-success";
+                              document.getElementById('modalButton').className = "btn btn-success";
+                              document.getElementById('modalText').innerHTML = "Password changed successfully";
+                              document.getElementById("modalButton").onclick = function() {
+                                //location.href='gallery.php';
+                              }
+                            } else {
+                              document.getElementById('modalButton').className = "btn btn-danger";
+                              document.getElementById('modalText').innerHTML = data;
+                            }
+                            $('#myModal').modal('show');
+                        });
+                      } else {
+                        var $myForm = $('#myForm');
+                        $myForm.find(':submit').click();
+                      }
+                    }
+
                 var myInput = document.getElementById("pwd1");
                 var letter = document.getElementById("letter");
                 var capital = document.getElementById("capital");
