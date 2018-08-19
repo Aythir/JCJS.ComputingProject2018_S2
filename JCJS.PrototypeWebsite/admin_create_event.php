@@ -78,7 +78,7 @@
               <?php
               if($EventID > 0) {
                 echo '<button type="submit" class="btn"><i class="fa fa-save"></i> Save Changes</button>';
-                echo '<button type="submit" class="btn">Event Gallery</button>';
+                echo '<button type="button" class="btn" onclick="location.href=\'gallery.php\';">Event Gallery</button>';
               } else {
                 echo '<button type="submit" class="btn">Create Event</button><button type="reset" class="btn grey">Reset</button>';
               }

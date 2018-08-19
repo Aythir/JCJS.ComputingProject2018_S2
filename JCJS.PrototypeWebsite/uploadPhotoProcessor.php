@@ -1,13 +1,17 @@
 <?php include 'databaseConnection.php';?>
+<?php echo exec('whoami'); ?>
 <?php
+
+error_reporting(E_ALL); ini_set('display_errors', 1);
+
 session_start();
 if(isset($_SESSION["EventID"])) {
     $eventID = (int)$_SESSION["EventID"];
 } else {
-    header("Location: enterEventCode.php?error=1");
+    header("Location: index.php?error=1");
 }
 
-$target_dir = "eventPhotos/". $eventID . "/";
+$target_dir = $_SERVER['DOCUMENT_ROOT']."/"."eventPhotos/". $eventID . "/";
 $uploadOk = 1;
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -44,7 +48,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     $timestamp = date('Y-m-d G:i:s');
-    $sql = "INSERT INTO Photos (EventID, ImageType, Timestamp) VALUES ($eventID,3,'$timestamp')";
+    $sql = "INSERT INTO Photos (EventID, IsUserUpload, Timestamp) VALUES ($eventID,1,'$timestamp')";
     if ($conn->query($sql) === TRUE) {
         // get the ID of the inserted row
         $photoID = $conn->insert_id;
@@ -58,13 +62,22 @@ if ($uploadOk == 0) {
         $result = $conn->query($sql);     
         $conn->close();
 
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.$newFilename)) {
-            header("Location: showPhoto.php?PhotoID=".$photoID);
-        } else {
-            echo "Sorry, there was an error uploading your file.";
+        if (is_uploaded_file($_FILES["fileToUpload"]["tmp_name"])) {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.$newFilename)) {
+                header("Location: showPhoto.php?PhotoID=".$photoID);
+                //echo "[Uploaded ".$target_dir.$newFilename."]<br>";
+            } else {
+                echo "Sorry, there was an error renaming your file.<br>";
+                echo "[".$target_dir.$newFilename."]<br>";
+                echo "[".$_FILES["fileToUpload"]["tmp_name"]."]<br>";
+            }
+        }
+        else {
+            echo "Sorry, file not uploaded.".$_FILES["fileToUpload"]["tmp_name"]."<br>";
         }
     } else {
-        echo "Error inserting to database";
+        //echo "Error inserting to database";
+        echo "Error inserting to database:" . $sql . "<br>" . $conn->error;
     }    
 }
 
