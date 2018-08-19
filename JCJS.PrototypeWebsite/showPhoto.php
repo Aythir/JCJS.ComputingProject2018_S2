@@ -20,10 +20,6 @@
     $row = mysqli_fetch_assoc($result);
     $fileName = $row["Filename"];
     $filePath = "eventPhotos/".$eventID."/".$fileName;
-    $thumbnailPath = "eventPhotos/".$eventID."/thumbnails/thumb500_".$fileName;
-    if (file_exists($thumbnailPath)) {
-      $filePath = $thumbnailPath;
-    }
   } else {
       header("Location: 500.php?error=1");
   }  
@@ -77,25 +73,26 @@ function uploadToCloudinary() {
   var photoID = <?php echo $photoID?>;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    //if (this.readyState == 4 && this.status == 200) {
      document.getElementById("testDiv").innerHTML = this.responseText;
-    }
+    //}
   };
   xhttp.open("GET", "./scripts/uploadToCloudinary.php?filePath=" + filePath +"&photoID="+ photoID, true);
   xhttp.send();
 }
 
 function applyFilter() {
+  alert("Entered applyFilter");
   var photoID = <?php echo $photoID?>;
+  alert(document.getElementById("filterDropdown").value);
   var filter = document.getElementById("filterDropdown").value;
   if (filter != "") {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("showImage").src = this.responseText;
-        document.getElementById("saveFilter").href = this.responseText;
-        /* Update controls to allow download of filtered image */
-        saveFilterResult();
+      document.getElementById("saveFilter").href = this.responseText;
+      document.getElementById("showImage").src = this.responseText;
+      saveFilterResult();
       }
     };
     xhttp.open("GET", "./scripts/applyFilter.php?photoID="+ photoID + "&filter=" + filter, true);
@@ -141,15 +138,7 @@ function applyFilter() {
     <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
     <div class="text-center d-flex justify-content-center" style="font-size:25px">
       <!-- filter dropdown-->
-      <div class="form-group">
-        <label for="filterDropdown">Select filter:</label>
-        <select class="form-control" id="filterDropdown">
-          <option value="grayscale">Black and White</option>
-          <option value="sepia">Sepia</option>
-          <option value="cartoonify">Cartoon</option>
-        </select>
-      </div>
-      <!-- <div class="dropdown">
+      <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Select filter
         </button>
@@ -158,7 +147,7 @@ function applyFilter() {
           <a class="dropdown-item" value="sepia">Sepia</a>
           <a class="dropdown-item" value="cartoonify">Cartoon</a>
         </div>
-      </div> -->
+      </div>
       <!-- apply filter button-->
           <button class="btn" onclick="applyFilter()">Apply</button>
       <!-- cancel filter button-->
@@ -183,7 +172,6 @@ function applyFilter() {
   var fileName = "<?php echo $filePath?>";
 
   function cancelFilter() {
-    //Show/hide relevant controls
     document.getElementById("default-buttons").style.display = "block";
     document.getElementById("apply-filter-buttons").style.display = "none";
     document.getElementById("save-filter-buttons").style.display = "none";
@@ -191,16 +179,16 @@ function applyFilter() {
   }
 
   function filterMode() {
-    //Upload image early in preparation for applying filter
+    alert("Entered filtermode");
+    //Upload image in preparation for applying filters
     uploadToCloudinary();
-    //Show/hide relevant controls
+    alert("Finished upload");
     document.getElementById("default-buttons").style.display = "none";
     document.getElementById("apply-filter-buttons").style.display = "block";
     document.getElementById("save-filter-buttons").style.display = "none";
   }
 
   function saveFilterResult () {
-    //Show/hide relevant controls
     document.getElementById("default-buttons").style.display = "none";
     document.getElementById("apply-filter-buttons").style.display = "none";
     document.getElementById("save-filter-buttons").style.display = "block";

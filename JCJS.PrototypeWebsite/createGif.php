@@ -1,11 +1,13 @@
-<?php include 'databaseConnection.php';?>
 <?php include("GifCreator.php"); ?>
 <?php
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
+
 session_start();
 if(isset($_SESSION["EventID"])) {
     $eventID = (int)$_SESSION["EventID"];
 } else {
-    header("Location: enterEventCode.php?error=1");
+    header("Location: index.php?error=1");
 }
 
 $photoCount = 0;
@@ -13,48 +15,26 @@ $frameArray = array();
 $durationArray = array();
 $animationDuration = 100;
 
-if(isset($_GET["Photo1"])) {
-    $photo1 = (int)$_GET["Photo1"];
-    array_push($frameArray,"eventPhotos/".$eventID."/"."photo".$photo1.".jpg");
-    array_push($durationArray,$animationDuration);
-    $photoCount++;
-}
-if(isset($_GET["Photo2"])) {
-    $photo2 = (int)$_GET["Photo2"];
-    array_push($frameArray,"eventPhotos/".$eventID."/"."photo".$photo2.".jpg");
-    array_push($durationArray,$animationDuration);
-    $photoCount++;
-}
-if(isset($_GET["Photo3"])) {
-    $photo3 = (int)$_GET["Photo3"];
-    array_push($frameArray,"eventPhotos/".$eventID."/"."photo".$photo3.".jpg");
-    array_push($durationArray,$animationDuration);
-    $photoCount++;
+if(isset($_GET["sel"])) {
+    $photoArray = explode(",",$_GET["sel"]);
+
+    foreach ($photoArray as &$value) {
+        array_push($frameArray,"eventPhotos/".$eventID."/"."photo".(int)$value.".jpg");
+        array_push($durationArray,$animationDuration);
+    }
 }
 
-$timestamp = date('Y-m-d G:i:s');
-$sql = "INSERT INTO Photos (EventID, ImageType, Timestamp) VALUES ($eventID,3,'$timestamp')";
-if ($conn->query($sql) === TRUE) {
-    // get the ID of the inserted row
-    $photoID = $conn->insert_id;
+$photoID = round($eventID.time()/1000);
 
-    // Initialize and create the GIF !
-    $gc = new GifCreator();
-    $gc->create($frameArray, $durationArray, 0);
-    $gifBinary = $gc->getGif();
+// Initialize and create the GIF !
+$gc = new GifCreator();
+$gc->create($frameArray, $durationArray, 0);
+$gifBinary = $gc->getGif();
+$gifFilename = "animation".$photoID.".gif";
+$gifFilePath = "eventPhotos/".$eventID."/".$gifFilename;
 
-    // save the animated gif to a file using animationID number in filename
-    file_put_contents("eventPhotos/".$eventID."/"."animation".$photoID.".gif", $gifBinary);
+// save the animated gif to a file using animationID number in filename
+file_put_contents($gifFilePath, $gifBinary);
 
-    // update database row with filename
-    $sql = "UPDATE Photos SET Filename = 'animation".$photoID.".gif' WHERE PhotoID = $photoID;";
-    //echo $sql;
-    $result = $conn->query($sql);     
-
-    header("Location: showGif.php?PhotoID=".$photoID);
-} else {
-    echo "Error inserting to database";
-}
-
-$conn->close();
+header("Location: showGif.php?animationID=".$photoID);
 ?>

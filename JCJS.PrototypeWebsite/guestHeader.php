@@ -1,6 +1,16 @@
+<?php
+    session_start();
+
+    // check that user is logged in before proceeding
+    if(isset($_SESSION['EventID'])) {
+        // proceed as the guest has entered a valid event code
+    } else {
+        // if user not logged in then redirect to login page
+        header("Location: index.php?error=8");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,93 +30,6 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- Import font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <style>
-
-form {border: 3px solid  #e6e6e6;
-      max-width:550px;
-      padding: 5px;
-      box-shadow: 2px 2px 1px 1px #cc0052;
-      border-radius: 10px;
-
-     }
-
-input[type=text], input[type=password]   {
-       width: 100%;
-       padding: 12px 20px;
-       margin: 3px 0;
-       display: inline-block;
-       border: 1px solid #ccc;
-       box-sizing: border-box;
-
-   }
-
-button{
-    background-color: #cc0052;
-    margin: 8px 0;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-
-.container {
-    padding: 16px;
-}
-
-.container-fluid {
-    width: 100%;
-    padding-bottom: 10px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background: #EC6F66;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-     }
-
-.user-gallery {
-       border: 3px solid  #e6e6e6;
-       padding: 5px;
-       box-shadow: 1px 1px 1px 1px black;
-       border-radius: 10px;
-       background-color: white;
-       position: relative;
-     }
-.personal-gallery {
-       border: 3px solid  #e6e6e6;
-       padding: 5px;
-       box-shadow: 1px 1px 1px 1px black;
-       border-radius: 10px;
-       background-color: white;
-       position: relative;
-       margin-bottom: 15px;
-     }
-
-.row {
-         margin: 0;
-     }
-
-
-* {
-         margin: 0;
-         padding: 0;
-     }
-
-/* Styles for showPhoto.php */
-
-   .mySlides
-   {
-      display: none;
-   }
-
-   
-   figure
-      {
-        cursor: pointer;
-      }
-
-</style>
 </head>
 <body>
     <!-- Logout Modal -->
