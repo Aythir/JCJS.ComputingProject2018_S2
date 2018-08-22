@@ -130,9 +130,7 @@ function applyFilter() {
              <!--Facebook supplied button-->
               <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
             <!-- end Facebook supplied button-->
-     <!-- instragram-->
-          <a class="p-2 m-2 ins-ic">
-            <i class="fa fa-instagram red-text"> </i></a>
+     
     </div>
     </div>
     <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
