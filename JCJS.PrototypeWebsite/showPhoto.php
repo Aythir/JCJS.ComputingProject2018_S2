@@ -122,6 +122,8 @@ function applyFilter() {
           <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
       <!-- apply filter-->
           <button class="btn" onclick="filterMode()">Apply Filter</button>
+          <!--  return to gallery-->
+          <button class="btn" onclick="goBack()">Gallery</button>
 
           <span class="align-middle">Share:</span>
       <!-- facebook-->
@@ -191,6 +193,12 @@ function applyFilter() {
     document.getElementById("apply-filter-buttons").style.display = "none";
     document.getElementById("save-filter-buttons").style.display = "block";
   }
+  
+
+   function goBack() {
+    window.history.back()
+   }
+
 
   cancelFilter();
 </script>
