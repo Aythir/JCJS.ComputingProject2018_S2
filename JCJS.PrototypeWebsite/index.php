@@ -30,7 +30,7 @@
                   <hr class="hr-light">
                 </div>
                 <!--Body of event code form-->
-                <!--<form method="post" action="gallery.php" class="md-form"> <!-- The action method will need to change according to the PHP code implemeneted, but this is a short work around now.-->
+                <!--<form method="post" action="gallery.php" class="md-form" -->
                   <div class="md-form">
                   <i class="fa fa-user prefix white-text active"></i>
                   <input type="text" id="eventCode" name="eventCode" class="white-text form-control">

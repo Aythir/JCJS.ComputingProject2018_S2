@@ -50,7 +50,7 @@
         
     <!-- Navbar -->
    <nav class="navbar navbar-expand-sm navbar-light">
-      <a class="navbar-brand" href="gallery.php"> <!-- Little Red Logo -->
+      <a class="navbar-brand" href="#"> <!-- Little Red Logo -->
           <img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>
       <!-- Toggler/collapsibe Button -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
