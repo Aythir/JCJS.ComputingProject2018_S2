@@ -2,10 +2,7 @@
 <?php
   $title = "Upload Photo";
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
-  //$navbarlinks .= createNavLink("Create Gif","#");
   $navbarlinks .= createNavLink("Slideshow","slideshow.php");
-  $navbarlinks .= createNavLink("Host Login","host_login.php");
-  $navbarlinks .= createLogout();
 ?>
 <?php include 'guestHeader.php';?>
   <!-- Content -->
@@ -17,8 +14,8 @@
             <div class="leftcol ml-auto">
             <h1 class="h1-responsive font-weight-bold animated fadeInLeft">Upload your photo</h1>
             <hr class="hr-light animated fadeInLeft">
-            <h5 class="mb-3 animated fadeInLeft">Choose an exisiting photo(s) from your device
-            or take a photo now to upload to the event collection</h5>
+            <h6 class="mb-3 animated fadeInLeft">Choose an exisiting photo(s) from your device
+            or take a photo now to upload to the event collection</h6>
           </div>
 
           </div>

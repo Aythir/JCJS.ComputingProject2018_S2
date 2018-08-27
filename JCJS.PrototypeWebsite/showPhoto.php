@@ -26,8 +26,6 @@
 
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
-  $navbarlinks .= createNavLink("Host Login","host_login.php");
-  $navbarlinks .= createLogout();
 ?>
 <?php include 'guestHeader.php';?>  
 <!--Facebook supplied code-->
@@ -118,12 +116,16 @@ function applyFilter() {
     </div>
     <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
     <div class="text-center d-flex justify-content-center" style="font-size:25px">
+      <!-- delete photo button (host access only)-->
+      <?php
+      if(isset($_SESSION["HostAccess"])) {
+        echo '<button class="btn" onclick="deletePhoto('.$photoID.')">Delete</button>';
+      }          
+      ?>      
       <!-- save button-->
           <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
       <!-- apply filter-->
           <button class="btn" onclick="filterMode()">Apply Filter</button>
-          <!--  return to gallery-->
-          <button class="btn" onclick="goBack()">Gallery</button>
 
           <span class="align-middle">Share:</span>
       <!-- facebook-->
@@ -132,7 +134,9 @@ function applyFilter() {
              <!--Facebook supplied button-->
               <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
             <!-- end Facebook supplied button-->
-     
+     <!-- instragram-->
+          <a class="p-2 m-2 ins-ic">
+            <i class="fa fa-instagram red-text"> </i></a>
     </div>
     </div>
     <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
@@ -168,6 +172,21 @@ function applyFilter() {
   </div>
 
 </div>
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteModal" role="dialog">
+  <div class="modal-dialog">
+  <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Are you sure you want to permanently delete this image?</h4>            
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-error" data-dismiss="modal">No</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href='delete_photo.php?id=<?php echo $photoID ?>';">Yes</button>
+      </div>
+      </div>
+  </div>
+  </div>
 <script>
   var fileName = "<?php echo $filePath?>";
 
@@ -193,13 +212,11 @@ function applyFilter() {
     document.getElementById("apply-filter-buttons").style.display = "none";
     document.getElementById("save-filter-buttons").style.display = "block";
   }
-  
-
-   function goBack() {
-    window.history.back()
-   }
-
 
   cancelFilter();
+
+  function deletePhoto() {
+    $('#deleteModal').modal('show');
+  }  
 </script>
 <?php include 'ppFooter.php';?>

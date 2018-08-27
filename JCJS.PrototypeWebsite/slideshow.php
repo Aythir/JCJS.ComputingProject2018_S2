@@ -1,10 +1,15 @@
-<?php include 'functionList.php';?>
 <?php
-  $title = "Slideshow";
-  $navbarlinks = createNavLink("Event Gallery","gallery.php");
-  $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
-  $navbarlinks .= createNavLink("Host Login","host_login.php");
-  $navbarlinks .= createLogout();
+    include 'databaseConnection.php';
+    include 'functionList.php';
+
+    $title = "Slideshow";
+    $navbarlinks = createNavLink("Event Gallery","gallery.php");
+    $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
+
+    session_start();
+    if(isset($_SESSION["EventID"])) {
+        $eventID = (int)$_SESSION["EventID"];
+    }  
 ?>
 <?php include 'guestHeader.php';?>
   <!-- Content -->
@@ -29,27 +34,29 @@
           <li class="item3"></li>
         </ul>
 
-   <!-- The slideshow -->
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="eventPhotos/1/photo1.jpg" alt="photo" width="100%" >
-          </div>
-          <div class="carousel-item">
-            <img src="eventPhotos/1/photo2.jpg" alt="Photo" width="100%">
-          </div>
-          <div class="carousel-item">
-            <img src="eventPhotos/1/photo3.jpg" alt="Photo" width="100%">
-          </div>
-          <div class="carousel-item">
-            <img src="eventPhotos/1/photo4.jpg" alt="Photo" width="100%">
-          </div>
-           <div class="carousel-item">
-            <img src="eventPhotos/1/photo5.jpg" alt="Photo" width="100%">
-          </div>
-           <div class="carousel-item">
-            <img src="eventPhotos/1/photo6.jpg" alt="Photo" width="100%">
-          </div>
+        <!-- The slideshow -->
+        <?php
+        $sql = "SELECT FileName FROM `photos` WHERE eventID = ".$eventID." AND IsUserUpload = 1;";
+        //echo $sql;
+        $result = $conn->query($sql);
 
+        $idx = 0;
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                if($idx == 0) {
+                    echo '<div class="carousel-item active">'."\r\n";
+                }
+                else {
+                    echo '<div class="carousel-item">'."\r\n";    
+                }
+                echo "<img src='eventPhotos/".$eventID."/".$row["FileName"]."' alt='photo' width='100%'>"."\r\n";
+                echo "</div>"."\r\n";
+                $idx++;
+            }
+        }
+        ?>
         </div>
 
         <!-- Left and right controls -->
@@ -87,6 +94,11 @@
            $("#myCarousel").carousel("next");
        });
    });
+
+   // refresh page every 1 minute
+    setTimeout(function() {
+        location.reload();
+    }, 100000);
    </script>
 
 </div>

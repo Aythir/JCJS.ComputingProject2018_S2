@@ -7,6 +7,7 @@
   if(isset($_GET['username'])) {
     $username = $_GET['username'];
   }  
+  $navbarlinks = "";
 ?>
 <?php include 'databaseConnection.php';?>
 <?php include 'guestHeader.php';?>
@@ -50,10 +51,6 @@
                     </div>
 
                     <button type="submit" class="btn">Submit</button>
-
-                    <div style="padding:15px 0px 0px 0px">
-                      <span class="pwd">Forgot <a href="#">password?</a></span>
-                    </div>
                   </div>
                 </div>
               </form>

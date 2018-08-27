@@ -7,12 +7,12 @@
   //echo $sql;
   $result = $conn->query($sql);
 
+  $response = "false";
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {    
       $_SESSION["EventID"] = $row["EventID"];
-      echo "true";      
+      $response = "true";  
     }
-  } else {
-    echo "false";
   }
+  echo $response;
 ?>
