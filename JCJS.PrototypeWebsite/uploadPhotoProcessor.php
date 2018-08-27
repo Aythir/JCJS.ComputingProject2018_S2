@@ -12,6 +12,9 @@ if(isset($_SESSION["EventID"])) {
 }
 
 $target_dir = $_SERVER['DOCUMENT_ROOT']."/"."eventPhotos/". $eventID . "/";
+if (!file_exists($target_dir)) {
+    mkdir($target_dir, 0777, true);
+}
 $uploadOk = 1;
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -31,8 +34,8 @@ if (file_exists($target_file)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
 }
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
+// Check file size (max 5mb file size)
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }

@@ -34,19 +34,17 @@
   } 
 ?>
 <?php include 'adminHeader.php';?>
- <!-- Content -->
- <div class="container-liquid">
-     <!--Grid row-->
-  <div class="row" style="margin-top:80px">
-          <!--Grid column-->
-
+<!-- Content -->
+<div class="container-liquid">
+  <!--Grid row-->
+  <div class="row" style="margin-top:80px;">
+    <!--Grid column-->
     <div class="container mt-3">
       <div class= "login-form">
         <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
-
-       <!--Reset password form-->
-       <form method="post" action="/eventProcessor.php?EventID=<?php echo $EventID?>">
-         <div class="form-group">
+        <!--Reset password form-->
+        <form method="post" action="/eventProcessor.php?EventID=<?php echo $EventID?>">
+          <div class="form-group">
             <div class="container">
               <input type="hidden" name="eventID" value="">
 
@@ -78,7 +76,7 @@
               <?php
               if($EventID > 0) {
                 echo '<button type="submit" class="btn"><i class="fa fa-save"></i> Save Changes</button>';
-                echo '<button type="button" class="btn" onclick="location.href=\'gallery.php\';">Event Gallery</button>';
+                echo '<button type="button" class="btn" onclick="location.href=\'admin_gallery_transfer.php?eventID='.$EventID.'\';">Event Gallery</button>';
               } else {
                 echo '<button type="submit" class="btn">Create Event</button><button type="reset" class="btn grey">Reset</button>';
               }
@@ -88,8 +86,6 @@
         </form>
       </div>
    </div>
-
   </div>
-
- </div>
+</div>
 <?php include 'ppFooter.php';?>

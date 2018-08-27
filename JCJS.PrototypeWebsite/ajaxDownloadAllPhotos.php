@@ -1,12 +1,15 @@
 <?php include 'databaseConnection.php';?>
 <?php
+error_reporting(E_ALL); ini_set('display_errors', 1);
+
   session_start();
-  echo "0";
   if(isset($_SESSION["HostAccess"])) {  
     $eventID = (int)$_SESSION["EventID"];
 
     $zipDirectory = getcwd ()."\\eventPhotos\\";
-    $photoDirectory = getcwd ()."\\eventPhotos\\$eventID\\";
+    //echo $zipDirectory;
+    $photoDirectory = getcwd ()."//eventPhotos//$eventID//";
+    //echo $photoDirectory;
     $zipFile = "allPhotos.zip";
     
     // Initialize archive object
@@ -27,9 +30,9 @@
       {
           // Get real and relative path for current file
           $filePath = $file->getRealPath();
-          echo $filePath."<br>";
+          //echo $filePath."<br>";
           $relativePath = substr($filePath, strlen($photoDirectory));
-          echo $relativePath."<br>";
+          //echo $relativePath."<br>";
 
           // Add current file to archive
           $zip->addFile($filePath, $relativePath);

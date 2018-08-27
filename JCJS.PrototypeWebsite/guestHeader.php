@@ -1,12 +1,14 @@
 <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     // check that user is logged in before proceeding
     if(isset($_SESSION['EventID'])) {
         // proceed as the guest has entered a valid event code
     } else {
-        // if user not logged in then redirect to login page
-        header("Location: index.php?error=8");
+        // if user not logged in then redirect to login page (unless already at the login page - index.php or admin_Login.php)
+        if (basename($_SERVER['PHP_SELF']) != "index.php" && basename($_SERVER['PHP_SELF']) != "admin_Login.php") header("Location: index.php?error=8");
     }
 ?>
 <!DOCTYPE html>
@@ -50,23 +52,32 @@
         
     <!-- Navbar -->
    <nav class="navbar navbar-expand-sm navbar-light">
-      <a class="navbar-brand" href="#"> <!-- Little Red Logo -->
-          <img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>
-      <!-- Toggler/collapsibe Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-         <span class="navbar-toggler-icon"></span>
-      </button>
+      <a class="navbar-brand" href="gallery.php"><img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>
 
       <!-- Navbar Links -->
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <?php
-        if(isset($navbarlinks)) {
-            echo '<ul class="navbar-nav">';
-            echo $navbarlinks;
-            echo '</ul>';
+        if($navbarlinks != "") {
+            //Toggler/collapsibe Button (hamburger menu)
+            echo '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">';
+            echo '<span class="navbar-toggler-icon"></span>';
+            echo '</button>';
+            echo '<div class="collapse navbar-collapse" id="collapsibleNavbar">';
+            if(isset($_SESSION["HostAccess"])) {
+                $navbarlinks .= createModalLink();
+            } else {
+                $navbarlinks .= createNavLink("Host Login","host_login.php");
+            }
+    
+            $navbarlinks .= createLogout();
+          
+            if(isset($navbarlinks)) {
+                echo '<ul class="navbar-nav">';
+                echo $navbarlinks;
+                echo '</ul>';
+            }
+            echo '</div>';
         }
-      ?>
-      </div>
+        ?>      
    </nav>
 
   <!-- Content -->
