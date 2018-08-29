@@ -20,6 +20,10 @@
     $row = mysqli_fetch_assoc($result);
     $fileName = $row["Filename"];
     $filePath = "eventPhotos/".$eventID."/".$fileName;
+    $thumbnailPath = "eventPhotos/".$eventID."/thumbnails/thumb500_".$fileName;
+    if (file_exists($thumbnailPath)) {
+      $filePath = $thumbnailPath;
+    }
   } else {
       header("Location: 500.php?error=1");
   }  
@@ -71,26 +75,25 @@ function uploadToCloudinary() {
   var photoID = <?php echo $photoID?>;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    //if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && this.status == 200) {
      document.getElementById("testDiv").innerHTML = this.responseText;
-    //}
+    }
   };
   xhttp.open("GET", "./scripts/uploadToCloudinary.php?filePath=" + filePath +"&photoID="+ photoID, true);
   xhttp.send();
 }
 
 function applyFilter() {
-  alert("Entered applyFilter");
   var photoID = <?php echo $photoID?>;
-  alert(document.getElementById("filterDropdown").value);
   var filter = document.getElementById("filterDropdown").value;
   if (filter != "") {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("saveFilter").href = this.responseText;
-      document.getElementById("showImage").src = this.responseText;
-      saveFilterResult();
+        document.getElementById("showImage").src = this.responseText;
+        document.getElementById("saveFilter").href = this.responseText;
+        /* Update controls to allow download of filtered image */
+        saveFilterResult();
       }
     };
     xhttp.open("GET", "./scripts/applyFilter.php?photoID="+ photoID + "&filter=" + filter, true);
@@ -110,25 +113,24 @@ function applyFilter() {
     <!-- selected large images -->
     <!-- original image -->
     <div class="row m-0" style="margin-top:10px">
-    <div class="container">
       <!-- <figure class=""> -->
         <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
       <!-- </figure> -->
     </div>
-    </div>
-     <div class="container">
     <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
     <div class="text-center d-flex justify-content-center" style="font-size:25px">
+      <!--  return to gallery-->
+      <button class="btn" onclick="goBack()">< Back to gallery</button>
+      <!-- save button-->
+          <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
+      <!-- apply filter-->
+          <button class="btn" onclick="filterMode()">Apply Filter</button>
       <!-- delete photo button (host access only)-->
       <?php
       if(isset($_SESSION["HostAccess"])) {
         echo '<button class="btn" onclick="deletePhoto('.$photoID.')">Delete</button>';
       }          
-      ?>      
-      <!-- save button-->
-          <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
-      <!-- apply filter-->
-          <button class="btn" onclick="filterMode()">Apply Filter</button>
+      ?>
 
           <span class="align-middle">Share:</span>
       <!-- facebook-->
@@ -139,11 +141,18 @@ function applyFilter() {
             <!-- end Facebook supplied button-->
     </div>
     </div>
-    </div>
     <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
     <div class="text-center d-flex justify-content-center" style="font-size:25px">
       <!-- filter dropdown-->
-      <div class="dropdown">
+      <div class="form-group">
+        <label for="filterDropdown">Select filter:</label>
+        <select class="form-control" id="filterDropdown">
+          <option value="grayscale">Black and White</option>
+          <option value="sepia">Sepia</option>
+          <option value="cartoonify">Cartoon</option>
+        </select>
+      </div>
+      <!-- <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Select filter
         </button>
@@ -152,7 +161,7 @@ function applyFilter() {
           <a class="dropdown-item" value="sepia">Sepia</a>
           <a class="dropdown-item" value="cartoonify">Cartoon</a>
         </div>
-      </div>
+      </div> -->
       <!-- apply filter button-->
           <button class="btn" onclick="applyFilter()">Apply</button>
       <!-- cancel filter button-->
@@ -192,6 +201,7 @@ function applyFilter() {
   var fileName = "<?php echo $filePath?>";
 
   function cancelFilter() {
+    //Show/hide relevant controls
     document.getElementById("default-buttons").style.display = "block";
     document.getElementById("apply-filter-buttons").style.display = "none";
     document.getElementById("save-filter-buttons").style.display = "none";
@@ -199,25 +209,29 @@ function applyFilter() {
   }
 
   function filterMode() {
-    alert("Entered filtermode");
-    //Upload image in preparation for applying filters
+    //Upload image early in preparation for applying filter
     uploadToCloudinary();
-    alert("Finished upload");
+    //Show/hide relevant controls
     document.getElementById("default-buttons").style.display = "none";
     document.getElementById("apply-filter-buttons").style.display = "block";
     document.getElementById("save-filter-buttons").style.display = "none";
   }
 
   function saveFilterResult () {
+    //Show/hide relevant controls
     document.getElementById("default-buttons").style.display = "none";
     document.getElementById("apply-filter-buttons").style.display = "none";
     document.getElementById("save-filter-buttons").style.display = "block";
   }
 
-  cancelFilter();
+   function goBack() {
+    window.history.back()
+   }
 
-  function deletePhoto() {
+   function deletePhoto() {
     $('#deleteModal').modal('show');
-  }  
+  }
+
+  cancelFilter();
 </script>
 <?php include 'ppFooter.php';?>
