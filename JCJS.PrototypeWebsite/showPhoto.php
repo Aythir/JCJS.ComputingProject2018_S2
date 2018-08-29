@@ -112,70 +112,74 @@ function applyFilter() {
         
     <!-- selected large images -->
     <!-- original image -->
-    <div class="row m-0" style="margin-top:10px">
-      <!-- <figure class=""> -->
-        <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
-      <!-- </figure> -->
-    </div>
-    <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
-    <div class="text-center d-flex justify-content-center" style="font-size:25px">
-      <!--  return to gallery-->
-      <button class="btn" onclick="goBack()">< Back to gallery</button>
-      <!-- save button-->
-          <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
-      <!-- apply filter-->
-          <button class="btn" onclick="filterMode()">Apply Filter</button>
-      <!-- delete photo button (host access only)-->
-      <?php
-      if(isset($_SESSION["HostAccess"])) {
-        echo '<button class="btn" onclick="deletePhoto('.$photoID.')">Delete</button>';
-      }          
-      ?>
-
-          <span class="align-middle">Share:</span>
-      <!-- facebook-->
-          <a class="p-2 m-2 fb-ic" >
-             <i class="fa fa-facebook red-text" onclick="shareToFacebook()"></i></a>
-             <!--Facebook supplied button-->
-              <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-            <!-- end Facebook supplied button-->
-    </div>
-    </div>
-    <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
-    <div class="text-center d-flex justify-content-center" style="font-size:25px">
-      <!-- filter dropdown-->
-      <div class="form-group">
-        <label for="filterDropdown">Select filter:</label>
-        <select class="form-control" id="filterDropdown">
-          <option value="grayscale">Black and White</option>
-          <option value="sepia">Sepia</option>
-          <option value="cartoonify">Cartoon</option>
-        </select>
+    <div class="container">
+      <div class="row m-0" style="margin-top:10px">
+        <!-- <figure class=""> -->
+          <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
+        <!-- </figure> -->
       </div>
-      <!-- <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Select filter
-        </button>
-        <div class="dropdown-menu" id="filterDropdown" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" value="grayscale">Black and White</a>
-          <a class="dropdown-item" value="sepia">Sepia</a>
-          <a class="dropdown-item" value="cartoonify">Cartoon</a>
-        </div>
-      </div> -->
-      <!-- apply filter button-->
-          <button class="btn" onclick="applyFilter()">Apply</button>
-      <!-- cancel filter button-->
-          <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
     </div>
-    </div>
+    <div class="container">
+      <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+        <div class="text-center d-flex justify-content-center" style="font-size:25px">
+          <!--  return to gallery-->
+          <button class="btn" onclick="goBack()">< Back to gallery</button>
+          <!-- save button-->
+              <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
+          <!-- apply filter-->
+              <button class="btn" onclick="filterMode()">Apply Filter</button>
+          <!-- delete photo button (host access only)-->
+          <?php
+          if(isset($_SESSION["HostAccess"])) {
+            echo '<button class="btn" onclick="deletePhoto('.$photoID.')">Delete</button>';
+          }          
+          ?>
 
-    <div id="save-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
-    <div class="text-center d-flex justify-content-center" style="font-size:25px">
-      <!-- save filter button-->
-          <a id="saveFilter" href="#" download><button class="btn" >Save Full Size</button></a>
-      <!-- discard filter result button-->
-          <a href="#"><button class="btn" onclick="cancelFilter()">Discard</button></a>
-    </div>
+              <span class="align-middle">Share:</span>
+          <!-- facebook-->
+              <a class="p-2 m-2 fb-ic" >
+                <i class="fa fa-facebook red-text" onclick="shareToFacebook()"></i></a>
+                <!--Facebook supplied button-->
+                  <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                <!-- end Facebook supplied button-->
+        </div>
+      </div>
+      <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+        <div class="text-center d-flex justify-content-center" style="font-size:25px">
+          <!-- filter dropdown-->
+          <div class="form-group">
+            <label for="filterDropdown">Select filter:</label>
+            <select class="form-control" id="filterDropdown">
+              <option value="grayscale">Black and White</option>
+              <option value="sepia">Sepia</option>
+              <option value="cartoonify">Cartoon</option>
+            </select>
+          </div>
+          <!-- <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select filter
+            </button>
+            <div class="dropdown-menu" id="filterDropdown" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" value="grayscale">Black and White</a>
+              <a class="dropdown-item" value="sepia">Sepia</a>
+              <a class="dropdown-item" value="cartoonify">Cartoon</a>
+            </div>
+          </div> -->
+          <!-- apply filter button-->
+              <button class="btn" onclick="applyFilter()">Apply</button>
+          <!-- cancel filter button-->
+              <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
+        </div>
+      </div>
+
+      <div id="save-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+        <div class="text-center d-flex justify-content-center" style="font-size:25px">
+          <!-- save filter button-->
+              <a id="saveFilter" href="#" download><button class="btn" >Save Full Size</button></a>
+          <!-- discard filter result button-->
+              <a href="#"><button class="btn" onclick="cancelFilter()">Discard</button></a>
+        </div>
+      </div>
     </div>
     <div id="testDiv"></div>
 
