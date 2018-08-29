@@ -112,16 +112,17 @@ function applyFilter() {
         
     <!-- selected large images -->
     <!-- original image -->
-    <div class="container">
+    
       <div class="row m-0" style="margin-top:10px">
+      <div class="container">
         <!-- <figure class=""> -->
           <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
         <!-- </figure> -->
       </div>
     </div>
-    <div class="container">
+    <div class="container" >
       <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
-        <div class="text-center d-flex justify-content-center" style="font-size:25px">
+        <div class="text-center d-flex justify-content-center" >
           <!--  return to gallery-->
           <button class="btn" onclick="goBack()">< Back to gallery</button>
           <!-- save button-->
@@ -134,16 +135,17 @@ function applyFilter() {
             echo '<button class="btn" onclick="deletePhoto('.$photoID.')">Delete</button>';
           }          
           ?>
-
-              <span class="align-middle">Share:</span>
-          <!-- facebook-->
-              <a class="p-2 m-2 fb-ic" >
-                <i class="fa fa-facebook red-text" onclick="shareToFacebook()"></i></a>
-                <!--Facebook supplied button-->
-                  <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-                <!-- end Facebook supplied button-->
+  
+          <!--Facebook supplied button-->
+             <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
+             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+             class="fb-xfbml-parse-ignore">Share</a>
+             </div>
+          <!-- end Facebook supplied button-->
         </div>
       </div>
+     </div>
+     <div class="container">
       <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
         <div class="text-center d-flex justify-content-center" style="font-size:25px">
           <!-- filter dropdown-->
@@ -171,6 +173,8 @@ function applyFilter() {
               <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
         </div>
       </div>
+      </div>
+      
 
       <div id="save-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
         <div class="text-center d-flex justify-content-center" style="font-size:25px">
@@ -180,7 +184,7 @@ function applyFilter() {
               <a href="#"><button class="btn" onclick="cancelFilter()">Discard</button></a>
         </div>
       </div>
-    </div>
+    
     <div id="testDiv"></div>
 
   </div>
