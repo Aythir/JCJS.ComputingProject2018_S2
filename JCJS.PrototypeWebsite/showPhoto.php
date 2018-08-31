@@ -119,7 +119,7 @@ function applyFilter() {
      <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
       
            <!-- apply filter-->
-          <button class="btn btn-lg green" onclick="filterMode()">Apply Filter</button>
+          <button class="btn btn-lg btn-default" onclick="filterMode()">Apply Filter</button>
           
           <!-- save button-->
           <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn btn-lg">View Full Size</button></a>
@@ -166,7 +166,7 @@ function applyFilter() {
             </div>
           </div> -->
           <!-- apply filter button-->
-              <button class="btn btn-lg green" onclick="applyFilter()">Apply</button>
+              <button class="btn btn-lg btn-default" onclick="applyFilter()">Apply</button>
           <!-- cancel filter button-->
               <a href="#"><button class="btn btn-lg" onclick="cancelFilter()">Cancel</button></a>
         </div>
@@ -176,7 +176,7 @@ function applyFilter() {
       <div id="save-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
         <div class="text-center d-flex justify-content-center" style="font-size:25px">
           <!-- save filter button-->
-              <a id="saveFilter" href="#" download><button class="btn btn-lg green" >Save</button></a>
+              <a id="saveFilter" href="#" download><button class="btn btn-lg btn-default" >Save</button></a>
           <!-- discard filter result button-->
               <a href="#"><button class="btn btn-lg" onclick="cancelFilter()">Discard</button></a>
         </div>
