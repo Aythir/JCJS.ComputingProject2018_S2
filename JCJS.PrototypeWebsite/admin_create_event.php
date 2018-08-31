@@ -39,13 +39,13 @@
   <!--Grid row-->
   <div class="row" style="margin-top:80px;">
     <!--Grid column-->
-    <div class="container mt-3">
+    <div class="container mt-3 col-md-6" >
       <div class= "login-form">
         <h3 class="h3-responsive font-weight-bold" style="color:white" ><?php echo $title?></h3>
         <!--Reset password form-->
         <form method="post" action="/eventProcessor.php?EventID=<?php echo $EventID?>">
           <div class="form-group">
-            <div class="container">
+            <div class="container" >
               <input type="hidden" name="eventID" value="">
 
               <div class="form-group">
