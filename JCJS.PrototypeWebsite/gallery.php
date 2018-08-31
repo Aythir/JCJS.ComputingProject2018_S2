@@ -89,7 +89,8 @@ include 'functionList.php';
 </div>
 
  <!--Main content-->
- <div onload= "img_selection()" class="container-fluid">
+ <div class="container-fluid">
+
     <div class="personal-gallery tz-gallery">
         <h3 class= "responsive-text">Your Photobooth Session: <?php echo $eventName ?></h3>
         <hr>
