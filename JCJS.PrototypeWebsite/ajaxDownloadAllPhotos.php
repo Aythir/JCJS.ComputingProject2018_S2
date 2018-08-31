@@ -6,7 +6,7 @@ error_reporting(E_ALL); ini_set('display_errors', 1);
   if(isset($_SESSION["HostAccess"])) {  
     $eventID = (int)$_SESSION["EventID"];
 
-    $zipDirectory = getcwd ()."\\eventPhotos\\";
+    $zipDirectory = getcwd ()."//eventPhotos//";
     //echo $zipDirectory;
     $photoDirectory = getcwd ()."//eventPhotos//$eventID//";
     //echo $photoDirectory;
@@ -31,7 +31,7 @@ error_reporting(E_ALL); ini_set('display_errors', 1);
           // Get real and relative path for current file
           $filePath = $file->getRealPath();
           //echo $filePath."<br>";
-          $relativePath = substr($filePath, strlen($photoDirectory));
+          $relativePath = substr($filePath, strlen(realpath($photoDirectory)) + 1); //+1 to take care of trailing slash
           //echo $relativePath."<br>";
 
           // Add current file to archive
