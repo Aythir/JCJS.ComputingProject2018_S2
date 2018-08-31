@@ -105,58 +105,56 @@ function applyFilter() {
 </script>
 <!-- Content -->
 <div class="container-liquid">
-
-
   <div class="personal-gallery tz-gallery" style="margin-top:80px">
-    <!--Grid row-->
-        
-    <!-- selected large images -->
-    <!-- original image -->
-    
-      <div class="row m-0" style="margin-top:10px">
+      <div class="row" style="margin-top:10px">
       <div class="container">
         <!-- <figure class=""> -->
           <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
         <!-- </figure> -->
       </div>
     </div>
-    <div class="container" >
-      <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
-        <div class="text-center d-flex justify-content-center" >
-          <!--  return to gallery-->
-          <button class="btn" onclick="goBack()">< Back to gallery</button>
+
+<div class="container">
+<div class="text-center d-flex justify-content-center" style="font-size:25px">
+     <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+      
+           <!-- apply filter-->
+          <button class="btn btn-lg green" onclick="filterMode()">Apply Filter</button>
+          
           <!-- save button-->
-              <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn">View Full Size</button></a>
-          <!-- apply filter-->
-              <button class="btn" onclick="filterMode()">Apply Filter</button>
+          <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn btn-lg">View Full Size</button></a>
+         
+          <!--  return to gallery-->
+          <button class="btn btn-lg" onclick="goBack()">< Back to gallery</button>
+          
           <!-- delete photo button (host access only)-->
           <?php
           if(isset($_SESSION["HostAccess"])) {
             echo '<button class="btn" onclick="deletePhoto('.$photoID.')">Delete</button>';
           }          
           ?>
-  
+          
           <!--Facebook supplied button-->
-             <div class="fb-share-button" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
+             <div class="fb-share-button" style="top-margin:10px"
+             data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
              class="fb-xfbml-parse-ignore">Share</a>
              </div>
           <!-- end Facebook supplied button-->
-        </div>
       </div>
-     </div>
-     <div class="container">
-      <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
+</div>
+
+     <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
         <div class="text-center d-flex justify-content-center" style="font-size:25px">
           <!-- filter dropdown-->
-          <div class="form-group">
+          <div class="form-group" style="font-size:25px">
             <label for="filterDropdown">Select filter:</label>
             <select class="form-control" id="filterDropdown">
               <option value="grayscale">Black and White</option>
               <option value="sepia">Sepia</option>
               <option value="cartoonify">Cartoon</option>
             </select>
-          </div>
+          <!--div>-->
           <!-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Select filter
@@ -168,20 +166,19 @@ function applyFilter() {
             </div>
           </div> -->
           <!-- apply filter button-->
-              <button class="btn" onclick="applyFilter()">Apply</button>
+              <button class="btn btn-lg green" onclick="applyFilter()">Apply</button>
           <!-- cancel filter button-->
-              <a href="#"><button class="btn" onclick="cancelFilter()">Cancel</button></a>
+              <a href="#"><button class="btn btn-lg" onclick="cancelFilter()">Cancel</button></a>
         </div>
       </div>
-      </div>
-      
+     </div>
 
       <div id="save-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
         <div class="text-center d-flex justify-content-center" style="font-size:25px">
           <!-- save filter button-->
-              <a id="saveFilter" href="#" download><button class="btn" >Save Full Size</button></a>
+              <a id="saveFilter" href="#" download><button class="btn btn-lg green" >Save</button></a>
           <!-- discard filter result button-->
-              <a href="#"><button class="btn" onclick="cancelFilter()">Discard</button></a>
+              <a href="#"><button class="btn btn-lg" onclick="cancelFilter()">Discard</button></a>
         </div>
       </div>
     
