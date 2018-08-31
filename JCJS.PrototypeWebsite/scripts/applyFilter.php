@@ -15,7 +15,13 @@
 
     $photoID = $_GET["photoID"];
     $filter = $_GET["filter"];
-    $result = cloudinary_url($photoID, array("effect" => $filter));
+    $result = cloudinary_url($photoID, array("transformation" => array("effect" => $filter),
+      'overlay' => 'lrpLogo',
+      'width' => 200,
+      'gravity' => 'south_east',
+      'x' => 10,
+      'y' => 10
+    ));
     echo $result;
       
 ?>
