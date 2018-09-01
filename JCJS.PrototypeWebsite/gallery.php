@@ -99,7 +99,7 @@ include 'functionList.php';
             <button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>
         </div> 
         <br>       
-        <div class= "row" style="padding:0 0 0 0">
+        <div class= "row">
             <?php
                 $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 1;";
                 //echo $sql;
@@ -108,7 +108,7 @@ include 'functionList.php';
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding: 0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
+                        //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                         echo '<div class= " col-4 col-lg-3 col-sm-4" style="cursor:pointer; padding:0">';
                         echo '<div id="gallery" class="card">';
                         echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white">';
@@ -133,7 +133,7 @@ include 'functionList.php';
             if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding: 0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
+                    //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                     echo '<div class= "col-4 col-lg-3 col-sm-4 " style="cursor:pointer; padding:0">';
                     echo '<div id="gallery" class="card">';
                     echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white">';
