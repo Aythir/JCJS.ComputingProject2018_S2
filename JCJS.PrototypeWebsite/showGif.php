@@ -22,21 +22,23 @@
       </div>
      </div>
       <div class="container">
-        <div class="text-center d-flex justify-content-center" style="font-size:25px"> 
+       <!--center buttons<div class="text-center d-flex justify-content-center" style="font-size:25px">-->
         <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->        
          <!-- Save Gif to device-->
-          <button class="btn btn-lg btn-default" onclick="#">Save to Device</button>
+          <button class="btn btn-default" onclick="#">Save to Device</button>
           <!--  return to gallery-->
-          <button class="btn btn-lg" onclick="goBack()">< Back to gallery</button>
+          <button class="btn" onclick="goBack()">< Back to gallery</button>
           
-         <div class="fb-share-button" style="top-margin:10px" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
+         <!--Facebook supplied button-->
+         <div class="fb-share-button" style="top-margin:10px"
+         data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
              class="fb-xfbml-parse-ignore">Share</a>
          </div>
           <!-- end Facebook supplied button-->
       
         </div>
-      </div>
+      <!--</div>-->
     </div>
    </div>
   </div>
