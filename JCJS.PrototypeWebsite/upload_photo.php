@@ -37,6 +37,28 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:red" id='modalText'></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <?php
+    if(isset($_GET['errorMsg'])) {
+      echo "<script>";
+      echo "document.getElementById('modalText').innerHTML = '".$_GET['errorMsg']."';";
+      echo "$('#myModal').modal('show');";
+      echo "</script>";
+    }
+    ?>      
     <script>
       $("#photoSelect").change(function(){
           document.getElementById("photoForm").submit();

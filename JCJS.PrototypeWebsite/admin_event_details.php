@@ -19,7 +19,7 @@
         </div>
         <!--Table-->
         <div class="container" style='border:3px solid #e6e6e6;background-color:white;padding:5px;box-shadow:1px 1px 1px 1px black;border-radius:10px;'>
-          <table class="table table-hover">
+          <table class="table table-hover table-responsive">
               <thead>
               <tr>
                 <th style="color:#cc0052">Event</th>
@@ -34,8 +34,7 @@
             </thead>
             <tbody>
               <?php
-              $sql = "SELECT * FROM events ORDER BY EventDate;";
-              $sql = "SELECT events.EventID,EventName,EventDate,GuestAccessCode,HostAccessCode,SUM(CASE WHEN IsUserUpload = 1 THEN 1 ELSE 0 END) AS GuestUploads,COUNT(Photoid) AS TotalUploads FROM `events` LEFT JOIN Photos ON events.EventID = photos.EventID GROUP BY events.EventID,EventName,EventDate,GuestAccessCode,HostAccessCode ORDER BY EventDate;";
+              $sql = "SELECT events.EventID,EventName,EventDate,GuestAccessCode,HostAccessCode,DownloadCount,SUM(CASE WHEN IsUserUpload = 1 THEN 1 ELSE 0 END) AS GuestUploads,COUNT(Photoid) AS TotalUploads FROM `events` LEFT JOIN Photos ON events.EventID = photos.EventID GROUP BY events.EventID,EventName,EventDate,GuestAccessCode,HostAccessCode,DownloadCount ORDER BY EventDate;";
               //echo $sql;
               $result = $conn->query($sql);
 
@@ -51,7 +50,7 @@
                       echo "<td>".$row["GuestUploads"]."</td>";
                       $boothUploads = (int)$row["TotalUploads"]-(int)$row["GuestUploads"];
                       echo "<td>".$boothUploads."</td>";
-                      echo "<td>-</td>";
+                      echo "<td>".$row["DownloadCount"]."</td>";
                       echo "</tr>";
                   }
               } else {
@@ -89,6 +88,12 @@
             echo "$('#myModal').modal('show');";
             echo "</script>";
           }
+          if(isset($_GET['deleted'])) {
+            echo "<script>";
+            echo "document.getElementById('modalText').innerHTML = 'Event Deleted';";
+            echo "$('#myModal').modal('show');";
+            echo "</script>";
+          }          
         ?>
       </div>
     </div>

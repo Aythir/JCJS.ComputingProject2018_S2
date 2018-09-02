@@ -2,17 +2,18 @@
 include 'databaseConnection.php';
 include 'functionList.php';
 
-  $title = "Gallery";
-  $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
-  $navbarlinks .= createNavLink("Slideshow","slideshow.php");
-  
-  session_start();
-  if(isset($_SESSION["EventID"])) {
-    $eventID = (int)$_SESSION["EventID"];
-  }
-  else {
-    //header("Location: index.php?error=2");
+session_start();
 
+$title = "Gallery";
+$navbarlinks = createNavLink("Upload Photo","upload_photo.php");
+$navbarlinks .= createNavLink("Slideshow","slideshow.php");
+if(isset($_SESSION["AdminID"])) $navbarlinks .= createNavLink("Event List","admin_event_details.php");
+
+if(isset($_SESSION["EventID"])) {
+    $eventID = (int)$_SESSION["EventID"];
+}
+else {
+    //header("Location: index.php?error=2");
     if(isset($_POST["code"])) {
         //check database for code, either in events...
         $enteredCode = $_POST["code"];
@@ -20,21 +21,21 @@ include 'functionList.php';
         $sql = "SELECT EventID FROM events WHERE GuestAccessCode = '$enteredCode';";
         //echo $sql;
         $result = $conn->query($sql);
-    
+
         if ($result->num_rows > 0) {
             $codeFound = true;
             $row = mysqli_fetch_row($result);
             $_SESSION["EventID"] = (int)$row[0];
             $eventID = (int)$_SESSION["EventID"];
         }
-    
+
         mysqli_free_result($result);
         //...or if not found above, in photos
         if ($codeFound == false) {
             $sql = "SELECT EventID, UniqueCode FROM photos WHERE UniqueCode = '$enteredCode';";
             //echo $sql;
             $result = $conn->query($sql);
-    
+
             if ($result->num_rows > 0) {
                 $codeFound = true;
                 $row = mysqli_fetch_row($result);
@@ -43,18 +44,18 @@ include 'functionList.php';
                 $_SESSION["UniqueCodes"] = array($enteredCode);
             }
         }
-      }
-  }
+    }
+}
 
-  $sql = "SELECT EventName FROM Events WHERE EventID = '$eventID';";
-  //echo $sql;
-  $result = $conn->query($sql);
+$sql = "SELECT EventName FROM Events WHERE EventID = '$eventID';";
+//echo $sql;
+$result = $conn->query($sql);
 
-  if ($result->num_rows > 0) {
-      // output data of each row
-      $row = mysqli_fetch_row($result);
-      $eventName = $row[0];
-  }  
+if ($result->num_rows > 0) {
+    // output data of each row
+    $row = mysqli_fetch_row($result);
+    $eventName = $row[0];
+}  
 ?>
 <?php include "guestHeader.php";?>
 
@@ -79,7 +80,7 @@ include 'functionList.php';
 <!-- Modal content-->
     <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title" id='selectorModalText'></h4>
+        <h4 class="modal-title" id='selectorModalText'>Modal</h4>
     </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
@@ -96,7 +97,7 @@ include 'functionList.php';
         <hr>
         <h5>Select two to five photos and click the button to generate your personal GIF!</h5>
         <div id="gifButtons1">
-            <button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>
+            <button type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>
         </div> 
         <br>       
         <div class= "row">
@@ -110,8 +111,8 @@ include 'functionList.php';
                     while($row = $result->fetch_assoc()) {
                         //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                         echo '<div class= " col-4 col-lg-3 col-sm-4" style="cursor:pointer; padding:0">';
-                        echo '<div id="gallery" class="card">';
-                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white">';
+                        echo '<div class="card">';
+                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white" alt="Event Photo">';
                         echo "</div>";
                         echo "</div>";
                     }
@@ -121,7 +122,7 @@ include 'functionList.php';
     </div>
    </div>
     <!-- Public event photo gallery-->
-    <div class="user-gallery tz-gallery">
+    <div class="user-gallery tz-gallery" id='publicGallery'>
         <h3>Public Event Photos: <?php echo $eventName ?></h3>
         <hr>
         <div class="row">
@@ -135,7 +136,7 @@ include 'functionList.php';
                 while($row = $result->fetch_assoc()) {
                     //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                     echo '<div class= "col-4 col-lg-3 col-sm-4 " style="cursor:pointer; padding:0">';
-                    echo '<div id="gallery" class="card">';
+                    echo '<div class="card">';
                     echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white">';
                     echo "</div>";
                     echo "</div>";
@@ -145,20 +146,17 @@ include 'functionList.php';
         </div>
         <!-- End row-->
     </div>
-    <!-- End user gallery-->
-
-    <div class= "create-gif">
-        <div class="personal-gallery">
-            <h5>Select two to five photos and click the button to generate your personal GIF!</h5>
-            <div id="gifButtons2">
-                <button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 <!-- End main content-->
 <!--End of Main content-->
 <script>
+$(document).ready(function () {
+    $("myButton").on("click", "a", function () {
+        $('.navbar-collapse').collapse('hide');
+    });
+});
+
     var selectionArray = [];
     var enableImageSelection = false;
 
@@ -178,16 +176,16 @@ include 'functionList.php';
         if(enableImageSelection == false) {
             enableImageSelection = true;
             document.getElementById("selectorModalText").innerHTML = "Image selection is now enabled. Please select 3-5 images and then click 'Create animation from selected images' to create an animated Gif file.";
-            document.getElementById("gifButtons1").innerHTML = '<button id="merge" type="button" class="btn btn-default" onclick="mergeSelections();">Merge</button><button id="reset" type="button" class="btn btn-secondary" onclick=" clearSelections();">Reset</button><button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Cancel</button>';
-            document.getElementById("gifButtons2").innerHTML = '<button id="merge" type="button" class="btn btn-default" onclick="mergeSelections();">Merge</button><button id="reset" type="button" class="btn btn-secondary" onclick=" clearSelections();">Reset</button><button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Cancel</button>';
+            document.getElementById("gifButtons1").innerHTML = '<button id="merge" type="button" class="btn btn-default" onclick="mergeSelections();">Merge</button><button id="reset" type="button" class="btn btn-secondary" onclick=" clearSelections();">Reset</button><button type="button" class="btn btn-default" onclick="enableSelector();">Cancel</button>';
             $('#selectorModal').modal('show');
+            $('#publicGallery').hide();
         } else {
             clearSelections();
             enableImageSelection = false;
             document.getElementById("selectorModalText").innerHTML = "Image selection is now disabled. Clicking an image will show you a full size copy of that photo";
-            document.getElementById("gifButtons1").innerHTML = '<button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>';
-            document.getElementById("gifButtons2").innerHTML = '<button id="create" type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>';
+            document.getElementById("gifButtons1").innerHTML = '<button type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>';
             $('#selectorModal').modal('show');
+            $('#publicGallery').show();
         }
     }
 
