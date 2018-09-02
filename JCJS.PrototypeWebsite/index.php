@@ -52,7 +52,6 @@
         <div class="modal-dialog">
            <!-- Modal content-->
           <div class="modal-content">
-          
             <div class="modal-header">
                  <h4>Terms of Use and Privacy Notice</h4>
                  <button type="button" style ="align:right" class="close" data-dismiss="modal">&times;</button>
@@ -73,6 +72,9 @@
               Access to photos is restricted and protected by a secure server.
               Photos which we deem as inappropriate will be removed</p>
             </div>
+           </div>
+         </div>
+       </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
