@@ -35,7 +35,8 @@
                     <button id="enterButton" class="btn btn-white">Enter</button> <!-- Event code button -->
                   <br><br>
                     <!--Terms of Use and Privacy Policy text and links-->
-                    <h6 style="color: white"><i><a href="#"style="color: white">Terms of Use</a> and <a href="#"style="color: white">Privacy Policy</i></a></h6>
+                    <h6 style="color: white"><i>By continuing, you agree to the
+                    <a style="color:white" data-toggle="modal" href="#myTermsModal">Terms of Use and Privacy Policy</i></a></h6>
                   </div>
                 <!--</form>-->
                 </div>
@@ -46,6 +47,32 @@
           <!--Grid column-->
         </div>
         <!--Grid row-->
+        <!-- Terms of Use ...Modal -->
+      <div id="myTermsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+           <!-- Modal content-->
+          <div class="modal-content">
+          
+            <div class="modal-header">
+                 <h4>Terms of Use and Privacy Notice</h4>
+                 <button type="button" style ="align:right" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Thanks for using Little Red Photobooth and our unique Photobooth Management System.
+              The services we offer bring event photos to life, enabling guests to access and share
+              photos taken in our photobooth during the event and photos uploaded by guests.</p>
+              <p>By using the services, you indicate that you accept these Terms.</p>
+              <p style="font-weight:bold">What information do we collect?</p>
+              <p>No personal information is collected. Access to services are via a unique event code
+              or photobooth session code supplied to you by the event host.
+              No email or other data is required.</p>
+              <p style="font-weight:bold">How do we keep event photos secure?</label>
+              <p>All photos that are taken during Photobooth photo sessions or are uploaded from a device
+              are kept confidential. Various electronic and physical security systems are maintained
+              to ensure the safety of photos.
+              Access to photos is restricted and protected by a secure server.
+              Photos which we deem as inappropriate will be removed</p>
+            </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
