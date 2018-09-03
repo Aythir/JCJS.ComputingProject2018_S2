@@ -109,23 +109,23 @@ function applyFilter() {
       <div class="row" style="margin-top:10px">
       <div class="container">
         <!-- <figure class=""> -->
-          <img id ="showImage" alt="picture" src='<?php echo $filePath?>' class="img-fluid col-md-12 p-1">
+          <img class="img-fluid col-md-12 p-1" id ="showImage" alt="picture" src='<?php echo $filePath?>' >
         <!-- </figure> -->
       </div>
     </div>
 
 <div class="container">
-<div class="text-center d-flex justify-content-center" style="font-size:25px">
+<!--<div class="text-center d-flex justify-content-center" style="font-size:25px">-->
      <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->
       
            <!-- apply filter-->
-          <button class="btn btn-lg btn-default" onclick="filterMode()">Apply Filter</button>
+          <button class="btn btn-default" onclick="filterMode()">Apply Filter</button>
           
           <!-- save button-->
           <a href="ajaxDownloadPhoto.php?PhotoID=<?php echo $photoID?>" download><button id="saveButton" class="btn btn-lg">View Full Size</button></a>
          
           <!--  return to gallery-->
-          <button class="btn btn-lg" onclick="goBack()">< Back to gallery</button>
+          <button class="btn " onclick="goBack()">< Back to gallery</button>
           
           <!-- delete photo button (host access only)-->
           <?php
@@ -141,7 +141,7 @@ function applyFilter() {
              class="fb-xfbml-parse-ignore">Share</a>
              </div>
           <!-- end Facebook supplied button-->
-      </div>
+      <!--</div>-->
 </div>
 
      <div id="apply-filter-buttons"> <!-- Wrapper div required for show/hide functions to work-->
