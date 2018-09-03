@@ -122,7 +122,7 @@ function applyFilter() {
           <button class="btn btn-default" onclick="filterMode()">Apply Filter</button>
           
           <!-- save button-->
-          <a href="<?php echo $filePath?>" download><button id="saveButton" class="btn ">View Full Size</button></a>
+          <a href="ajaxDownloadPhoto.php?PhotoID=<?php echo $photoID?>" download><button id="saveButton" class="btn btn-lg">View Full Size</button></a>
          
           <!--  return to gallery-->
           <button class="btn " onclick="goBack()">< Back to gallery</button>

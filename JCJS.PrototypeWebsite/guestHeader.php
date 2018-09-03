@@ -58,7 +58,7 @@
       <?php
         if($navbarlinks != "") {
             //Toggler/collapsibe Button (hamburger menu)
-            echo '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">';
+            echo '<button class="navbar-toggler" id="myButton" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">';
             echo '<span class="navbar-toggler-icon"></span>';
             echo '</button>';
             echo '<div class="collapse navbar-collapse" id="collapsibleNavbar">';
