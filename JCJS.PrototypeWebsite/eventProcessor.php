@@ -12,11 +12,33 @@
         $sql = "UPDATE Events SET eventDate = '$eventDate',eventName = '$eventName',eventLocation = '$eventLocation',guestAccessCode = '$guestAccessCode',hostAccessCode = '$hostAccessCode' WHERE eventID = $eventID;";
         //echo $sql;
         $result = $conn->query($sql);      
+
+        $conn->close();  
+        header("Location: admin_event_details.php?saved=".$eventID);
     } else {
-        $sql = "INSERT INTO Events (eventDate,eventName,eventLocation,guestAccessCode,hostAccessCode) VALUES ('$eventDate','$eventName','$eventLocation','$guestAccessCode','$hostAccessCode');";
+        $sql = "SELECT eventName FROM Events WHERE guestAccessCode = '$guestAccessCode' OR hostAccessCode = '$hostAccessCode';";
         //echo $sql;
-        $result = $conn->query($sql);            
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $eventName = $row["eventName"];
+            //header("Location: admin_event_details.php?duplicate=".$eventName);
+            echo "Duplicate host or guest code(s).";
+        } else {
+            $sql = "INSERT INTO Events (eventDate,eventName,eventLocation,guestAccessCode,hostAccessCode) VALUES ('$eventDate','$eventName','$eventLocation','$guestAccessCode','$hostAccessCode');";
+            //echo $sql;
+            $result = $conn->query($sql);   
+            
+            $eventID = mysqli_insert_id($conn);
+            $eventPath = getcwd ()."/eventPhotos/$eventID/";
+            //echo $eventPath;
+            if (!file_exists($eventPath)) {
+                mkdir($eventPath, 0777, true);
+                //echo "directory created: ".$eventPath;
+            }
+            $conn->close();  
+            header("Location: admin_event_details.php?saved=".$eventID);
+        }
     }
-    $conn->close();  
-    header("Location: admin_event_details.php?saved=".$eventID);
 ?>

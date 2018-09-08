@@ -112,7 +112,7 @@ if ($result->num_rows > 0) {
                         //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                         echo '<div class= " col-4 col-lg-3 col-sm-4" style="cursor:pointer; padding:0">';
                         echo '<div class="card">';
-                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white" alt="Event Photo">';
+                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:2px solid white" alt="Event Photo">';
                         echo "</div>";
                         echo "</div>";
                     }
@@ -197,9 +197,9 @@ $(document).ready(function () {
         } else {
             if(jQuery.inArray(currentSelection, selectionArray) == -1) {
                 selectionArray.push(currentSelection);
-                document.getElementById(currentSelection).style = "border:1px solid red";
+                document.getElementById(currentSelection).style = "border:2px solid red";
             } else {
-                document.getElementById(currentSelection).style = "border:1px solid white";
+                document.getElementById(currentSelection).style = "border:2px solid white";
                 selectionArray = $.grep(selectionArray, function(value) {
                     return value != currentSelection;
                 });            
@@ -209,7 +209,7 @@ $(document).ready(function () {
     
     function clearSelections() {
         $.each( selectionArray, function( key, value ) {
-            document.getElementById(value).style = "border:1px solid white";
+            document.getElementById(value).style = "border:2px solid white";
             selectionArray = [];
         });        
     }

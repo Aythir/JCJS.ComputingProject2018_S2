@@ -18,27 +18,25 @@
    <div class="personal-gallery tz-gallery" style="margin-top:80px">
      <div class="row" style="margin-top:10px">
       <div class="container">
-         <img src='eventPhotos/<?php echo $eventID."/animation".$animationID?>.gif' class="img-fluid col-md-12 p-1">
+         <img src='eventPhotos/<?php echo $eventID."/animation".$animationID?>.gif?t=<?php echo round(microtime(true) * 1000); ?>' class="img-fluid col-md-12 p-1">
       </div>
      </div>
       <div class="container">
-       <!--center buttons<div class="text-center d-flex justify-content-center" style="font-size:25px">-->
+        <div class="text-center d-flex justify-content-center" style="font-size:25px"> 
         <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->        
          <!-- Save Gif to device-->
-          <button class="btn btn-default" onclick="#">Save to Device</button>
+          <button class="btn btn-lg btn-default" onclick="#">Save to Device</button>
           <!--  return to gallery-->
-          <button class="btn" onclick="goBack()">< Back to gallery</button>
+          <button class="btn btn-lg" onclick="goBack()">< Back to gallery</button>
           
-         <!--Facebook supplied button-->
-         <div class="fb-share-button" style="top-margin:10px"
-         data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
+         <div class="fb-share-button" style="top-margin:10px" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
              class="fb-xfbml-parse-ignore">Share</a>
          </div>
           <!-- end Facebook supplied button-->
       
         </div>
-      <!--</div>-->
+      </div>
     </div>
    </div>
   </div>
