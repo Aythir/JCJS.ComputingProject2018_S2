@@ -29,8 +29,6 @@
             <div class="text-center">
               <form action='uploadPhotoProcessor.php' method='post' id='photoForm' enctype="multipart/form-data">
                   <label class="btn btn-white btn-primary btn-file"><input type="file" id='photoSelect' name="fileToUpload" style="display: none;" />SELECT PHOTO(S)</label>
-                  <br />
-                  <label class="btn btn-white btn-primary btn-file"> TAKE A PHOTO NOW<input type="file" accept="image/*" name='capture' id="capture" capture="camera" style="display: none;"></label>
                 </form>
             </div>
           </div>

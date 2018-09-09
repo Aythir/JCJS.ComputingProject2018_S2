@@ -15,16 +15,16 @@ if(isset($_SESSION["HostAccess"])) {
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_row($result);
         $target_dir = $_SERVER['DOCUMENT_ROOT']."/"."eventPhotos/". (int)($_SESSION["EventID"]) . "/" . $row[0];
-        //echo $target_dir;
+        echo $target_dir;
         unlink($target_dir);
 
         $sql = "DELETE FROM Photos WHERE PhotoID = $photoID;";
-        //echo $sql;
+        echo $sql;
         $result = $conn->query($sql);     
     }
     $conn->close();
 
-    header("Location: gallery.php");
+    //header("Location: gallery.php");
 } else {
     header("Location: index.php?error=1");
 }

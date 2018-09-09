@@ -70,12 +70,12 @@
 
               <div class="form-group">
                 <label for="eventName"style="font-weight:bold">Event Name:</label>
-                <input type="text" class="form-control" maxlength = "50" value="<?php echo $EventName?>" placeholder="Enter a name for the event" id="eventName" name="eventName" required>
+                <input type="text" class="form-control" maxlength = "30" value="<?php echo $EventName?>" placeholder="Enter a name for the event" id="eventName" name="eventName" required>
               </div>
 
               <div class="form-group">
                 <label for="eventLocation"style="font-weight:bold">Event Location:</label>
-                <input type="text" class="form-control" maxlength = "50" value="<?php echo $EventLocation?>" placeholder="Enter the venue name and address" id="eventLocation" name="eventLocation" required>
+                <input type="text" class="form-control" maxlength = "40" value="<?php echo $EventLocation?>" placeholder="Enter the venue name and address" id="eventLocation" name="eventLocation" required>
               </div>
 
               <div class="form-group">

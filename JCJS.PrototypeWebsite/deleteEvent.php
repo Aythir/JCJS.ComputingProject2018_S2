@@ -7,18 +7,23 @@ if(isset($_SESSION["AdminID"])) {
   $eventID = (int)$_GET["EventID"];
 
   //event photos directory
-  $photoDirectory = getcwd ()."\\eventPhotos\\$eventID\\";
+  $photoDirectory = getcwd ()."/eventPhotos/$eventID/";
+  //echo "directory to delete: ".$photoDirectory;
   
-  // delete all photos from event directory
-  array_map('unlink', glob("$photoDirectory/*.*"));
-  
-  //delete event directory itself
-  rmdir($photoDirectory);
+  if (file_exists($photoDirectory)) {
+    // delete all photos from event directory
+    array_map('unlink', glob("$photoDirectory/*.*"));
+    
+    //delete event directory itself
+    rmdir($photoDirectory);
+    //echo "deleted directory: ".$photoDirectory;
+  }
 
   $sql = "DELETE FROM Events WHERE EventID = '$eventID';";
   //echo $sql;
   $result = $conn->query($sql);            
   $conn->close();  
+
+  header("Location: admin_event_details.php?deleted=".$eventID);  
 }
-header("Location: admin_event_details.php?deleted=".$eventID);  
 ?>

@@ -1,14 +1,25 @@
 <?php include 'databaseConnection.php';?>
 <?php
-error_reporting(E_ALL); ini_set('display_errors', 1);
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
 
 session_start();
 $eventID = (int)$_SESSION["EventID"];
 
 $photoID = (int)$_GET["PhotoID"];
-$fileName = "photo".$photoID.".jpg";
 
-$photoPath = getcwd ()."\\eventPhotos\\$eventID\\".$fileName;
+$sql = "SELECT Filename FROM photos WHERE EventID = $eventID AND PhotoID = $photoID;";
+//echo $sql;
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $fileName = $row["Filename"];
+} else {
+    header("Location: 500.php?error=1");
+} 
+
+$photoPath = getcwd ()."/eventPhotos/$eventID/".$fileName;
 //echo $photoPath
 
 // Process download
@@ -30,5 +41,7 @@ if(file_exists($photoPath)) {
   flush(); // Flush system output buffer
   readfile($photoPath);
   exit;
+} else {
+  echo "File not found: ".$photoPath;
 }
 ?>

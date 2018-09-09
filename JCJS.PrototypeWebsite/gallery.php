@@ -8,6 +8,7 @@ $title = "Gallery";
 $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
 $navbarlinks .= createNavLink("Slideshow","slideshow.php");
 if(isset($_SESSION["AdminID"])) $navbarlinks .= createNavLink("Event List","admin_event_details.php");
+$navbarlinks .= createMergeButton();
 
 if(isset($_SESSION["EventID"])) {
     $eventID = (int)$_SESSION["EventID"];
@@ -95,11 +96,7 @@ if ($result->num_rows > 0) {
     <div class="personal-gallery tz-gallery">
         <h3 class= "responsive-text">Your Photobooth Session: <?php echo $eventName ?></h3>
         <hr>
-        <h5>Select two to five photos and click the button to generate your personal GIF!</h5>
-        <div id="gifButtons1">
-            <button type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>
-        </div> 
-        <br>       
+        <div id="animationText"></div> 
         <div class= "row">
             <?php
                 $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 1;";
@@ -109,10 +106,9 @@ if ($result->num_rows > 0) {
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                         echo '<div class= " col-4 col-lg-3 col-sm-4" style="cursor:pointer; padding:0">';
                         echo '<div class="card">';
-                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white" alt="Event Photo">';
+                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Booth Uploaded Photo" style="border:2px solid white">';
                         echo "</div>";
                         echo "</div>";
                     }
@@ -137,7 +133,7 @@ if ($result->num_rows > 0) {
                     //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                     echo '<div class= "col-4 col-lg-3 col-sm-4 " style="cursor:pointer; padding:0">';
                     echo '<div class="card">';
-                    echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" style="border:1px solid white">';
+                    echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Public Gallery Photo" style="border:1px solid white">';
                     echo "</div>";
                     echo "</div>";
                 }
@@ -175,17 +171,20 @@ $(document).ready(function () {
     function enableSelector() {
         if(enableImageSelection == false) {
             enableImageSelection = true;
+            document.getElementById("animationText").innerHTML = '<h5>Select two to five photos and click the button to generate your personal GIF!</h5>';
             document.getElementById("selectorModalText").innerHTML = "Image selection is now enabled. Please select 3-5 images and then click 'Create animation from selected images' to create an animated Gif file.";
-            document.getElementById("gifButtons1").innerHTML = '<button id="merge" type="button" class="btn btn-default" onclick="mergeSelections();">Merge</button><button id="reset" type="button" class="btn btn-secondary" onclick=" clearSelections();">Reset</button><button type="button" class="btn btn-default" onclick="enableSelector();">Cancel</button>';
+            document.getElementById("gifButtons").innerHTML = '<button id="merge" type="button" class="btn btn-default py-2" onclick="mergeSelections();">Create</button><button id="reset" type="button" class="btn btn-secondary py-2" onclick=" clearSelections();">Reset</button><button type="button" class="btn btn-default py-2" onclick="enableSelector();">Cancel</button>';
             $('#selectorModal').modal('show');
             $('#publicGallery').hide();
+            $('#bottomNav').show();
         } else {
             clearSelections();
             enableImageSelection = false;
             document.getElementById("selectorModalText").innerHTML = "Image selection is now disabled. Clicking an image will show you a full size copy of that photo";
-            document.getElementById("gifButtons1").innerHTML = '<button type="button" class="btn btn-default" onclick="enableSelector();">Create Animation</button>';
+            document.getElementById("gifButtons").innerHTML = '';
             $('#selectorModal').modal('show');
             $('#publicGallery').show();
+            $('#bottomNav').hide();
         }
     }
 
@@ -197,9 +196,9 @@ $(document).ready(function () {
         } else {
             if(jQuery.inArray(currentSelection, selectionArray) == -1) {
                 selectionArray.push(currentSelection);
-                document.getElementById(currentSelection).style = "border:1px solid red";
+                document.getElementById(currentSelection).style = "border:2px solid red";
             } else {
-                document.getElementById(currentSelection).style = "border:1px solid white";
+                document.getElementById(currentSelection).style = "border:2px solid white";
                 selectionArray = $.grep(selectionArray, function(value) {
                     return value != currentSelection;
                 });            
@@ -209,7 +208,7 @@ $(document).ready(function () {
     
     function clearSelections() {
         $.each( selectionArray, function( key, value ) {
-            document.getElementById(value).style = "border:1px solid white";
+            document.getElementById(value).style = "border:2px solid white";
             selectionArray = [];
         });        
     }
@@ -224,6 +223,14 @@ $(document).ready(function () {
         } else {
             location.href='createGif.php?sel='+selectionArray;
         }
-    };        
+    };  
+    $(window).on('load',function(){
+        $('#bottomNav').hide();      
+    });    
 </script>
+<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark py-0" id='bottomNav'>
+    <div class="container py-0" id='gifButtons'>
+        <button id="merge" type="button" class="btn btn-default py-2" onclick="mergeSelections();">Create</button>
+    </div>
+</nav>
 <?php include 'ppFooter.php';?>

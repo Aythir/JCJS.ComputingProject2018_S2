@@ -5,6 +5,9 @@
   function createLogout() {
     return '<li><a class="nav-link" onclick="$(\'#logoutModal\').modal(\'show\');">Logout</a></li>';
   }
+  function createMergeButton() {
+    return '<li><a class="nav-link" onclick="enableSelector();">Create Animation</a></li>';
+  }  
   function createModalLink() {
     return '<li><a class="nav-link" onclick="$(\'#hostModal\').modal(\'show\');">Download All</a></li>';
   }  
