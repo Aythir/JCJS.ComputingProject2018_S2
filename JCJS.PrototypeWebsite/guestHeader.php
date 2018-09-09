@@ -51,7 +51,7 @@
     </div>
         
     <!-- Navbar -->
-   <nav class="navbar navbar-expand-sm navbar-light">
+   <nav class="navbar navbar-expand-sm navbar-light" id="mainHeader">
       <a class="navbar-brand" href="gallery.php"><img src="img/logo.png" height= "51" width= "60" alt="Little Red Photobooth"></a>
 
       <!-- Navbar Links -->

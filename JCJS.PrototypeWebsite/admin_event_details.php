@@ -93,7 +93,13 @@
             echo "document.getElementById('modalText').innerHTML = 'Event Deleted';";
             echo "$('#myModal').modal('show');";
             echo "</script>";
-          }          
+          }   
+          if(isset($_GET['updated'])) {
+            echo "<script>";
+            echo "document.getElementById('modalText').innerHTML = 'Password updated';";
+            echo "$('#myModal').modal('show');";
+            echo "</script>";
+          }                    
         ?>
       </div>
     </div>
