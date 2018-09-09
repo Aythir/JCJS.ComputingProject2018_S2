@@ -8,6 +8,13 @@
     $username = $_GET['username'];
   }  
   $navbarlinks = "";
+
+  $username = "";
+  $remember_me = "";
+  if(isset($_COOKIE["username"])) {
+      $username = $_COOKIE["username"];
+      $remember_me = " checked";
+  }  
 ?>
 <?php include 'databaseConnection.php';?>
 <?php include 'guestHeader.php';?>
@@ -47,7 +54,7 @@
                     </div>
 
                     <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
+                    <label><input type="checkbox" name="remember_me"<?php echo $remember_me ?>> Remember me</label>
                     </div>
 
                     <button type="submit" class="btn">Submit</button>
