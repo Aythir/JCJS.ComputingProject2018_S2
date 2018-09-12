@@ -71,7 +71,6 @@
     $(".carousel-control-next").click(function(){
         $("#myCarousel").carousel("next");
     });
-});
 
 // refresh page every 1 minute
 setTimeout(function() {
