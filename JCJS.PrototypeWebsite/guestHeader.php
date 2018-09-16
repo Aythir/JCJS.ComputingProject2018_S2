@@ -21,7 +21,7 @@
     <!-- Import jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!-- Import bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -36,18 +36,18 @@
 <body>
     <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" role="dialog">
-    <div class="modal-dialog">
-    <!-- Modal content-->
-        <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Are you sure you want to log out now?</h4>            
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to log out now?</h4>            
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-error" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href='logout.php';">Yes</button>
+            </div>
+            </div>
         </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-error" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href='logout.php';">Yes</button>
-        </div>
-        </div>
-    </div>
     </div>
         
     <!-- Navbar -->
@@ -58,10 +58,10 @@
       <?php
         if($navbarlinks != "") {
             //Toggler/collapsibe Button (hamburger menu)
-            echo '<button class="navbar-toggler" id="myButton" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">';
+            echo '<button class="navbar-toggler collapsed" id="myButton" type="button" data-toggle="collapse" data-target="#navbar">';
             echo '<span class="navbar-toggler-icon"></span>';
             echo '</button>';
-            echo '<div class="collapse navbar-collapse" id="collapsibleNavbar">';
+            echo '<div class="navbar-collapse collapse navbar-left" id="navbar">';
             if(isset($_SESSION["HostAccess"])) {
                 $navbarlinks .= createModalLink();
             } else {

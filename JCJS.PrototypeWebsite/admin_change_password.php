@@ -62,19 +62,19 @@
 
               <div class="form-group">
               <label for="pwd" style="font-weight:bold">Current password:</label>
-              <input type="password" class="form control" maxlength = "10" placeholder="Enter your current password" name="pwd" id="pwd" required>
+              <input type="password" class="form control" maxlength = "20" placeholder="Enter your current password" name="pwd" id="pwd" required>
               </div>
 
               <div class="form-group">
                 <label for="pwd1"style="font-weight:bold">New Password:</label>
-                <input type="password" id="pwd1" name="pwd1" class="form-control" maxlength = "10" placeholder="Enter new password"
+                <input type="password" id="pwd1" name="pwd1" class="form-control" maxlength = "20" placeholder="Enter new password"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
               </div>
 
               <div class="form-group">
                 <label for="pwd2"style="font-weight:bold">Confirm new password:</label>
-                <input type="password" class="form-control" maxlength = "10" placeholder="Re-enter new password" name="pwd2" id="pwd2"
+                <input type="password" class="form-control" maxlength = "20" placeholder="Re-enter new password" name="pwd2" id="pwd2"
                 title="Must match the new password entered"required>
               </div>
               <button type="submit" class="btn">Reset Password</button>

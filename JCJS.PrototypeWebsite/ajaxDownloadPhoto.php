@@ -6,18 +6,22 @@ error_reporting(E_ALL);
 session_start();
 $eventID = (int)$_SESSION["EventID"];
 
-$photoID = (int)$_GET["PhotoID"];
+if(isset($_GET["PhotoID"])) {
+  $photoID = (int)$_GET["PhotoID"];
+  $sql = "SELECT Filename FROM photos WHERE EventID = $eventID AND PhotoID = $photoID;";
+  //echo $sql;
+  $result = $conn->query($sql);
 
-$sql = "SELECT Filename FROM photos WHERE EventID = $eventID AND PhotoID = $photoID;";
-//echo $sql;
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $fileName = $row["Filename"];
+  if ($result->num_rows > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $fileName = $row["Filename"];
+  } else {
+      header("Location: 500.php?error=1");
+  } 
 } else {
-    header("Location: 500.php?error=1");
-} 
+  $animationID = (int)$_GET["animationID"];
+  $fileName = "animation".$animationID.".gif";
+}
 
 $photoPath = getcwd ()."/eventPhotos/$eventID/".$fileName;
 //echo $photoPath

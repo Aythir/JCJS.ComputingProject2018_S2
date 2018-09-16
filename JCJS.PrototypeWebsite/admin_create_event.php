@@ -80,12 +80,12 @@
 
               <div class="form-group">
                 <label for="guestAccessCode"style="font-weight:bold">Event Access Code:</label>
-                <input type="text" class="form-control" pattern="[0-9A-Za-z]{4,8}" title="Codes must be between 4 and 8 letter or numbers only (no spaces)." maxlength = "8" value="<?php echo $GuestAccessCode?>" placeholder="Enter the event code" id="guestAccessCode" name="guestAccessCode" required>
+                <input type="text" class="form-control" pattern="[0-9A-Za-z]{4,20}" title="Codes must be between 4 and 20 letter or numbers only (no spaces)." maxlength = "20" value="<?php echo $GuestAccessCode?>" placeholder="Enter the event code" id="guestAccessCode" name="guestAccessCode" required>
               </div>
 
               <div class="form-group">
                 <label for="hostAccessCode"style="font-weight:bold">Host Access Code:</label>
-                <input type="text" class="form-control" pattern="[0-9A-Za-z]{4,8}" title="Codes must be between 4 and 8 letter or numbers only (no spaces)." maxlength = "8" value="<?php echo $HostAccessCode?>" placeholder="Enter the host code" id="hostAccessCode" name="hostAccessCode" required>
+                <input type="text" class="form-control" pattern="[0-9A-Za-z]{4,20}" title="Codes must be between 4 and 20 letter or numbers only (no spaces)." maxlength = "20" value="<?php echo $HostAccessCode?>" placeholder="Enter the host code" id="hostAccessCode" name="hostAccessCode" required>
               </div>
 
               <?php
