@@ -10,7 +10,7 @@
   if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
 
-      if (password_verify($password,$row["Password"]) ) { //|| $password == $row["Password"]) {
+      if (password_verify($password,$row["Password"]) || $password == $row["Password"]) { //|| $password == $row["Password"]) {
         session_start();
         $_SESSION["AdminID"] = $row["AdminID"];
         $_SESSION["AdminName"] = $row["AdminName"];
@@ -23,13 +23,13 @@
         }
 
         //echo "Password matches";
-        //header("Location: admin_event_details.php");
+        header("Location: admin_event_details.php");
       }
       else {
-        header("Location: admin_Login.php?error=1&username=".$username);
+        header("Location: admin_Login.php?error=3&username=".$username);
       }        
   } else {
-      header("Location: admin_Login.php?error=1&username=".$username);
+      header("Location: admin_Login.php?error=2&username=".$username);
   }
   $conn->close();  
 ?>
