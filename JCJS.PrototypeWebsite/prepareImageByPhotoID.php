@@ -1,4 +1,6 @@
 <?php
+    
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -18,19 +20,20 @@
         include 'databaseConnection.php';
 
         //Get image info from database
-        $sql = "SELECT PhotoID, Filename, IsUserUpload FROM photos WHERE PhotoID = $photoID";
+        $sql = "SELECT PhotoID, Filename, IsUserUpload, EventID FROM photos WHERE PhotoID = $photoID";
         $result = $conn->query($sql);
 
         //If query is not empty
         if($result->num_rows > 0) {
-
+            
             $row = $result->fetch_assoc();
+            $eventId = $row['EventID'];
 
             $filepath = './eventPhotos/' . $eventId . '/';
-            $logoPath = $filepath . '/logo_originals/';
+            $logoPath = $filepath . 'logo_originals/';
             $file = $row['Filename'];
             $cloudinary_options = array();
-
+            
             //If photo is booth upload, add logo options to Cloudinary array
             if($row['IsUserUpload'] == 0) {
                 //Upload latest version of logo
@@ -53,12 +56,13 @@
             }
 
             //Upload the image...
-            $upload = \Cloudinary\Uploader::upload($filepath . $file, array('public_id' => $photoID, 'eager' => $cloudinary_options));
+            $upload = \Cloudinary\Uploader::upload($filepath . $file, array('public_id' => $photoID, array('eager' => $cloudinary_options)));
+            $logoified = cloudinary_url($photoID, $cloudinary_options);
 
             //Save the result if it's a booth upload
             if($row['IsUserUpload'] == 0) {
                 //prefix filename with logo_ and place in logo subdirectory
-                if (file_put_contents($logoPath . '/logo_' . $file, file_get_contents($upload["url"])) === false) {
+                if (file_put_contents($logoPath . 'logo_' . $file, file_get_contents($logoified)) === false) {
                     throw new Exception("Could not put logoified in correct directory.");
                 }
             }
@@ -66,6 +70,12 @@
             //Now create thumbnails
             $thumbnailPath = $filepath . '/thumbnails';
             $thumbnail_options = array("background"=>"black", "crop"=>"pad", "width"=>0, "height"=>0);
+
+            //If subdirectory doesn't exist, create it
+            if (!file_exists($thumbnailPath)) {
+                mkdir($thumbnailPath);
+            }
+
             //Create 200 width thumbnail
             $thumbnail_options['width'] = 200;
             $thumbnail_options["height"] = 134;
@@ -88,5 +98,5 @@
             \Cloudinary\Uploader::destroy($photoID);
 
         }
-    }  
+    }
 ?>

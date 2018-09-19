@@ -1,7 +1,6 @@
 <?php
 include 'databaseConnection.php';
 include 'functionList.php';
-include './scripts/prepareImageByPhotoID.php';
 
 session_start();
 
@@ -113,6 +112,7 @@ if ($result->num_rows > 0) {
                         if(file_exists("eventPhotos/".$eventID."/thumbnails/thumb200_".$row["Filename"])) {
                             echo '/thumbnails/thumb200_';
                         } else {
+                            include 'prepareImageByPhotoID.php';
                             prepareImageByPhotoID($row["PhotoID"]);
                         }
                         echo $row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Booth Uploaded Photo" style="border:2px solid white">';
@@ -144,6 +144,7 @@ if ($result->num_rows > 0) {
                     if(file_exists("eventPhotos/".$eventID."/thumbnails/thumb200_".$row["Filename"])) {
                         echo '/thumbnails/thumb200_';
                     } else {
+                        include 'prepareImageByPhotoID.php';
                         prepareImageByPhotoID($row["PhotoID"]);
                     }
                     echo $row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Public Gallery Photo" style="border:1px solid white">';
