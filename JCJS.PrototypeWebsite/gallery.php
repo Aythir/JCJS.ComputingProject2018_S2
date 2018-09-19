@@ -1,6 +1,7 @@
 <?php
 include 'databaseConnection.php';
 include 'functionList.php';
+include './scripts/prepareImageByPhotoID.php';
 
 session_start();
 
@@ -99,7 +100,7 @@ if ($result->num_rows > 0) {
         <div id="animationText"></div> 
         <div class= "row">
             <?php
-                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 1;";
+                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 0;";
                 //echo $sql;
                 $result = $conn->query($sql);
 
@@ -108,7 +109,13 @@ if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         echo '<div class= " col-4 col-lg-3 col-sm-4" style="cursor:pointer; padding:0">';
                         echo '<div class="card">';
-                        echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Booth Uploaded Photo" style="border:2px solid white">';
+                        echo '<img src="eventPhotos/'.$eventID.'/';
+                        if(file_exists("eventPhotos/".$eventID."/thumbnails/thumb200_".$row["Filename"])) {
+                            echo '/thumbnails/thumb200_';
+                        } else {
+                            prepareImageByPhotoID($row["PhotoID"]);
+                        }
+                        echo $row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Booth Uploaded Photo" style="border:2px solid white">';
                         echo "</div>";
                         echo "</div>";
                     }
@@ -123,7 +130,7 @@ if ($result->num_rows > 0) {
         <hr>
         <div class="row">
         <?php
-            $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 0;";
+            $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 1;";
             //echo $sql;
             $result = $conn->query($sql);
 
@@ -133,7 +140,13 @@ if ($result->num_rows > 0) {
                     //echo '<div class= "col-4 col-lg-3 col-sm-4" style="padding:0" onclick="location.href=\'showPhoto.php?PhotoID='.$row["PhotoID"].'\'" style="cursor:pointer;">';
                     echo '<div class= "col-4 col-lg-3 col-sm-4 " style="cursor:pointer; padding:0">';
                     echo '<div class="card">';
-                    echo '<img src="eventPhotos/'.$eventID.'/'.$row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Public Gallery Photo" style="border:1px solid white">';
+                    echo '<img src="eventPhotos/'.$eventID.'/';
+                    if(file_exists("eventPhotos/".$eventID."/thumbnails/thumb200_".$row["Filename"])) {
+                        echo '/thumbnails/thumb200_';
+                    } else {
+                        prepareImageByPhotoID($row["PhotoID"]);
+                    }
+                    echo $row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Public Gallery Photo" style="border:1px solid white">';
                     echo "</div>";
                     echo "</div>";
                 }
