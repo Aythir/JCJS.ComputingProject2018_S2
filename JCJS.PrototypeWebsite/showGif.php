@@ -9,6 +9,8 @@
     header("Location: index.php?error=1");
   }
 
+  $filePath = "http://".$_SERVER['SERVER_NAME']."/eventPhotos/".$eventID."/animation".$animationID.".gif";
+
   $navbarlinks = createNavLink("Event Gallery","gallery.php");
   $navbarlinks .= createNavLink("Upload Photo","upload_photo.php");
    ?>
@@ -56,25 +58,29 @@ function shareToFacebook() {
    <div class="personal-gallery tz-gallery" style="margin-top:80px">
      <div class="row" style="margin-top:10px">
       <div class="container">
-         <img src='eventPhotos/<?php echo $eventID."/animation".$animationID?>.gif?t=<?php echo round(microtime(true) * 1000); ?>' class="img-fluid col-md-12 p-1">
+         <img src='<?php echo $filePath."?t=" . round(microtime(true) * 1000); ?>' class="img-fluid col-md-12 p-1">
       </div>
      </div>
       <div class="container">
-        <div class="text-center d-flex justify-content-center" style="font-size:25px"> 
-        <div id="default-buttons"> <!-- Wrapper div required for show/hide functions to work-->        
-         <!-- Save Gif to device-->
-          <button class="btn btn-default" onclick="#">Save to Device</button>
-          <!--  return to gallery-->
-          <button class="btn" onclick="goBack()">< Back to gallery</button>
-          
-         <div class="fb-share-button" style="top-margin:10px" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
-             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-             class="fb-xfbml-parse-ignore">Share</a>
-         </div>
-          <!-- end Facebook supplied button-->
-      
+        <div class='row'>
+          <div class='col-lg-4 col-sm-6'>
+              <!--  return to gallery-->
+              <button class="btn btn-block" onclick="goBack()"><< Gallery</button>
+
+          </div>
+          <div class='col-lg-4 col-sm-6'>
+              <!-- Save Gif to device-->
+              <a href="ajaxDownloadPhoto.php?animationID=<?php echo $animationID?>"><button id="saveButton" class="btn btn-default btn-block">Download Image</button></a>
+
+          </div>
+          <div class='col-lg-4 col-sm-6'>
+              <div class="fb-share-button" style="top-margin:10px" data-href="<?php echo $filePath?>" data-layout="button_count" data-size="large" data-mobile-iframe="false">
+              <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+              class="fb-xfbml-parse-ignore">Share</a>
+              </div>
+              <!-- end Facebook supplied button-->      
+          </div>
         </div>
-      </div>
     </div>
    </div>
   </div>

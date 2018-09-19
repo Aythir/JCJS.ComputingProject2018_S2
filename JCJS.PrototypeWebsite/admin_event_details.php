@@ -1,3 +1,4 @@
+<?php include 'admin_login_check.php';?>
 <?php include 'functionList.php';?>
 <?php
   $title = "List of Events";
