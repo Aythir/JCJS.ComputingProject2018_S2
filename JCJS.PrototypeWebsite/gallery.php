@@ -90,27 +90,6 @@ if ($result->num_rows > 0) {
 </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="codeModal" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title" id='codeModalText'>Enter a new unique code</h4>
-<!-- Input for new event --> 
-<div class="md-form">
-    <input type="text" id="enterCode" class="form-control">
-    <label for="enterCode">Enter code</label>
-</div>
-    </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-    <button type="button" id='codeModalButton' class="btn btn-error" data-dismiss="modal">OK</button>
-    </div>
-    </div>
-</div>
-</div>
-
  <!--Main content-->
  <div class="container-fluid">
 
