@@ -60,7 +60,7 @@
               <p>Thanks for using Little Red Photobooth and our unique Photobooth Management System.
               The services we offer bring event photos to life, enabling guests to access and share
               photos taken in our photobooth during the event and photos uploaded by guests.</p>
-              <p>By using the services, you indicate that you accept these Terms.</p>
+              <p>By using the services, you agree to be bind to these Terms.</p>
               <p style="font-weight:bold">What information do we collect?</p>
               <p>No personal information is collected. Access to services are via a unique event code
               or photobooth session code supplied to you by the event host.
@@ -70,7 +70,7 @@
               are kept confidential. Various electronic and physical security systems are maintained
               to ensure the safety of photos.
               Access to photos is restricted and protected by a secure server.
-              Photos which we deem as inappropriate will be removed</p>
+              We reserve the right to delete any photo that we deem in violation of the Terms. </p>
             </div>
            </div>
          </div>
