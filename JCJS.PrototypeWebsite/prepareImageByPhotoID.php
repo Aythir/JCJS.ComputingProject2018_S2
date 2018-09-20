@@ -15,8 +15,9 @@
         "api_secret" => "lNdOEX5stZEosAsWZjv2bkqQlkM" 
       ));
 
-    function prepareImageByPhotoID(int $photoID) {
+    if(isset($_GET['id'])) {
 
+        $photoID = $_GET['id'];
         include 'databaseConnection.php';
 
         //Get image info from database
@@ -36,9 +37,6 @@
             
             //If photo is booth upload, add logo options to Cloudinary array
             if($row['IsUserUpload'] == 0) {
-                //Upload latest version of logo
-                $lrpLogoPath = './img/logo.png';
-                $lrpLogoUpload = \Cloudinary\Uploader::upload($lrpLogoPath, array('overwrite' => true, 'public_id' => 'lrpLogo'));
 
                 //If logo subdirectory doesn't exist, create it
                 if (!file_exists($logoPath)) {
@@ -68,34 +66,40 @@
             }
 
             //Now create thumbnails
-            $thumbnailPath = $filepath . '/thumbnails';
-            $thumbnail_options = array("background"=>"black", "crop"=>"pad", "width"=>0, "height"=>0);
+            $thumbnailPath = $filepath . 'thumbnails';
+            $thumbnail_options = array("transformation" => $cloudinary_options, "background"=>"black", "crop"=>"pad", "width"=>0, "height"=>0);
 
             //If subdirectory doesn't exist, create it
             if (!file_exists($thumbnailPath)) {
                 mkdir($thumbnailPath);
             }
 
-            //Create 200 width thumbnail
-            $thumbnail_options['width'] = 200;
-            $thumbnail_options["height"] = 134;
-            $thumb200 = cloudinary_url($photoID, $thumbnail_options);
-
-            if (file_put_contents($thumbnailPath . '/thumb200_' . $file, file_get_contents($thumb200)) === false) {
-                throw new Exception("Could not put thumbnail in correct directory.");
-            }
+            
 
             //Create 500 width thumbnail
             $thumbnail_options['width'] = 500;
             $thumbnail_options["height"] = 334;
-            $thumb500 = cloudinary_url($photoID, array('width' => 500));
+            $thumb500 = cloudinary_url($photoID, array_merge($thumbnail_options));
 
             if (file_put_contents($thumbnailPath . '/thumb500_' . $file, file_get_contents($thumb500)) === false) {
                 throw new Exception("Could not put thumbnail in correct directory.");
             }
 
+            //Create 200 width thumbnail
+            $thumbnail_options['width'] = 200;
+            $thumbnail_options["height"] = 134;
+            $thumb200 = cloudinary_url($photoID, array_merge($thumbnail_options));
+
+            if (file_put_contents($thumbnailPath . '/thumb200_' . $file, file_get_contents($thumb200)) === false) {
+                throw new Exception("Could not put thumbnail in correct directory.");
+            }
+
             //And finally delete image from Cloudinary server
             \Cloudinary\Uploader::destroy($photoID);
+
+            if(file_exists($thumbnailPath . '/thumb200_' . $file)) {
+                echo $thumbnailPath . '/thumb200_' . $file;
+            }
 
         }
     }

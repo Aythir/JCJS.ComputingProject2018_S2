@@ -132,9 +132,6 @@ if ($result->num_rows > 0) {
                         echo '<img src="eventPhotos/'.$eventID.'/';
                         if(file_exists("eventPhotos/".$eventID."/thumbnails/thumb200_".$row["Filename"])) {
                             echo '/thumbnails/thumb200_';
-                        } else {
-                            include 'prepareImageByPhotoID.php';
-                            prepareImageByPhotoID($row["PhotoID"]);
                         }
                         echo $row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Booth Uploaded Photo" style="border:2px solid white">';
                         echo "</div>";
@@ -164,9 +161,6 @@ if ($result->num_rows > 0) {
                     echo '<img src="eventPhotos/'.$eventID.'/';
                     if(file_exists("eventPhotos/".$eventID."/thumbnails/thumb200_".$row["Filename"])) {
                         echo '/thumbnails/thumb200_';
-                    } else {
-                        include 'prepareImageByPhotoID.php';
-                        prepareImageByPhotoID($row["PhotoID"]);
                     }
                     echo $row["Filename"].'" class="card-img-top" id="'.$row["PhotoID"].'" alt="Public Gallery Photo" style="border:1px solid white">';
                     echo "</div>";
@@ -263,6 +257,28 @@ $(document).ready(function () {
     $(window).on('load',function(){
         $('#bottomNav').hide();      
     });    
+
+    function createThumbnails() {
+        let imgs = document.getElementsByClassName("card-img-top");
+        for(let i = 0; i < imgs.length; i++) {
+            if(!imgs[i].src.includes("thumb")) {
+                //AJAX Call to create thumbnail
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("" + imgs[i].id).src = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "prepareImageByPhotoID.php?id=" + imgs[i].id, true);
+                xhttp.send();
+            } else {
+
+            }
+        }
+
+    }
+
+    createThumbnails();
 </script>
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark py-0" id='bottomNav'>
     <div class="container py-0" id='gifButtons'>
