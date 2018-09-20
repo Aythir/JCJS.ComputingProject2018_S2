@@ -13,13 +13,11 @@
         "api_secret" => "lNdOEX5stZEosAsWZjv2bkqQlkM" 
       ));
 
-    echo "in the file";
     //This function will detect and create thumbnails of 200 and 500 width for a given eventId
     //Assuming the event photos are in ./eventPhotos/$eventId relative to this script
     //A thumbnail subdirectory will be created in the eventId directory if it doesn't already exist
     //Thumbnails will not be created if they already exist
     function detectAndCreateThumbnails(int $eventId) {
-        echo "Script called";
         $filepath = '../eventPhotos/' . $eventId;
         $thumbnailPath = $filepath . '/thumbnails';
         $filepath = realpath($filepath);
@@ -70,7 +68,5 @@
         
         
     }
-
-    detectAndCreateThumbnails(1);
     
 ?>
