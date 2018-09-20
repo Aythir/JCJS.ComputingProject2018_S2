@@ -160,6 +160,7 @@ if ($result->num_rows > 0) {
 </div>
 <!-- End main content-->
 <!--End of Main content-->
+<?php include 'guestFooter.php';?>
 <script>
 $(document).ready(function () {
     $("myButton").on("click", "a", function () {
@@ -247,4 +248,3 @@ $(document).ready(function () {
         <button id="merge" type="button" class="btn btn-default py-2" onclick="mergeSelections();">Create</button>
     </div>
 </nav>
-<?php include 'ppFooter.php';?>

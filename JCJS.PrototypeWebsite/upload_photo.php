@@ -57,6 +57,7 @@
       echo "</script>";
     }
     ?>      
+    <?php include 'guestFooter.php';?>
     <script>
       $("#photoSelect").change(function(){
           document.getElementById("photoForm").submit();
