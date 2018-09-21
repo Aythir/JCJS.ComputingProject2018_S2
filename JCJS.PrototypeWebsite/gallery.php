@@ -98,9 +98,10 @@ if ($result->num_rows > 0) {
     <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title" id='codeModalText'>Enter a new unique code</h4>
+     </div> 
 <!-- Input for new event --> 
 <div class="md-form">
-    <input type="text" id="enterCode" class="form-control">
+    <input style= ""type="text" id="enterCode" class="form-control">
     <label for="enterCode">Enter code</label>
 </div>
     </div>

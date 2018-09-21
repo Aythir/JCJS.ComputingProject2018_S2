@@ -4,7 +4,7 @@
     }
 
     // check that user is logged in before proceeding
-    if(isset($_SESSION['EventID'])) {
+    if(isset($_SESSION['EventID']) || isset($_SESSION["UniqueCode"])) {
         // proceed as the guest has entered a valid event code
     } else {
         // if user not logged in then redirect to login page (unless already at the login page - index.php or admin_Login.php)
