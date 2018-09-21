@@ -2,9 +2,9 @@
 <?php
   session_start();
   $eventCode = mysqli_real_escape_string($conn,$_POST["eventCode"]);
-  $eventCode = (int)$eventCode;
+  $eventCodeInt = (int)$eventCode;
 
-  $sql = "SELECT EventID,HostAccessCode FROM Events WHERE GuestAccessCode = '$eventCode' OR HostAccessCode = '$eventCode';";
+  $sql = "SELECT EventID,HostAccessCode FROM Events WHERE GuestAccessCode = '$eventCodeInt' OR HostAccessCode = '$eventCodeInt';";
   //echo $sql;
   $result = $conn->query($sql);
 
@@ -15,6 +15,18 @@
       if($row["HostAccessCode"] == $eventCode) $_SESSION["HostAccess"] = true;
       $response = "true";  
     }
+  }
+  else {
+    $sql = "SELECT UniqueCode FROM photos WHERE UniqueCode = '$eventCode';";
+    //echo $sql;
+    $result = $conn->query($sql);
+  
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {    
+        $_SESSION["UniqueCode"] = $row["UniqueCode"];
+        $response = "true";  
+      }
+    }    
   }
   echo $response;
 ?>
