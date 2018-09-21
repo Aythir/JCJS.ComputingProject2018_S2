@@ -3,16 +3,15 @@
   $title = "Login Page";
   $clearBackground = true;
 
-  $username = '';
+  $adminUsername = '';
   if(isset($_GET['username'])) {
-    $username = $_GET['username'];
+    $adminUsername = $_GET['username'];
   }  
   $navbarlinks = "";
 
-  $username = "";
   $remember_me = "";
   if(isset($_COOKIE["username"])) {
-      $username = $_COOKIE["username"];
+      $adminUsername = $_COOKIE["username"];
       $remember_me = " checked";
   }  
 ?>
@@ -45,7 +44,7 @@
 
                   <div class="form-group">
                     <label for="uname" style="font-weight:bold">Username:</label>
-                    <input type="text" class="form control" maxlength = "30" placeholder="Enter username" id="username" value="<?php echo $username ?>" name="username" required>
+                    <input type="text" class="form control" maxlength = "30" placeholder="Enter username" id="username" value="<?php echo $adminUsername ?>" name="username" required>
                     </div>
 
                     <div class="form-group">
