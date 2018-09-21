@@ -121,7 +121,11 @@ if ($result->num_rows > 0) {
         <div id="animationText"></div> 
         <div class= "row">
             <?php
-                $sql = "SELECT PhotoID,Filename FROM Photos WHERE EventID = '$eventID' AND IsUserUpload = 0;";
+                if(isset($_SESSION["UniqueCode"])) {
+                    $uniqueCode = $_SESSION["UniqueCode"];
+                    $uniqueCodeSQL = " OR UniqueCode = '".$uniqueCode."'";
+                }
+                $sql = "SELECT PhotoID,Filename FROM Photos WHERE (EventID = '$eventID' AND IsUserUpload = 0)".$uniqueCodeSQL.";";
                 //echo $sql;
                 $result = $conn->query($sql);
 
