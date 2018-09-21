@@ -9,6 +9,7 @@ $navbarlinks = createNavLink("Upload Photo","upload_photo.php");
 $navbarlinks .= createNavLink("Slideshow","slideshow.php");
 if(isset($_SESSION["AdminID"])) $navbarlinks .= createNavLink("Event List","admin_event_details.php");
 $navbarlinks .= createMergeButton();
+$navbarlinks .= enterUniqueCode();
 
 if(isset($_SESSION["EventID"])) {
     $eventID = (int)$_SESSION["EventID"];
@@ -279,6 +280,7 @@ $(document).ready(function () {
     }
 
     createThumbnails();
+    
 </script>
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark py-0" id='bottomNav'>
     <div class="container py-0" id='gifButtons'>
