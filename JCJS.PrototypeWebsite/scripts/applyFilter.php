@@ -6,6 +6,7 @@
   require 'Cloudinary.php';
   require 'Uploader.php';
   require 'Api.php';
+  include '../databaseConnection.php';
 
   \Cloudinary::config(array( 
     "cloud_name" => "littleredphotobooth", 
@@ -15,13 +16,27 @@
 
     $photoID = $_GET["photoID"];
     $filter = $_GET["filter"];
-    $result = cloudinary_url($photoID, array("transformation" => array("effect" => $filter),
-      'overlay' => 'lrpLogo',
-      'width' => 200,
-      'gravity' => 'south_east',
-      'x' => 10,
-      'y' => 10
-    ));
+
+    //Only apply logo if image is booth upload
+    $sql = "SELECT photoID, IsUserUpload FROM photos WHERE photoID = $photoID;";
+    //echo $sql;
+    $result = $conn->query($sql);
+    $conn->close(); 
+    if ($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);
+      if($row['IsUserUpload'] == 0) {
+        $logo_options = array('overlay' => 'lrpLogo',
+        'width' => 200,
+        'gravity' => 'south_east',
+        'x' => 10,
+        'y' => 10);
+        $result = cloudinary_url($photoID, array_merge(array("transformation" => array("effect" => $filter)), $logo_options));
+      } else {
+        $result = cloudinary_url($photoID, array("transformation" => array("effect" => $filter)));
+      }
+    }
+    
+    
     echo $result;
       
 ?>
