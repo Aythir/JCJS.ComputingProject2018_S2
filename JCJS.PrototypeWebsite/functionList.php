@@ -14,4 +14,4 @@
   function enterUniqueCode() {
     return '<li><a class="nav-link" onclick="$(\'#codeModal\').modal(\'show\');">Enter Unique Code</a></li>';
   }
-?>m
+?>
