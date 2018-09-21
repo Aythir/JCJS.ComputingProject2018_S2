@@ -71,15 +71,13 @@ function shareToFacebook() {
 }
 
 function uploadToCloudinary() {
-  var filePath = "<?php echo $filePath?>";
   var photoID = <?php echo $photoID?>;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("testDiv").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "./scripts/uploadToCloudinary.php?filePath=" + filePath +"&photoID="+ photoID, true);
+  xhttp.open("GET", "./scripts/uploadToCloudinary.php?photoID="+ photoID, true);
   xhttp.send();
 }
 
@@ -166,8 +164,6 @@ function applyFilter() {
         <a href="#"><button class="btn btn-lg" onclick="cancelFilter()">Discard</button></a>
   </div>
 </div>
-
-<div id="testDiv"></div>
 
 </div>
 
