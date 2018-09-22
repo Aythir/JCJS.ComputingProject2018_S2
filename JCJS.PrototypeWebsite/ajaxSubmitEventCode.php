@@ -23,7 +23,7 @@
   
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {    
-        $_SESSION["UniqueCode"] = $row["UniqueCode"];
+        $_SESSION["UniqueCodes"] = array($row["UniqueCode"]);
         $response = "true";  
       }
     }    

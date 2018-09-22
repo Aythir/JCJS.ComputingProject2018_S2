@@ -101,8 +101,9 @@ if ($result->num_rows > 0) {
      </div> 
 <!-- Input for new event --> 
 <div class="md-form">
-    <input style= ""type="text" id="enterCode" class="form-control">
-    <label for="enterCode">Enter code</label>
+    <input style= ""type="text" id="uniqueCode" class="form-control">
+    <label for="uniqueCode">Enter code</label><br/>
+    <span id="invalid-unique">Test Text</span>
 </div>
     </div>
     <div class="modal-footer">
@@ -122,9 +123,8 @@ if ($result->num_rows > 0) {
         <div id="animationText"></div> 
         <div class= "row">
             <?php
-                if(isset($_SESSION["UniqueCode"])) {
-                    $uniqueCode = $_SESSION["UniqueCode"];
-                    $uniqueCodeSQL = " OR UniqueCode = '".$uniqueCode."'";
+                if(isset($_SESSION["UniqueCodes"])) {
+                    $uniqueCodeSQL = " OR UniqueCode IN (".$implode(',',$_SESSION["UniqueCodes"]).")";
                 }
                 $sql = "SELECT PhotoID,Filename FROM Photos WHERE (EventID = '$eventID' AND IsUserUpload = 0)".$uniqueCodeSQL.";";
                 //echo $sql;
@@ -187,6 +187,21 @@ $(document).ready(function () {
     $("myButton").on("click", "a", function () {
         $('.navbar-collapse').collapse('hide');
     });
+
+    $("#codeModalButton").click(function(){
+            $.post("ajaxSubmitUniqueCode.php",
+            {
+                uniqueCode: document.getElementById('uniqueCode').value
+            },
+            function(data, status){
+                if(data === "true") {
+                  location.href='gallery.php';
+                } else {
+                  document.getElementById('invalid-unique').innerHTML = "Invalid unique code. Please try again";
+                }
+                
+            });
+          });
 });
 
     var selectionArray = [];
