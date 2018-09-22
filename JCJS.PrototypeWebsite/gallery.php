@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
 <div class="md-form">
     <input style= ""type="text" id="uniqueCode" class="form-control" value="fzS8pZHDToA">
     <label for="uniqueCode">Enter code</label><br/>
-    <span id="invalid-unique">Test Text</span>
+    <span id="invalid-unique" style="color:red;font-weight:bold;">Error Text</span>
 </div>
     </div>
     <div class="modal-footer">
