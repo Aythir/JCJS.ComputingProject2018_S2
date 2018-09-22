@@ -1,0 +1,1 @@
+Creating a new event in the admin portal will create a subdirectory in this directory named by event ID. Ensure the FTP uploader has write access to this directory and any subfolders within.
