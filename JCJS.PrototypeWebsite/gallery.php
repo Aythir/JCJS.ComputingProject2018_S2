@@ -1,4 +1,7 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 include 'databaseConnection.php';
 include 'functionList.php';
 
@@ -101,13 +104,14 @@ if ($result->num_rows > 0) {
      </div> 
 <!-- Input for new event --> 
 <div class="md-form">
-    <input style= ""type="text" id="enterCode" class="form-control">
-    <label for="enterCode">Enter code</label>
+    <input style= ""type="text" id="uniqueCode" class="form-control" value="fzS8pZHDToA">
+    <label for="uniqueCode">Enter code</label><br/>
+    <span id="invalid-unique" style="color:red;font-weight:bold;">Error Text</span>
 </div>
     </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-    <button type="button" id='codeModalButton' class="btn btn-error" data-dismiss="modal">OK</button>
+    <button type="button" id='codeModalButton' class="btn btn-error" data-dismiss="modal" onclick="validateUniqueCode()">OK</button>
     </div>
     </div>
 </div>
@@ -122,12 +126,18 @@ if ($result->num_rows > 0) {
         <div id="animationText"></div> 
         <div class= "row">
             <?php
-                if(isset($_SESSION["UniqueCode"])) {
-                    $uniqueCode = $_SESSION["UniqueCode"];
-                    $uniqueCodeSQL = " OR UniqueCode = '".$uniqueCode."'";
+                $sql = "SELECT PhotoID,Filename FROM Photos WHERE ";
+
+                if(isset($_SESSION["HostAccess"]) && $_SESSION["HostAccess"] == true) {
+                    $sql .= "EventID = '$eventID' AND IsUserUpload = 0";
+                } 
+                elseif(isset($_SESSION["UniqueCodes"])) {
+                    $sql.= "UniqueCode IN ('".implode('\',\'',$_SESSION["UniqueCodes"])."')";
                 }
-                $sql = "SELECT PhotoID,Filename FROM Photos WHERE (EventID = '$eventID' AND IsUserUpload = 0)".$uniqueCodeSQL.";";
-                //echo $sql;
+                else {
+                    $sql .= "EventID = '$eventID' AND IsUserUpload = 0 AND UniqueCode IN (NULL,'')";
+                }
+                $sql .= ';';
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -143,6 +153,8 @@ if ($result->num_rows > 0) {
                         echo "</div>";
                         echo "</div>";
                     }
+                } else {
+                    echo "<p>Looks like no-one has used the booth yet. Or maybe this is a private event where you need to enter the unique code printed on your strip.</p>";
                 }
             ?>
         </div>
@@ -172,6 +184,8 @@ if ($result->num_rows > 0) {
                     echo "</div>";
                     echo "</div>";
                 }
+            } else {
+                echo "<p>Looks like no-one has uploaded a photo from their device yet. Be the first!</p>";
             }
         ?>
         </div>
@@ -184,19 +198,19 @@ if ($result->num_rows > 0) {
 <?php include 'guestFooter.php';?>
 <script>
 $(document).ready(function () {
+    
     $("myButton").on("click", "a", function () {
         $('.navbar-collapse').collapse('hide');
     });
+    $("#modalButton").click(function(){
+        location.href='ajaxDownloadAllPhotos.php';
+    });
+
+    
 });
 
     var selectionArray = [];
     var enableImageSelection = false;
-
-    $(document).ready(function() {
-        $("#modalButton").click(function(){
-            location.href='ajaxDownloadAllPhotos.php';
-        });
-    });  
     
     var elems = document.querySelectorAll('.card-img-top');
 
@@ -282,6 +296,22 @@ $(document).ready(function () {
             }
         }
 
+    }
+
+    function validateUniqueCode() {
+        var uniqueCode = document.getElementById('uniqueCode').value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if(this.responseText == "true") {
+                    location.href = 'gallery.php';
+                } else {
+                    document.getElementById('invalid-unique').innerHTML = "This code is not valid. Please try again";
+                }
+            }
+        };
+        xhttp.open("GET", "ajaxSubmitUniqueCode.php?uniqueCode=" + uniqueCode, true);
+        xhttp.send();
     }
 
     createThumbnails();

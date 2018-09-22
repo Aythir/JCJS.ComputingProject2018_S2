@@ -17,13 +17,14 @@
     }
   }
   else {
-    $sql = "SELECT UniqueCode FROM photos WHERE UniqueCode = '$eventCode';";
+    $sql = "SELECT UniqueCode, EventID FROM photos WHERE UniqueCode = '$eventCode';";
     //echo $sql;
     $result = $conn->query($sql);
   
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {    
-        $_SESSION["UniqueCode"] = $row["UniqueCode"];
+        $_SESSION["UniqueCodes"] = array($row["UniqueCode"]);
+        $_SESSION["EventID"] = $row["EventID"];
         $response = "true";  
       }
     }    
