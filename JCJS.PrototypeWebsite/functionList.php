@@ -14,4 +14,7 @@
   function enterUniqueCode() {
     return '<li><a class="nav-link" onclick="$(\'#codeModal\').modal(\'show\');">Enter Unique Code</a></li>';
   }
+  function createFullscreenLink() {
+    return '<li><a class="nav-link" style="cursor:pointer;" onclick="openFullscreen();">Fullscreen</a></li>';
+  }
 ?>
