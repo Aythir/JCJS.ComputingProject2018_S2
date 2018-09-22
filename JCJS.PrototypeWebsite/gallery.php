@@ -154,7 +154,7 @@ if ($result->num_rows > 0) {
                         echo "</div>";
                     }
                 } else {
-                    echo "<p>Looks like no-one has used the booth yet. Or maybe this is a private event where you need to enter the code printed on your strip.</p>";
+                    echo "<p>Looks like no-one has used the booth yet. Or maybe this is a private event where you need to enter the unique code printed on your strip.</p>";
                 }
             ?>
         </div>
