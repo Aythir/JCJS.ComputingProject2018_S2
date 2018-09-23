@@ -64,62 +64,61 @@ if ($result->num_rows > 0) {
 ?>
 <?php include "guestHeader.php";?>
 
-<!-- Modal -->
+<!-- Download all photos Modal -->
 <div class="modal fade" id="hostModal" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title" id='modalText'>Are you sure you want to download all photos for this event as a single ZIP file?</h4>
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id='modalText'>Are you sure you want to download all photos for this event as a single ZIP file?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" id='modalButton' class="btn btn-error" data-dismiss="modal">OK</button>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-    <button type="button" id='modalButton' class="btn btn-error" data-dismiss="modal">OK</button>
-    </div>
-    </div>
-</div>
 </div>
 
+<!-- Enable/Disable Animation Modal -->
 <div class="modal fade" id="selectorModal" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title" id='selectorModalText'>Modal</h4>
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id='selectorModalText'>Modal</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-    </div>
-    </div>
-</div>
 </div>
 
-<!-- Modal -->
+<!-- Unique codes Modal -->
 <div class="modal fade" id="codeModal" role="dialog">
-<div class="modal-dialog">
-<!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title" id='codeModalText'>Enter a new unique code</h4>
-     </div> 
-<!-- Input for new event --> 
-<div class="md-form">
-    <input style= ""type="text" id="uniqueCode" class="form-control" value="fzS8pZHDToA">
-    <label for="uniqueCode">Enter code</label><br/>
-    <span id="invalid-unique" style="color:red;font-weight:bold;">Error Text</span>
-</div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id='codeModalText'>Enter a new unique code</h4>
+            </div> 
+            <!-- Input for new event --> 
+            <div class="md-form px-3">
+                <input style= ""type="text" id="uniqueCode" class="form-control" value="fzS8pZHDToA">
+                <label for="uniqueCode">Enter code</label><br/>
+                <span id="invalid-unique" style="color:red;font-weight:bold;"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" id='codeModalButton' class="btn btn-error">OK</button>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-    <button type="button" id='codeModalButton' class="btn btn-error" data-dismiss="modal" onclick="validateUniqueCode()">OK</button>
-    </div>
-    </div>
-</div>
 </div>
 
  <!--Main content-->
  <div class="container-fluid">
-
     <div class="personal-gallery tz-gallery">
         <h3 class= "responsive-text">Your Photobooth Session: <?php echo $eventName ?></h3>
         <hr>
@@ -205,8 +204,9 @@ $(document).ready(function () {
     $("#modalButton").click(function(){
         location.href='ajaxDownloadAllPhotos.php';
     });
-
-    
+    $("#codeModalButton").click(function() {
+        validateUniqueCode();
+    });    
 });
 
     var selectionArray = [];
@@ -314,7 +314,7 @@ $(document).ready(function () {
         xhttp.send();
     }
 
-    createThumbnails();
+    //createThumbnails();
     
 </script>
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark py-0" id='bottomNav'>
