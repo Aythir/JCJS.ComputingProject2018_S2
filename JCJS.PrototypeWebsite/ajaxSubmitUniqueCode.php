@@ -4,6 +4,7 @@
       ini_set('display_startup_errors', 1);
       error_reporting(E_ALL);
   session_start();
+  $response = "false";
   $uniqueCode = mysqli_real_escape_string($conn,$_GET["uniqueCode"]);
   if(!isset($_SESSION["UniqueCodes"])) {
     $_SESSION["UniqueCodes"] = array();
@@ -14,9 +15,9 @@
     
     $eventID = (int)$_SESSION["EventID"];
 
-    $sql = "SELECT photoID,UniqueCode FROM photos WHERE UniqueCode = '$uniqueCode' AND EventID = $eventID;";
+    //$sql = "SELECT photoID,UniqueCode FROM photos WHERE UniqueCode = '$uniqueCode' AND EventID = $eventID;";
+    $sql = "SELECT photoID,UniqueCode FROM photos WHERE UniqueCode = '$uniqueCode';";
     $result = $conn->query($sql);
-    $response = "false";
     if($uniqueCode != "" && $uniqueCode != NULL) {
       if ($result->num_rows > 0) { 
         array_push($_SESSION["UniqueCodes"], $uniqueCode);
