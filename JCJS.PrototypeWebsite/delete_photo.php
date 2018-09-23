@@ -1,7 +1,7 @@
 <?php include 'databaseConnection.php';?>
 <?php
 
-error_reporting(E_ALL); ini_set('display_errors', 1);
+//error_reporting(E_ALL); ini_set('display_errors', 1);
 
 $photoID = (int)$_GET["id"];
 
@@ -24,7 +24,7 @@ if(isset($_SESSION["HostAccess"])) {
     }
     $conn->close();
 
-    //header("Location: gallery.php");
+    header("Location: gallery.php");
 } else {
     header("Location: index.php?error=1");
 }
